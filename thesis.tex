@@ -1,0 +1,103 @@
+\documentclass[a4paper,oneside]{Tptesi2}
+
+% --- IMPOSTAZIONI LINGUA E TESTO ---
+
+\usepackage[utf8]{inputenc}
+\usepackage{csquotes}         % Utile per la corretta gestione delle virgolette in inglese
+
+% --- PACCHETTI STANDARD ---
+\usepackage{listings}
+\usepackage{amsmath,amssymb}
+\usepackage{verbatim}
+\usepackage{indentfirst}
+\usepackage{subfigure}
+\usepackage{algorithmic}
+\usepackage{framed}
+\usepackage{rotating}
+\usepackage{cite}
+
+% Use a small font for the verbatim environment
+\makeatletter  % makes '@' an ordinary character
+\renewcommand{\verbatim@font}{%
+  \ttfamily\footnotesize\catcode`\<=\active\catcode`\>=\active%
+}
+\makeatother   % makes '@' a special symbol again
+
+% --- DEFINIZIONI & TEOREMI (Tradotti in Inglese) ---
+\newtheorem{theorem}{Theorem}[chapter]
+\newtheorem{corollary}[theorem]{Corollary}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{definition}{Definition}[chapter]
+\newtheorem{proposition}[definition]{Proposition}
+
+% --- FORMATTAZIONE FIGURE ---
+\setcounter{topnumber}{3}
+\setcounter{totalnumber}{3}
+\def\topfraction{1}
+\def\textfraction{0}
+
+% ===================================================================
+% FRONTESPIZIO (Compila in automatico usando Tptesi2)
+% ===================================================================
+\title{Hybrid Quantum-Classical Architecture for Solving Large-Scale QUBO Problems: A Divide et Impera Approach}
+\author{Giacomo Orsucci} % Inserisci il tuo nome e cognome
+\titolocorso{in Computer Engineering}
+
+% RELATORI INTERNI (Supervisors)
+\chair{Prof. Benedetta Picano \\}
+\othermembers{Prof. Romano Fantacci}
+\numberofmembers{2} 
+
+% RELATORE ESTERNO / CORRELATORE (Co-supervisor)
+\correlatori{Dr. Claudio Cicconetti} 
+\numerocorrelatori{1}
+
+\degreeyear{2025/2026}
+
+% --- SETUP HYPERREF (Metadati del PDF) ---
+\hypersetup{%
+  plainpages=false,%
+  breaklinks,%
+  pdftitle={Hybrid Quantum-Classical Architecture for Solving Large-Scale QUBO Problems},%
+  pdfauthor={Name Surname},%
+  pdfsubject={Master's Thesis},%
+  colorlinks=false}
+
+% ===================================================================
+% DOCUMENTO
+% ===================================================================
+\begin{document}
+
+\frontmatter
+
+\pagestyle{headings} % rende attive le impostazioni sulla testata!
+
+% Crea il frontespizio (ricordati di avere "stemma.eps" o "stemma.png" nella root)
+\maketitle 
+
+\tableofcontents % Inserisce indice generale
+\cleardoublepage
+
+% Decommenta questi se vuoi gli indici delle figure e delle tabelle
+%\addcontentsline{toc}{chapter}{List of Figures}
+%\listoffigures   
+%\addcontentsline{toc}{chapter}{List of Tables}
+%\listoftables    
+
+%--------------- Inizio del testo vero e proprio ---------------
+\mainmatter
+
+% Struttura basata sull'indice concordato
+\include{chapters/Introduction_to_Quantum_Computing}
+%\include{chapters/02_Embedding_Problem}
+%\include{chapters/03_Base_Pipeline}
+%\include{chapters/04_Distributed_Architecture}
+%\include{chapters/05_Results}
+%\include{chapters/06_Conclusions}
+
+%--------------- Bibliografia ---------------
+\addcontentsline{toc}{chapter}{Bibliography} % Corretto da 'Bibliografia' a 'Bibliography'
+\bibliographystyle{ieeetr} % ieeetr è il formato standard per Ingegneria (numerato in ordine di citazione)
+\bibliography{files/biblio} 
+
+\end{document}

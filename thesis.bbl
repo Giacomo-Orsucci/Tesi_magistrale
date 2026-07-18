@@ -1,0 +1,64 @@
+\begin{thebibliography}{10}
+
+\bibitem{quantumReport}
+Q.~A. Memon, M.~A. Ahmad, and M.~Pecht, ``Quantum computing: Navigating the
+  future of computation, challenges, and technological breakthroughs,'' {\em
+  Quantum Reports}, vol.~6, no.~4, pp.~627--663, 2024.
+
+\bibitem{nielsen2010quantum}
+M.~A. Nielsen and I.~L. Chuang, {\em Quantum Computation and Quantum
+  Information}.
+\newblock Cambridge University Press, 10th anniversary~ed., 2010.
+
+\bibitem{memon2024quantum}
+Q.~A. Memon, M.~Al~Ahmad, and M.~Pecht, ``Quantum computing: Navigating the
+  future of computation, challenges, and technological breakthroughs,'' {\em
+  Quantum Reports}, vol.~6, pp.~627--663, 2024.
+
+\bibitem{grotti2026practicalusecasesneutral}
+M.~Grotti, S.~Marzella, G.~Bettonte, D.~Ottaviani, and E.~Ercolessi,
+  ``Practical use cases of neutral atoms quantum computers,'' 2026.
+
+\bibitem{google2024whatisquantum}
+{Google}, ``What is quantum computing?,'' whitepaper, Google, 2024.
+\newblock Guide for policymakers.
+
+\bibitem{microsoft_majorana1}
+{Microsoft}, ``Microsoft's majorana 1 chip carves new path for quantum
+  computing,'' 2024.
+
+\bibitem{mcgeoch2020dwaveReview}
+C.~C. McGeoch and P.~Farr{\'e}, ``The d-wave advantage system: An overview,''
+  Technical Report 14-1049A-A, D-Wave Systems Inc., 2020.
+
+\bibitem{Henriet2020quantumcomputing}
+L.~Henriet, L.~Beguin, A.~Signoles, T.~Lahaye, A.~Browaeys, G.-O. Reymond, and
+  C.~Jurczak, ``Quantum computing with neutral atoms,'' {\em {Quantum}},
+  vol.~4, p.~327, Sept. 2020.
+
+\bibitem{ebadi2022quantum}
+S.~Ebadi, A.~Keesling, M.~Cain, T.~T. Wang, H.~Levine, D.~Bluvstein,
+  G.~Semeghini, A.~Omran, J.-G. Liu, R.~Samajdar, X.-Z. Luo, B.~Nash, X.~Gao,
+  B.~Barak, E.~Farhi, S.~Sachdev, N.~Gemelke, L.~Zhou, S.~Choi, H.~Pichler,
+  S.-T. Wang, M.~Greiner, V.~Vuletic, and M.~D. Lukin, ``Quantum optimization
+  of maximum independent set using rydberg atom arrays,'' {\em Science},
+  vol.~376, no.~6598, pp.~1209--1215, 2022.
+
+\bibitem{alicebob2024white}
+N.~Coppola, R.~Lescanne, L.~Prost, and M.~{\v{Z}}e{\v{s}}ko, ``Think inside the
+  box: Quantum computing with cat qubits,'' tech. rep., Alice \& Bob, December
+  2024.
+\newblock Curated by Brian Siegelwax.
+
+\bibitem{Vercellino_2022}
+C.~Vercellino, P.~Viviani, G.~Vitali, A.~Scionti, A.~Scarabosio, O.~Terzo,
+  E.~Giusto, and B.~Montrucchio, ``Neural-powered unit disk graph embedding:
+  qubits connectivity for some qubo problems,'' in {\em 2022 IEEE International
+  Conference on Quantum Computing and Engineering (QCE)}, p.~186–196, IEEE,
+  2022.
+
+\bibitem{nowak2026satellitemissionplanningrydberg}
+M.~Nowak, B.~Marchand, Y.~Naghmouchi, S.~Rainjonneau, W.~Coelho, L.~Vignoli,
+  and L.-P. Henry, ``Satellite mission planning with rydberg atoms,'' 2026.
+
+\end{thebibliography}
