@@ -61,4 +61,51 @@ C.~Vercellino, P.~Viviani, G.~Vitali, A.~Scionti, A.~Scarabosio, O.~Terzo,
 M.~Nowak, B.~Marchand, Y.~Naghmouchi, S.~Rainjonneau, W.~Coelho, L.~Vignoli,
   and L.-P. Henry, ``Satellite mission planning with rydberg atoms,'' 2026.
 
+\bibitem{korte2012combinatorial}
+B.~Korte and J.~Vygen, {\em Combinatorial Optimization: Theory and Algorithms}.
+\newblock Springer, 5th~ed., 2012.
+
+\bibitem{papadimitriou1998combinatorial}
+C.~H. Papadimitriou and K.~Steiglitz, {\em Combinatorial Optimization:
+  Algorithms and Complexity}.
+\newblock Dover Publications, 1998.
+
+\bibitem{berge2001theory}
+C.~Berge, {\em The theory of graphs}.
+\newblock Courier Corporation, 2001.
+
+\bibitem{lucas2014ising}
+A.~Lucas, ``Ising formulations of many np problems,'' {\em Frontiers in
+  Physics}, vol.~2, p.~5, 2014.
+
+\bibitem{CLARK1990165}
+B.~N. Clark, C.~J. Colbourn, and D.~S. Johnson, ``Unit disk graphs,'' {\em
+  Discrete Mathematics}, vol.~86, no.~1, pp.~165--177, 1990.
+
+\bibitem{tarquini2026dronedeliverypackingproblem}
+S.~Tarquini, M.~Vandelli, F.~Ferrari, D.~Dragoni, and F.~Tudisco, ``Drone
+  delivery packing problem on a neutral-atom quantum computer,'' 2026.
+
+\bibitem{tarquini2026emergencyhubplacementneutralatom}
+S.~Tarquini, M.~Vandelli, F.~Ferrari, D.~Dragoni, and F.~Tudisco, ``Emergency
+  hub placement with a neutral-atom quantum computer,'' 2026.
+
+\bibitem{nembrini2024application}
+R.~Nembrini, M.~Ferrari~Dacrema, and P.~Cremonesi, ``An application of
+  reinforcement learning for minor embedding in quantum annealing,'' in {\em
+  Proceedings of the 2nd International Workshop on AI for Quantum and Quantum
+  for AI (AIQxQIA 2024) co-located with the 23rd International Conference of
+  the Italian Association for Artificial Intelligence (AIxIA 2024)}, vol.~3913
+  of {\em CEUR Workshop Proceedings}, CEUR-WS.org, 2024.
+
+\bibitem{Nembrini_2026}
+R.~Nembrini, M.~Ferrari~Dacrema, and P.~Cremonesi, ``Minor embedding for
+  quantum annealing with reinforcement learning,'' {\em Quantum Machine
+  Intelligence}, vol.~8, Feb. 2026.
+
+\bibitem{das2025grid}
+S.~Das, S.~K. Roy, R.~Rana, and M.~G. Chandra, ``Grid-partitioned mwis solving
+  with neutral atom quantum computing for qubo problems,'' {\em arXiv preprint
+  arXiv:2510.18540}, 2025.
+
 \end{thebibliography}

@@ -2,46 +2,47 @@ This is BibTeX, Version 0.99d (TeX Live 2022/dev/Debian)
 Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: chapters/Introduction_to_Quantum_Computing.aux
+A level-1 auxiliary file: chapters/The_Embedding_Problem.aux
 The style file: ieeetr.bst
 Database file #1: files/biblio.bib
-You've used 12 entries,
+You've used 22 entries,
             1876 wiz_defined-function locations,
-            549 strings with 6163 characters,
-and the built_in function-call counts, 3220 in all, are:
-= -- 274
-> -- 223
+            603 strings with 7863 characters,
+and the built_in function-call counts, 5102 in all, are:
+= -- 431
+> -- 328
 < -- 1
-+ -- 79
-- -- 67
-* -- 248
-:= -- 510
-add.period$ -- 15
-call.type$ -- 12
-change.case$ -- 14
++ -- 118
+- -- 96
+* -- 381
+:= -- 800
+add.period$ -- 28
+call.type$ -- 22
+change.case$ -- 22
 chr.to.int$ -- 0
-cite$ -- 12
-duplicate$ -- 138
-empty$ -- 257
-format.name$ -- 67
-if$ -- 745
+cite$ -- 22
+duplicate$ -- 231
+empty$ -- 459
+format.name$ -- 96
+if$ -- 1200
 int.to.chr$ -- 0
-int.to.str$ -- 12
-missing$ -- 7
-newline$ -- 42
-num.names$ -- 12
-pop$ -- 43
+int.to.str$ -- 22
+missing$ -- 18
+newline$ -- 75
+num.names$ -- 22
+pop$ -- 90
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 102
+skip$ -- 138
 stack$ -- 0
-substring$ -- 128
-swap$ -- 57
+substring$ -- 158
+swap$ -- 76
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 23
-width$ -- 14
-write$ -- 116
+while$ -- 36
+width$ -- 24
+write$ -- 206
