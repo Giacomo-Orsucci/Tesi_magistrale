@@ -1,0 +1,63 @@
+
+\chapter{Monolithic Approach: The Base Pipeline and its Limits} 
+\label{chap:base_pipeline}
+
+This chapter presents the conceptual architecture of our base embedding pipeline and the related experimental results. This provides the opportunity to detail how the embedding problem was methodologically approached, which classical optimization algorithms were selected and tested, and what scalability limitations emerged. Crucially, we will discuss how these limitations are natively imposed by the interplay between the mathematical formulation and the specific hardware constraints of the target quantum platform.
+
+\section{Conceptual Scheme and Target Hardware}
+\label{section:conceptual_base_pipeline}
+
+% Inserire qui l'immagine dello schema
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.5\textwidth]{img/base_pipeline.png} % Assicurati che il path sia corretto
+    \caption{Macroscopic flowchart of the base monolithic pipeline. The process merges classical problem specifications with physical hardware constraints.}
+    \label{fig:base_pipeline}
+\end{figure}
+
+As illustrated in the conceptual scheme in Figure \ref{fig:base_pipeline}, the first operational phase of the pipeline requires loading the QUBO problem instance. Therefore, it is strictly necessary to detail the geometric and mathematical characteristics of the investigated instances, as well as the hardware restrictions that dictated their generation.
+
+\paragraph{Hardware Constraints and the Jülich HPC Emulator}
+As previously discussed, neutral atom platforms present strict physical limitations. The most impactful constraint for our formulation is the reliance on a \textit{global driving laser}, which uniformly illuminates the entire atomic register. Mathematically, this forces a feasible quantum execution only for QUBO matrices that exhibit uniform values on the principal diagonal (representing a constant linear cost/detuning) and uniform off-diagonal penalties (representing the binary Rydberg blockade).
+
+To maximize the real-world applicability of this thesis, the pipeline was explicitly designed to target \textbf{Jade}, a state-of-the-art Neutral Atom Quantum Processing Unit \cite{pasqal2026italy}. While initially scheduled for physical execution, access to the actual Jade hardware was postponed to the upcoming December due to broader availability constraints. Consequently, the experimental phase was migrated to a remote analog quantum emulator provided by the \textbf{Jülich Supercomputing Centre (JSC)} in Germany. 
+
+To ensure that the algorithmic research remains perfectly forward-compatible with the real machine once available, we injected a custom hardware profile into the simulator (referred to in the codebase \cite{orsucci_qubo_ga_quantum} as \texttt{FakeJade}). This profile strictly enforces Jade's actual physical parameters.
+
+
+The \texttt{FakeJade} physical profile injected into the emulator severely bounds the degrees of freedom available to the classical embedding algorithm. Extracting directly from the pipeline's internal parametrization logic, the hardware constraints are strictly formalized into four dimensions:
+
+\begin{itemize}
+    \item \textbf{Maximum Radial Boundary ($R_{max}$):} The entire atomic register must be confined within a specific continuous area dictated by the laser focusing limits. For our target architecture, the coordinates are strictly bounded within a circular plane with a maximum radius of $R_{max} = 50.0\,\mu\text{m}$.
+    
+    \item \textbf{Minimum Optical Resolution ($d_{min}$):} Due to the diffraction limits of the optical tweezers, two atoms cannot be placed arbitrarily close. The hardware enforces a minimum inter-atomic distance of $d_{min} = 4.0\,\mu\text{m}$. Breaching this threshold causes trap interference, representing a hard physical violation.
+    
+    \item \textbf{Interaction Saturation ($V_{max}$):} Because neutral atoms interact following the Van der Waals potential ($V = C_6 / r^6$), the combination of physical laws and the $d_{min}$ constraint inherently caps the maximum possible interaction strength between any two qubits. The highest deliverable penalty in the system is strictly saturated at $V_{max} = C_6 / d_{min}^6$.
+    
+    \item \textbf{Global Channel Energetics and Scaling:} The QPU operates via a single \texttt{rydberg\_global} channel. This imposes strict energetic ceilings on the maximum allowable Rabi frequency ($\Omega_{max}$) and the maximum absolute detuning ($|\delta|_{max}$). Because raw QUBO weights can mathematically exceed these physical capacities, the embedding pipeline must calculate a restrictive \textit{Scale Factor}. As implemented in the codebase, the entire QUBO matrix is dynamically scaled down by a factor of $\min(\frac{V_{max}}{\max(Q_{off-diagonal})}, \frac{|\delta|_{max}}{\text{avg}(Q_{diagonal})})$ to ensure the problem fits seamlessly within the hardware's physical energy envelope.
+\end{itemize}
+
+\paragraph{QUBO Instance Generation}
+These strict hardware parameters played a foundational role in how the test datasets were generated. To guarantee that the problem instances are physically embeddable on the targeted neutral atom architecture, a specialized Python generation script was developed. Rather than generating arbitrary random graphs, the script synthesizes ``verisimilar'' Unit Disk Graphs (UDG) by simulating the actual physical placement of atoms under strict geometric constraints. 
+
+The generation logic is governed by the following procedural steps:
+\begin{enumerate}
+    \item \textbf{Dynamic Operational Area Calculation:} To achieve a specific target average degree (which dictates the interaction density and the problem's difficulty), an effective operational radius is dynamically calculated. This radius scales proportionally with the square root of the number of nodes ($N$) and the Rydberg radius. Crucially, it is mathematically bounded to never exceed the physical limits of the machine (the $50\,\mu\text{m}$ maximum hardware radius) while remaining large enough to accommodate all atoms.
+    \item \textbf{Rejection Sampling Placement:} Node coordinates are generated uniformly within the operational area using polar coordinates. A strict hardware minimum-distance check is enforced during this process: any randomly generated position that falls within the minimum allowed optical trap distance ($d_{min} = 4.0\,\mu\text{m}$) of an already placed atom is automatically rejected. This ensures the resulting spatial configuration perfectly respects the isolation constraints of the optical tweezers.
+    \item \textbf{QUBO Matrix Construction:} Once all $N$ coordinates are successfully placed within the continuous space, the pairwise Euclidean distance matrix is computed. The QUBO matrix ($Q$) is then formally populated: all main diagonal elements are uniformly set to $-1.0$ (representing the global laser's tendency to drive the atoms toward the Rydberg state), and a constant penalty weight of $2.0$ is assigned to any off-diagonal edge where the inter-atomic distance is strictly less than the specified Rydberg blockade radius ($R_b = 12.0\,\mu\text{m}$).
+    \item \textbf{Data Serialization:} Finally, the non-zero upper triangular elements of the QUBO matrix are extracted and serialized into a binary NumPy format (\texttt{.npz}). Although the original geometrically valid coordinates are stored for validation purposes, the embedding pipeline receives only the abstract mathematical weights, forcing the classical algorithm to blindly reconstruct a valid physical layout.
+\end{enumerate}
+
+% Qui puoi inserire uno screenshot o una piccola matrice di esempio
+\begin{figure}[htbp]
+    \centering
+    
+     \includegraphics[width=0.6\textwidth]{img/QUBO_example.png} 
+    \caption{Visual representation of a small-scale, procedurally generated UDG-like QUBO instance. The interaction density is strictly governed by the underlying geometric constraints. Instance generated using \textit{instance\_generator.py} as described above and inspected via \textit{inspect\_qubo.py} in \cite{orsucci_qubo_ga_quantum}.}
+    \label{fig:qubo_generation_example}
+\end{figure}
+
+\paragraph{Instance Loading and Matrix Parsing}
+Once generated, the dense QUBO matrices and their metadata are compressed and stored in NumPy's binary format (\texttt{.npz}). As depicted in the first block of the pipeline flowchart, the execution begins with the \texttt{QUBO loading} module. 
+
+A dedicated parser function dynamically extracts the indices and weights from the \texttt{.npz} file and reconstructs the symmetric $N \times N$ matrix ($Q$). Simultaneously, the system isolates the off-diagonal terms to calculate the maximum theoretical connectivity. This data structure serves as the absolute mathematical ground truth that the subsequent classical embedding engine, detailed in the next section, must attempt to replicate physically by placing atoms in the continuous 2D space.

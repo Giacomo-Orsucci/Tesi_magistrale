@@ -176,6 +176,37 @@ This diversity of approaches underscores the immaturity and the highly explorato
 Drawing from this extensive body of literature, we elected to restrict our focus specifically to the QUBO mathematical framework, which will be formally defined in the next section. More importantly, driven by the operational realities and constraints of the currently available experimental platforms, our investigation will target QUBO instances that naturally exhibit a UDG-like connectivity. This specific focus bypasses the need for massive auxiliary embeddings, setting the optimal stage for our distributed algorithmic approach.
 
 
+\section{Quadratic Unconstrained Binary Optimization (QUBO)}
+\label{sec:QUBO}
+
+Quadratic Unconstrained Binary Optimization (QUBO) provides a unifying mathematical framework for modeling a vast array of combinatorial optimization problems. As the name suggests, this formulation strictly involves binary decision variables and a quadratic objective function, notably without imposing any external algebraic constraints. 
+
+This formulation has gained immense popularity across various scientific and industrial fields due to its remarkable versatility. As demonstrated in comprehensive tutorials \cite{glover2018tutorial}, a multitude of classically constrained problems (such as the TSP, Max-Cut, or Graph Coloring) can be seamlessly recast into the unconstrained QUBO format through the use of penalty terms. Consequently, a massive segment of modern literature focuses on QUBO as the standard input format for quantum platforms. While historically popularized by quantum annealing systems built on superconducting qubits (such as D-Wave \cite{QUBO-D-Wave}), QUBO is increasingly becoming the target formulation for neutral atom architectures as well \cite{nowak2026satellitemissionplanningrydberg, Vercellino_2022, das2025grid}.
+
+From a formal mathematical perspective, solving a QUBO problem entails finding the specific assignment of a binary vector $x$ that minimizes (or maximizes, note that a minimization problem is equivalent to a maximization one by simply applying a minus sign ($-$) to the objective function) a quadratic cost function:
+
+\begin{equation}
+    \min_{x \in \{0,1\}^n} f(x) = x^T Q x = \sum_{i=1}^{n} \sum_{j=1}^{n} Q_{i,j} x_i x_j
+\end{equation}
+
+where:
+\begin{itemize}
+    \item $x = (x_1, x_2, \dots, x_n)$ is a vector of $n$ binary decision variables;
+    \item $Q$ is an $n \times n$ square matrix of real constants detailing the problem's costs and interactions.
+\end{itemize}
+
+A key mathematical property of binary variables is that $x_i^2 = x_i$ for any $x_i \in \{0,1\}$. This elegantly allows any linear term of the objective function to be mapped directly onto the main diagonal of the $Q$ matrix ($Q_{i,i}$), while the off-diagonal elements ($Q_{i,j}$ for $i \neq j$) encode the quadratic interactions, or "penalties," between pairs of variables.
+
+Our decision to adopt the QUBO framework for investigating hybrid embedding methodologies is twofold. First, it ensures broad applicability across the wide variety of problems identifiable in the literature \cite{glover2018tutorial}. Second, and most crucially, the binary nature of the variables establishes a native, one-to-one mapping with the physical states of a quantum register: each variable $x_i \in \{0,1\}$ directly dictates whether a specific atom $i$ is left in the ground state ($|0\rangle$) or excited to the Rydberg state ($|1\rangle$). This elegant bridge between mathematical abstraction and hardware execution perfectly sets the stage for the algorithmic development detailed in the next chapter.
+
+\paragraph{Investigated QUBO Instances}
+Due to specific hardware and simulator constraints, the experimental phase of this work focuses exclusively on UDG-like QUBO matrices. Specifically, we evaluate randomly generated QUBO instances whose underlying interaction connectivity strictly mirrors the geometric topology of a Unit Disk Graph.
+
+Furthermore, to ensure physical compatibility with current neutral atom platforms, these matrices are constrained to exhibit uniform parameter distributions. All elements on the principal diagonal are assigned identical values; mathematically, this uniform linear cost reflects the hardware limitation of employing a global driving laser, which applies the same detuning and Rabi frequency uniformly across the entire atomic register. Similarly, all non-zero off-diagonal elements share a constant penalty value, effectively representing the uniform, binary nature of the Rydberg blockade interaction across all valid UDG edges.
+
+
+%continuare come è fatta Q nel nostro caso e perchè. Il dettaglio su x lo metterei direttamente nella pipeline
+
 %Scaletta delle prossime cose da fare:
 
 %Descrizione QUBO problems e magari specificare meglio perchè ci concentriamo sugli UDG like (o vedere se farlo nelle sezioni dopo)

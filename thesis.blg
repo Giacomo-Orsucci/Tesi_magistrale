@@ -3,46 +3,47 @@ Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
 The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: chapters/Introduction_to_Quantum_Computing.aux
 A level-1 auxiliary file: chapters/The_Embedding_Problem.aux
+A level-1 auxiliary file: chapters/The_Base_Pipeline.aux
 The style file: ieeetr.bst
 Database file #1: files/biblio.bib
-You've used 22 entries,
+You've used 26 entries,
             1876 wiz_defined-function locations,
-            603 strings with 7863 characters,
-and the built_in function-call counts, 5102 in all, are:
-= -- 431
-> -- 328
+            627 strings with 8568 characters,
+and the built_in function-call counts, 5797 in all, are:
+= -- 495
+> -- 361
 < -- 1
-+ -- 118
-- -- 96
-* -- 381
-:= -- 800
-add.period$ -- 28
-call.type$ -- 22
-change.case$ -- 22
++ -- 131
+- -- 105
+* -- 425
+:= -- 907
+add.period$ -- 34
+call.type$ -- 26
+change.case$ -- 26
 chr.to.int$ -- 0
-cite$ -- 22
-duplicate$ -- 231
-empty$ -- 459
-format.name$ -- 96
-if$ -- 1200
+cite$ -- 26
+duplicate$ -- 263
+empty$ -- 533
+format.name$ -- 105
+if$ -- 1371
 int.to.chr$ -- 0
-int.to.str$ -- 22
-missing$ -- 18
-newline$ -- 75
-num.names$ -- 22
-pop$ -- 90
+int.to.str$ -- 26
+missing$ -- 20
+newline$ -- 89
+num.names$ -- 26
+pop$ -- 108
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 138
+skip$ -- 155
 stack$ -- 0
-substring$ -- 158
-swap$ -- 76
+substring$ -- 164
+swap$ -- 84
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 0
-while$ -- 36
-width$ -- 24
-write$ -- 206
+while$ -- 41
+width$ -- 28
+write$ -- 245

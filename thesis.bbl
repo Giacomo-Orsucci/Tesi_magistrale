@@ -108,4 +108,24 @@ S.~Das, S.~K. Roy, R.~Rana, and M.~G. Chandra, ``Grid-partitioned mwis solving
   with neutral atom quantum computing for qubo problems,'' {\em arXiv preprint
   arXiv:2510.18540}, 2025.
 
+\bibitem{glover2018tutorial}
+F.~Glover, G.~Kochenberger, and Y.~Du, ``A tutorial on formulating and using
+  qubo models,'' {\em arXiv preprint arXiv:1811.11538}, 2018.
+
+\bibitem{QUBO-D-Wave}
+P.~Date, R.~Patton, C.~Schuman, and T.~Potok, ``Efficiently embedding qubo
+  problems on adiabatic quantum computers,'' {\em Quantum Information
+  Processing}, vol.~18, no.~4, p.~117, 2019.
+
+\bibitem{pasqal2026italy}
+{Pasqal}, ``Pasqal delivers italy's first neutral atom quantum computer.''
+  \url{https://www.pasqal.com/newsroom/pasqal-delivers-italys-first-neutral-atom-quantum-computer/},
+  feb 2026.
+\newblock Accessed: 2026-07-22.
+
+\bibitem{orsucci_qubo_ga_quantum}
+G.~Orsucci, ``{QUBO-GA-QUANTUM}.''
+  \url{https://github.com/Giacomo-Orsucci/QUBO-GA-QUANTUM}, 2026.
+\newblock GitHub repository.
+
 \end{thebibliography}
