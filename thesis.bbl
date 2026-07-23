@@ -128,4 +128,8 @@ G.~Orsucci, ``{QUBO-GA-QUANTUM}.''
   \url{https://github.com/Giacomo-Orsucci/QUBO-GA-QUANTUM}, 2026.
 \newblock GitHub repository.
 
+\bibitem{bookGA}
+A.~Eiben and J.~Smith, {\em Introduction To Evolutionary Computing}, vol.~45.
+\newblock 01 2003.
+
 \end{thebibliography}

@@ -1,8 +1,10 @@
 \chapter{The Embedding Problem: Theoretical Framework} \label{chap:embedding_problem}
 
 This chapter introduces the theoretical framework behind the embedding problem for Neutral Atom Quantum Architectures. 
-The aim is to explain the inherent complexity of finding efficient embeddings. We will start by introducing basic concepts 
+The aim of this part is to explain the complexity of finding efficient embeddings, starting with an introduction of basic concepts 
 of computational complexity and graph theory, and then proceed to define Unit Disk Graphs (UDG) and the Maximum Independent Set (MIS) problem. Finally, these concepts will be connected to the current State of the Art (SOTA) and the Quadratic Unconstrained Binary Optimization (QUBO) formulation.
+
+
 \section{Combinatorial Optimization and Computational and Geometrical Complexity}
 \label{sec:combinatorial_opti_def}
 
@@ -11,9 +13,9 @@ Combinatorial optimization is a prominent branch of applied mathematics and comp
 
 These problems commonly involve discrete mathematical structures such as graphs, permutations, or boolean variables and are ubiquitous in fields ranging from logistics and network routing to machine learning and quantum physics \cite{papadimitriou1998combinatorial}. Although the solution space for these problems can be strictly finite, the number of possible configurations still can be overwhelmingly large. 
 
-Moreover, combinatorial optimization frequently encounters $NP$-Hard problems, where finding the exact global optimum becomes computationally intractable. Consequently, the field heavily leverages heuristics and metaheuristics to find high-quality approximate solutions within a reasonable timeframe. Within this computationally demanding landscape, Quantum Computing emerges as a disruptive paradigm; by exploiting quantum mechanical phenomena, it promises to tackle significantly larger $NP$-Hard instances and achieve higher-quality approximate solutions more efficiently than classical approaches \cite{memon2024quantum}.
+Moreover, combinatorial optimization frequently encounters $NP$-Hard problems, where finding the exact global optimum becomes computationally intractable. Consequently, the field heavily leverages heuristics and metaheuristics to find high-quality approximate solutions within a reasonable timeframe. Within this computationally demanding landscape, Quantum Computing emerges as a disruptive paradigm; by exploiting quantum mechanical phenomena, it promises to solve significantly larger $NP$-Hard instances and achieve higher-quality approximate solutions more efficiently than classical approaches \cite{memon2024quantum}.
 
-Building upon this general computational complexity, a secondary, equally formidable challenge arises when utilizing neutral atom platforms: the geometrical complexity. As introduced in Chapter \ref{chap:introduction}, executing an algorithm requires mapping (or \textit{embedding}) the logical variables of the optimization problem onto the physical atoms arranged in a 2D or 3D register \cite{Henriet2020quantumcomputing}. 
+Provided this general computational complexity, a secondary, equally formidable challenge arises when utilizing neutral atom platforms: the geometrical complexity. As introduced in Chapter \ref{chap:introduction}, executing an embedding algorithm requires mapping (or \textit{embedding}, precisely) the logical variables of the optimization problem onto the physical atoms arranged in a 2D or 3D register \cite{Henriet2020quantumcomputing}. 
 In our specific case, focusing on a 2D plane, the hardware imposes strict geometric constraints and specific interaction boundaries governed by the Ising model and the Rydberg blockade. Finding an efficient spatial mapping that preserves the problem's theoretical connectivity while respecting these strict physical limitations is, remarkably, an $NP$-Hard problem in itself \cite{Vercellino_2022}.
 
 \section{Unit Disk Graphs (UDG) and the Maximum Independent Set (MIS)}
@@ -25,14 +27,15 @@ A graph can be formally denoted as:
     G = (V, E)
 \end{equation}
 
-where $V$ is the set of vertices (or nodes) and $E$ is the set of edges connecting them. Graphs are ubiquitous mathematical structures used to model pairwise relations between objects, and their properties are supported by a vast and robust theoretical foundation \cite{berge2001theory}. 
+where $V$ is the set of vertices (or nodes) and $E$ is the set of edges connecting them. Graphs are very common mathematical structures used to model relations between objects, and their properties are supported by a vast, historically established and robust theoretical foundation \cite{berge2001theory}. 
 
-Consequently, while an exhaustive review of graph theory is beyond the scope of this work, these structures are of fundamental interest. Indeed, a significant portion of current literature focuses on graph-based combinatorial problems, primarily because graphs serve as the standard mathematical interface to encode and map optimization tasks onto quantum architectures. Prominent examples of such $NP$-Hard problems include the Maximum Cut (Max-Cut), the Traveling Salesperson Problem (TSP), and the Maximum Independent Set (MIS), which have extensively served as standard benchmarks for evaluating the performance of quantum algorithms \cite{lucas2014ising}.
+Thus, while an exhaustive review of graph theory is beyond the scope of this work, these structures will be briefly presented because of fundamental interest. Indeed, a significant portion of current literature focuses on graph-based combinatorial problems, primarily because graphs serve as the standard mathematical interface to encode and map optimization tasks onto quantum architectures. 
+Prominent examples of such $NP$-Hard problems include the Maximum Cut (Max-Cut), the Traveling Salesperson Problem (TSP), and the Maximum Independent Set (MIS), which have extensively served as standard benchmarks for evaluating the performance of quantum algorithms \cite{lucas2014ising}.
 
 To specialize our focus from general graphs, we introduce the concept of Unit Disk Graphs (UDG). As formalized by Clark et al. \cite{CLARK1990165}, UDGs can be defined through three mathematically equivalent geometric models:
 
 \begin{itemize}
-    \item \textbf{Distance Model:} Given a set of $n$ points in the Euclidean plane, an $n$-vertex graph is formed where each vertex corresponds to a point ($|V| = n$). An edge exists between two vertices if and only if the Euclidean distance $d(u, v)$ between the two corresponding points $u$ and $v$ is at most a specified threshold radius $r$. Mathematically, the edge set is defined as:
+    \item \textbf{Distance Model:} Given a set of $n$ points in the Euclidean plane, a $n$-vertex graph is formed where each vertex corresponds to a point ($|V| = n$). An edge exists between two vertices if and only if the Euclidean distance $d(u, v)$ between the two corresponding points $u$ and $v$ is at most a specified threshold radius $r$. Mathematically, the edge set is defined as:
     \begin{equation}
         E = \{ \{u, v\} \mid u, v \in V, \; d(u, v) \leq r \}
     \end{equation}
@@ -46,22 +49,23 @@ To specialize our focus from general graphs, we introduce the concept of Unit Di
     % --- Pannello Sinistro: Distance Model ---
     \node at (1, 2.5) {\textbf{(a) Distance Model}};
 
-    % Definisco i nodi (punti)
+    % definizione dei nodi (punti)
     \coordinate (A) at (0, 0);
     \coordinate (B) at (1.5, 0.5);
     \coordinate (C) at (0.5, 1.5);
     \coordinate (D) at (2.5, 1.2);
 
-    % Disegno gli archi validi (distanza <= r)
+    % Disegno degli archi validi (distanza <= r)
     \draw[thick] (A) -- (B) -- (C) -- (A);
     \draw[thick] (B) -- (D);
-    % Disegno un arco non valido per mostrare che la distanza > r
+
+    % Disegno di un arco non valido per mostrare che la distanza > r
     \draw[dashed, gray] (C) -- (D) node[midway, above right] {$> r$};
 
     % Etichetta della distanza <= r
     \draw[<->, red, thick] (A) -- (B) node[midway, below right] {$d \leq r$};
 
-    % Disegno i pallini dei nodi
+    % Disegno dei pallini dei nodi
     \filldraw (A) circle (2pt) node[below left] {$u$};
     \filldraw (B) circle (2pt) node[below] {$v$};
     \filldraw (C) circle (2pt) node[above] {$w$};
@@ -95,13 +99,13 @@ To specialize our focus from general graphs, we introduce the concept of Unit Di
     \filldraw (D2) circle (2pt);
     \end{scope}
 \end{tikzpicture}
-\caption{Equivalent geometric representations of a Unit Disk Graph (UDG). \textbf{(a)} The Distance Model connects nodes $u$ and $v$ if their Euclidean distance is $d \leq r$. \textbf{(b)} The Intersection Model places a disk of radius $r/2$ centered on each node; edges are formed exclusively where disks overlap.}
+\caption{The equivalent geometric representations of a Unit Disk Graph (UDG) cited from \cite{CLARK1990165}. \textbf{(a)} The Distance Model connects nodes $u$ and $v$ if their Euclidean distance is $d \leq r$. \textbf{(b)} The Intersection Model places a disk of radius $r/2$ centered on each node; edges are formed exclusively where disks overlap.}
 \label{fig:udg_models}
 \end{figure}
 
 Given any of these three definitions, the other two can be derived in linear time, demonstrating that they describe the exact same class of graphs. Historically, UDGs have proven to be an excellent mathematical framework for modeling broadcast and cellular networks, effectively resolving real-world problems such as frequency assignment and emergency signal routing \cite{CLARK1990165}. 
 
-In the context of this thesis, the distance model is of paramount importance: replacing the generic threshold distance $r$ with the Rydberg radius ($R_b$) perfectly captures the physical interaction connectivity of neutral atoms in a quantum register.
+In the context of this thesis, the distance model is ''the elected'' model: replacing the generic threshold distance $r$ with the Rydberg radius ($R_b$) perfectly captures the physical interaction connectivity of neutral atoms in a quantum register.
 
 As previously mentioned, the Maximum Independent Set (MIS) is a classic $NP$-Hard combinatorial optimization problem. While canonically formulated on general graphs, it holds massive relevance for our architecture because the problem famously remains $NP$-Hard even when restricted to Unit Disk Graphs \cite{CLARK1990165}.
 
@@ -113,7 +117,8 @@ The MIS problem entails finding an independent set that contains the largest pos
 
 Given the aforementioned definitions, a straightforward and perfect isomorphism emerges between the abstract MIS problem on a UDG and the physical dynamics of neutral atom arrays. Specifically, the geometric threshold radius $r$ of the UDG corresponds directly to the Rydberg blockade radius ($R_b$). 
 
-Consequently, the core mathematical constraint of the MIS problem, which strictly forbids selecting two adjacent vertices, is natively and physically enforced by the Rydberg blockade phenomenon, which prevents any two atoms within a distance $R_b$ from being simultaneously excited to the Rydberg state. Because of this perfect theoretical alignment, applying a global laser pulse designed to maximize the number of excited atoms in the 2D register forces the quantum many-body system to naturally evolve toward a ground state that inherently encodes the exact solution to the Maximum Independent Set of the corresponding geometric graph \cite{Henriet2020quantumcomputing}.
+Consequently, the core mathematical constraint of the MIS problem, which strictly forbids selecting two adjacent vertices, is natively and physically enforced by the Rydberg blockade phenomenon, which prevents any two atoms within a distance $R_b$ from being simultaneously excited to the Rydberg state. 
+Because of this perfect theoretical alignment, applying a global laser pulse designed to maximize the number of excited atoms in the 2D register forces the quantum many-body system to naturally evolve toward a ground state that inherently encodes the exact solution to the Maximum Independent Set of the corresponding geometric graph \cite{Henriet2020quantumcomputing}.
 \begin{figure}[htbp]
 \centering
 \begin{tikzpicture}[scale=1.2]
@@ -156,24 +161,26 @@ Consequently, the core mathematical constraint of the MIS problem, which strictl
     \draw[<->, thick] (E4) -- ++(\Rb,0) node[midway, above, font=\footnotesize] {$R_b$};
 
 \end{tikzpicture}
-\caption{Physical realization of the Maximum Independent Set (MIS) via the Rydberg blockade. Red dots represent atoms excited to the Rydberg state (\textbf{MIS selected nodes}), while black dots are atoms in the ground state (\textbf{unselected nodes}). The shaded red regions represent the Rydberg blockade volume (radius $R_b$). The physical mechanism preventing two Rydberg excitations from overlapping perfectly enforces the mathematical constraint of the MIS problem.}
+\caption{Physical realization of the Maximum Independent Set (MIS) via the Rydberg blockade. Red dots represent atoms excited to the Rydberg state (\textbf{MIS selected nodes}), while black dots are atoms remained in the ground state (\textbf{unselected nodes}). 
+The shaded red regions represent the Rydberg blockade volume (radius $R_b$). The physical mechanism preventing two Rydberg excitations from overlapping perfectly enforces the mathematical constraint of the MIS problem.}
 \label{fig:rydberg_mis}
 \end{figure}
 
 \section{Literature and State of the Art}
 \label{sec:SOTA}
 
-Defining a definitive State of the Art (SOTA) for the embedding problem on neutral atom architectures is inherently challenging, as the field remains at the absolute frontier of quantum computing research. Currently, there is no universally established protocol or singular ``gold standard'' architecture. Instead, the literature presents a diverse landscape of experimental approaches and heuristic strategies aimed at overcoming the strict geometric constraints of these platforms.
+Defining a definitive State of the Art (SOTA) for the embedding problem on neutral atom architectures is challenging, as the field remains at the absolute frontier of quantum computing research. Presently, there is no universally established protocol or singular ``gold standard'' architecture. Instead, the literature presents a diverse landscape of experimental approaches and heuristic strategies aimed at overcoming the strict geometric constraints of these platforms.
 
-To illustrate this dynamic ecosystem, recent literature explores a wide array of embedding techniques. For instance, Vercellino et al. \cite{Vercellino_2022} investigate the use of Neural Networks to dynamically map problem graphs onto physical registers. Other approaches rely on force-directed heuristics; notably, Tarquini et al. \cite{tarquini2026dronedeliverypackingproblem} successfully experimented with the Fruchterman-Reingold (FR) algorithm, enhanced by sophisticated pre- and post-processing techniques, to embed Quadratic Unconstrained Binary Optimization (QUBO) problems.
+To illustrate this dynamic ecosystem, recent literature explores a wide array of embedding techniques. For instance, Vercellino et al. \cite{Vercellino_2022} investigate the use of Neural Networks to dynamically map problem graphs onto physical registers. Other approaches rely on force-directed heuristics; notably, Tarquini et al. \cite{tarquini2026dronedeliverypackingproblem} successfully (within a reasonable dimension less than circa 50 nodes) experimented with the Fruchterman-Reingold (FR) algorithm, enhanced by sophisticated pre- and post-processing techniques, 
+to embed Quadratic Unconstrained Binary Optimization (QUBO) problems.
 
 Alongside embedding algorithms, significant research is devoted to translating highly complex real-world use cases into physical layouts. Examples include the formulation of emergency hub placement routing \cite{tarquini2026emergencyhubplacementneutralatom} and satellite mission planning \cite{nowak2026satellitemissionplanningrydberg}, demonstrating the vast applicability of QUBO formulations on neutral atoms.
 
-Crucially for this thesis, several recent studies have started exploring problem partitioning as a workaround for hardware scale limitations. Works by Nembrini et al. \cite{nembrini2024application, Nembrini_2026} and Das et al. \cite{das2025grid} propose dividing the original combinatorial problem into sub-instances resolved using localized arrays. While their specific methodologies differ from our scope, these partitioning strategies served as the foundational inspiration for the hybrid \textit{divide et impera} (divide and conquer) architecture proposed in the subsequent chapters of this work.
+Most important for this thesis, several recent studies have started exploring problem partitioning as a workaround for hardware scale limitations. Works by Nembrini et al. \cite{nembrini2024application, Nembrini_2026} and Das et al. \cite{das2025grid} propose dividing the original combinatorial problem into sub-instances resolved using localized arrays. While their specific methodologies differ from our scope, these partitioning strategies served as the foundational inspiration for the hybrid \textit{divide et impera} (divide and conquer) architecture proposed in the subsequent chapters of this work.
 
 This diversity of approaches underscores the immaturity and the highly exploratory nature of the field. While the lack of rigid standards offers significant opportunities for novel theoretical contributions, it also introduces substantial experimental risks and engineering bottlenecks. 
 
-Drawing from this extensive body of literature, we elected to restrict our focus specifically to the QUBO mathematical framework, which will be formally defined in the next section. More importantly, driven by the operational realities and constraints of the currently available experimental platforms, our investigation will target QUBO instances that naturally exhibit a UDG-like connectivity. This specific focus bypasses the need for massive auxiliary embeddings, setting the optimal stage for our distributed algorithmic approach.
+Drawing from this extensive body of literature, we chose to restrict our focus specifically to the QUBO mathematical framework, which will be formally defined in the next section. More importantly, mainly driven by the operational realities and constraints of the currently available experimental platforms, our investigation will target QUBO instances that naturally exhibit a UDG-like connectivity. This specific focus bypasses the need for massive auxiliary embeddings, setting the optimal stage for our distributed algorithmic approach.
 
 
 \section{Quadratic Unconstrained Binary Optimization (QUBO)}
@@ -204,13 +211,3 @@ Due to specific hardware and simulator constraints, the experimental phase of th
 
 Furthermore, to ensure physical compatibility with current neutral atom platforms, these matrices are constrained to exhibit uniform parameter distributions. All elements on the principal diagonal are assigned identical values; mathematically, this uniform linear cost reflects the hardware limitation of employing a global driving laser, which applies the same detuning and Rabi frequency uniformly across the entire atomic register. Similarly, all non-zero off-diagonal elements share a constant penalty value, effectively representing the uniform, binary nature of the Rydberg blockade interaction across all valid UDG edges.
 
-
-%continuare come è fatta Q nel nostro caso e perchè. Il dettaglio su x lo metterei direttamente nella pipeline
-
-%Scaletta delle prossime cose da fare:
-
-%Descrizione QUBO problems e magari specificare meglio perchè ci concentriamo sugli UDG like (o vedere se farlo nelle sezioni dopo)
-%Valutare se mettere esempio di matrice che useremo o comunque di problema QUBO
-%rileggere e valutare tutto il capitolo
-%attaccare il capitolo 3
-%valutare quando attaccare con sperimentazioni ulteriori e richieste
