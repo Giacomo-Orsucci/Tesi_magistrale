@@ -21,5 +21,6 @@
 \contentsline {subsection}{\numberline {3.1.2}QUBO Instance Generation}{26}{subsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.1.3}Instance Loading and Matrix Parsing}{28}{subsection.3.1.3}%
 \contentsline {section}{\numberline {3.2}Embedding Optimization using Genetic Algorithms (GA)}{28}{section.3.2}%
-\contentsline {paragraph}{Genetic Algorithm Framework}{29}{section*.7}%
-\contentsline {chapter}{Bibliography}{31}{section*.7}%
+\contentsline {subsection}{\numberline {3.2.1}Genetic Algorithm Framework}{29}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}GA Parametrization: Explanation and Example}{30}{subsection.3.2.2}%
+\contentsline {chapter}{Bibliography}{34}{table.3.1}%

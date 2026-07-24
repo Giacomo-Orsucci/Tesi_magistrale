@@ -10,16 +10,16 @@ This chapter presents the baseline architecture of our embedding pipeline and th
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.5\textwidth]{img/base_pipeline.png} 
-    \caption{Flowchart of the basic pipeline. The process highlights an hybrid classical-quantum approach.}
+    \caption{Flowchart of the basic pipeline. The process highlights a hybrid classical-quantum approach.}
     \label{fig:base_pipeline}
 \end{figure}
 
 As illustrated in the conceptual scheme in Figure \ref{fig:base_pipeline}, the first operational phase of the pipeline requires loading the QUBO problem instance. Therefore, it is strictly necessary to detail the geometric and mathematical characteristics of the investigated instances, as well as the hardware restrictions that dictated their generation.
 
 \subsection{Hardware Constraints and the Jülich HPC Emulator}
-As discussed, neutral atom platforms present some physical limitations. The most impactful constraint for our formulation is the reliance on a \textit{global driving laser}, which uniformly illuminates the entire atomic register and so imposes the impossibility to excite differently different atoms or clusters of different atoms. Mathematically, this enables a feasible quantum execution only for QUBO matrices that exhibit uniform values on the principal diagonal (representing a constant linear cost/detuning) and uniform off-diagonal penalties (representing the binary Rydberg blockade).
+As discussed, neutral atom platforms present some physical limitations. The most impactful constraint for our formulation is the reliance on a \textit{global driving laser}, which uniformly illuminates the entire atomic register and so imposes the impossibility of applying different excitations to individual atoms or clusters of different atoms. Mathematically, this enables a feasible quantum execution only for QUBO matrices that exhibit uniform values on the principal diagonal (representing a constant linear cost/detuning) and uniform off-diagonal penalties (representing the binary Rydberg blockade).
 
-In order to emulate as much as possible a real-world applicability of this thesis, the pipeline was explicitly designed to target \textbf{Jade}, a state-of-the-art Neutral Atom Quantum Processing Unit \cite{pasqal2026italy}. While we initially planned for physical execution on it, access to the actual Jade hardware was postponed to the upcoming December due to broader availability constraints. Consequently, the experimental phase for the moment has relied to a remote analog quantum emulator provided by the \textbf{Jülich Supercomputing Centre (JSC)} in Germany. 
+In order to emulate as much as possible a real-world applicability of this thesis, the pipeline was explicitly designed to target \textbf{Jade}, a state-of-the-art Neutral Atom Quantum Processing Unit \cite{pasqal2026italy}. While we initially planned for physical execution on it, access to the actual Jade hardware was postponed to the upcoming December due to broader availability constraints. Consequently, the experimental phase for the moment has relied on a remote analog quantum emulator provided by the \textbf{Jülich Supercomputing Centre (JSC)} in Germany. 
 
 To ensure that the research performed remains perfectly forward-compatible with the real machine once available, we injected a custom hardware profile into the simulator (referred to in the codebase \cite{orsucci_qubo_ga_quantum} as \texttt{FakeJade}). This profile strictly enforces Jade's actual physical parameters in order to be able to directly test this work on it in the near future.
 
@@ -38,12 +38,12 @@ The \texttt{FakeJade} physical profile injected into the emulator severely bound
 
 \subsection{QUBO Instance Generation}
 These strict hardware parameters played a foundational role in how the test datasets were generated. To guarantee that the problem instances are physically embeddable on the targeted neutral atom architecture, a specialized Python generation script was developed. Rather than generating arbitrary random graphs, the script synthesizes ``verisimilar'' Unit Disk Graphs (UDG) by simulating the actual physical placement of atoms under the constraints aforementioned.
-The generation logic is composed by the following procedural steps:
+The generation logic is composed of the following procedural steps:
 \begin{enumerate}
-    \item \textbf{Dynamic Operational Area Calculation:} To achieve a specific target average degree (which dictates primarly the problem's difficulty), an effective operational radius is dynamically calculated. This radius scales proportionally with the square root of the number of nodes ($N$) and the Rydberg radius. Most important, it is mathematically bounded to never exceed the physical limits of the machine (the $50\,\mu\text{m}$ maximum hardware radius) while remaining large enough to accommodate all atoms.
-    \item \textbf{Rejection Sampling Placement:} Node coordinates are generated uniformly within the operational area using polar coordinates. An hardware aware minimum-distance check is enforced during this process: any randomly generated position that falls within the minimum allowed optical trap distance ($d_{min} = 4.0\,\mu\text{m}$) of an already placed atom is immediately rejected. This ensures the resulting spatial configuration respects the optical tweezers' constraints.
+    \item \textbf{Dynamic Operational Area Calculation:} To achieve a specific target average degree (which dictates primarily the problem's difficulty), an effective operational radius is dynamically calculated. This radius scales proportionally with the square root of the number of nodes ($N$) and the Rydberg radius. Most important, it is mathematically bounded to never exceed the physical limits of the machine (the $50\,\mu\text{m}$ maximum hardware radius) while remaining large enough to accommodate all atoms.
+    \item \textbf{Rejection Sampling Placement:} Node coordinates are generated uniformly within the operational area using polar coordinates. A hardware-aware minimum-distance check is enforced during this process: any randomly generated position that falls within the minimum allowed optical trap distance ($d_{min} = 4.0\,\mu\text{m}$) of an already placed atom is immediately rejected. This ensures the resulting spatial configuration respects the optical tweezers' constraints.
     \item \textbf{QUBO Matrix Construction:} Once all $N$ coordinates are successfully placed within the delimited continuous space, the pairwise Euclidean distance matrix is computed. The QUBO matrix ($Q$) is then populated: all main diagonal elements are uniformly set to $-1.0$ (representing the global laser's tendency to drive the atoms toward the Rydberg state), and a constant penalty weight of $2.0$ is assigned to any off-diagonal edge where the inter-atomic distance is strictly less than the specified Rydberg blockade radius set ($R_b = 12.0\,\mu\text{m}$).
-    \item \textbf{Data Serialization:} Finally, the non-zero upper triangular elements of the QUBO matrix are extracted and serialized into a (\texttt{.npz}) format. Although the original geometrically valid coordinates are stored for validation purposes, the embedding pipeline receives only the abstract mathematical weights (otherwise all of the next experimentations do not makes much sense), forcing the selected embedding algorithm to reconstruct a valid physical layout from scratch.
+    \item \textbf{Data Serialization:} Finally, the non-zero upper triangular elements of the QUBO matrix are extracted and serialized into a (\texttt{.npz}) format. Although the original geometrically valid coordinates are stored for validation purposes, the embedding pipeline receives only the abstract mathematical weights (otherwise all of the next experimentations would not make much sense), forcing the selected embedding algorithm to reconstruct a valid physical layout from scratch.
 \end{enumerate}
 
 \begin{figure}[htbp]
@@ -62,26 +62,74 @@ A dedicated parser function extracts the indices and weights from the \texttt{.n
 \section{Embedding Optimization using Genetic Algorithms (GA)}
 \label{sec:ga_optimization}
 
-The search for an optimal physical embedding is a $NP$-Hard task characterized by a highly complex, non-convex optimization scenario that makes very ineffective using classical optimization methods such as the Nelder-Mead simplex method. As formalized in the previous section, among the challenges, we have that the computational engine must simultaneously satisfy strict geometric boundaries ($R_{max}$) and discrete proximity constraints ($d_{min}$) for example, all while minimizing in some way the topological error between the physical Van der Waals interactions and the mathematical QUBO penalties in order
-to achieve a good enough fitness score and consequently (at least in principal) a good enough embedding.
+The search for an optimal physical embedding is a $NP$-Hard task characterized by a highly complex, non-convex optimization scenario that makes the use of classical optimization methods, such as the Nelder-Mead simplex method, highly ineffective. As formalized in the previous section, among the challenges, we have that the computational engine must simultaneously satisfy strict geometric boundaries ($R_{max}$) and discrete proximity constraints ($d_{min}$) for example, all while minimizing in some way the topological error between the physical Van der Waals interactions and the mathematical QUBO penalties in order
+to achieve a good enough fitness score and consequently (at least in principle) a good enough embedding.
 
-Given the severity of these constraints and the complete lack of \textit{a priori} analytical information regarding the optimal spatial distribution of the atoms, we choose to initiate our experimental phase by testing a black-box, derivative-free optimization approach: Genetic Algorithms (GAs). This section has the main goal
-to explain the main GAs' characteristics finalized to better contextualize the more attentioned experimental results.  
+Given the severity of these constraints and the complete lack of \textit{a priori} analytical information regarding the optimal spatial distribution of the atoms, we chose to initiate our experimental phase by testing a black-box, derivative-free optimization approach: Genetic Algorithms (GAs). The main goal of this section is to explain the core characteristics of GAs, in order to better contextualize our experimental results.  
 
 
-%ancora da ricontrollare
-\paragraph{Genetic Algorithm Framework}
-Genetic Algorithms represent a prominent branch of evolutionary computation, heavily inspired by the biological principles of natural selection and genetics. The possible different methodological classifications and terminologies are very different and influenced by the different biological and evolutionary elements inspiring the different algorithms, 
-but in general they are particularly well-suited for optimization problems where the search space is discontinuous and when we don't have a priori information at all.
 
-In our specific context of application, as a result of deep and complete study of \cite{bookGA}, considered the bible for Genetic Algorithms, we decided to design our GA with the following key aspects: 
+\subsection{Genetic Algorithm Framework}
+Genetic Algorithms represent a prominent branch of evolutionary computation, heavily inspired by the biological principles of natural selection and genetics. While methodological classifications and terminologies vary significantly depending on the specific biological mechanisms inspiring them, GAs are universally recognized as highly effective for optimization tasks characterized by discontinuous search spaces and a complete lack of \textit{a priori} analytical information.
+
+In our specific context of application, and following a comprehensive study of the foundational literature \cite{bookGA}, we designed our GA architecture around the following key structural principles: 
 
 \begin{itemize}
-    \item an individual or chromosome in the GA population is a set of 2 continue 2D coordinates $(x,y)$ having a 2D register. A set for every $N$ atoms (binary variables).
-    \item the population is iteratevely improved via crossover, parenting, selection...
-    \item the population evalutation and improvement is done using a fitness function score as metric.
+    \item \textbf{Chromosome Encoding:} Unlike classical binary GAs, an individual (or chromosome) in our population is encoded as a continuous, real-valued array of 2D spatial coordinates $(x,y)$. This array strictly defines the physical placement of all $N$ atoms within the 2D register.
+    \item \textbf{Evolutionary Operators:} The population is iteratively evolved across generations utilizing customized selection, crossover, and mutation mechanisms.
+    \item \textbf{Evaluation Metric:} The survival and reproduction probability of each layout is strictly governed by a custom Fitness Function, which evaluates the topological validity and quality of the configuration.
 \end{itemize}
 
-%continuare con esempio di configurazione GA
-%spiegare nel dettaglio perchè è stata fatta questa scelta
+\subsection{GA Parametrization: Explanation and Example}
+
+In this subsection, we present a baseline parametrization example of our Genetic Algorithm. The primary purpose is to detail the specific hyperparameter configuration and the evolutionary mechanisms leveraged. 
+This specific setup represents an example of our algorithmic foundation in our approach, because also with larger or different instances the core architecture remains identical, requiring only dynamic (and/or manual) adjustments to the parameters (for example, applying more aggressive mutation rates or larger population sizes for higher-dimensional topologies).
+For illustrative purposes, below we report the configuration for a 5x5 instance (N=5, 5 nodes).
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l c p{0.55\textwidth}}
+        \hline
+        \textbf{GA Parameter} & \textbf{Chosen Value} & \textbf{Conceptual Meaning} \\
+        \hline
+        \textbf{Chromosome Length} & $2N$ & Continuous 2D coordinates for all $N$ atoms. \\
+        \textbf{Population Size} & $100$ & Number of candidate layouts per generation. \\
+        \textbf{Max Generations} & $800$ & Termination criterion for the evolutionary loop. \\
+        \textbf{Fitness Function} & Custom & Evaluates spatial topology against the target QUBO matrix. \\
+        \textbf{Selection Strategy} & Tournament ($K=3$) & Selects parents ensuring high competitive pressure. \\
+        \textbf{Mating Pool Size} & $20$ & Number of parents selected for reproduction. \\
+        \textbf{Crossover Operator} & Uniform & Exchanges individual $(x,y)$ coordinates between parents. \\
+        \textbf{Mutation Strategy} & Adaptive & Dynamically scales mutation probability ($40\%$ to $5\%$) based on fitness. \\
+        \textbf{Mutation Bounds} & $[-3.0, 3.0]$ $\mu$m & Spatial perturbation window for local coordinate fine-tuning. \\
+        \textbf{Elitism} & $5$ & Preserves the $5$ best layouts across generations without alterations. \\
+        \hline
+    \end{tabular}
+    }
+    \caption{Hyperparameter baseline configuration for the Genetic Algorithm setup for a 5x5 instance (N=5 nodes).}
+    \label{tab:ga_parameters}
+\end{table}
+
+Table \ref{tab:ga_parameters} illustrates the exact configuration adopted in the \textit{bench-GA.py} script from the project codebase \cite{orsucci_qubo_ga_quantum}. This setup gives us the opportunity to explicitly justify our design choices, which were heavily guided by the theoretical foundations established in \cite{bookGA}.
+
+To effectively explore the continuous geometric search space (which is inherently vast and intractable), the evolutionary pressure is driven by a Tournament Selection mechanism. This method selects the parent individuals for the mating phase while maintaining sufficient genetic diversity, thereby avoiding premature convergence. At the same time, to preserve high-quality geometric structures discovered during the search, an elitism strategy was adopted. This ensures that the best-performing embeddings are passed completely unaltered to the subsequent generation; otherwise, spatial mutations could easily disrupt these high-quality candidates.
+
+Regarding the genetic operators, a Uniform Crossover was implemented to exchange individual coordinates between parents, since traditional crossover methods based on splitting continuous arrays would disrupt the geometric integrity of the spatial layouts. However, the most critical configuration involved the mutation operator. Given the continuous nature of our coordinates and the strict precision required by the $d_{min}$ physical constraint, an Adaptive Mutation strategy was deployed. As detailed in the table, the mutation probability dynamically scales between $40\%$ and $5\%$ based on the individual's fitness, applying a spatial perturbation within a strict $[-3.0, 3.0]$ $\mu$m window. This adaptive approach is fundamentally advantageous: it allows the algorithm to aggressively explore the space during early generations and perform a delicate local fine-tuning as the population converges toward valid physical solutions. In this way, we can rapidly evaluate the enormous initial set of candidates in the solution landscape, increasing the probability of finding viable starting points.
+
+It is important to emphasize once again that designing and tuning a Genetic Algorithm must adhere to theoretical guidelines, but it also relies heavily on empirical craftsmanship and domain expertise. Understanding the specific physical constraints of the application problem is crucial for adapting the GA effectively. Consequently, while we cannot claim this to be the absolute optimal configuration mathematically, it certainly represents the most effective setup achieved during our experimental phase. 
+
+This empirical nature is evident in our choices: instead of terminating based on a target fitness score or execution time, we opted for a fixed maximum number of generations (stopping criterion) to better accommodate the stochastic nature of GAs. Furthermore, because every evolutionary run is inherently probabilistic, the algorithm is executed multiple times (multi-shot) for each instance to ensure robust and statistically significant results.
+
+Finally, these observations highlight one of the primary drawbacks of Genetic Algorithms: identifying a robust parametrization requires significant time dedicated to hyperparameter fine-tuning \cite{bookGA}. It demands extensive experimentation to develop a heuristic sensitivity to how the algorithm responds to varying problem sizes, graph topologies, and interaction densities.
+
+
 %spiegare con esempio la fitness function, formalizzarla e spiegare perchè è stata scelta.
+%valutare quali istanze (le più rappresentative) andare a riportare spiegando bene e di nostro pugno
+%i risultati ottenuti e le considerazioni relative al GA e le topologie delle istanze.
+
+
+%Passare ad SA, spiegare perchè abbiamo usato SA perchè SA + GRASP (magari basta dire che degli esperimenti preliminari hanno giustificato l'uso di GRASP ecc ecc)
+%Scegliere gli esperimenti più rappresentativi per SA + GRASP (magari qualcuno di confronto con GA e poi quelli che permettono di far vedere che si scala meglio), piccolo 
+%confronto SA-SA + GRASP?
+
