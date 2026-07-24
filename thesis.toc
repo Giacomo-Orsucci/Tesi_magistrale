@@ -23,4 +23,5 @@
 \contentsline {section}{\numberline {3.2}Embedding Optimization using Genetic Algorithms (GA)}{28}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Genetic Algorithm Framework}{29}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}GA Parametrization: Explanation and Example}{30}{subsection.3.2.2}%
-\contentsline {chapter}{Bibliography}{34}{table.3.1}%
+\contentsline {subsection}{\numberline {3.2.3}Fitness Function Formulation}{33}{subsection.3.2.3}%
+\contentsline {chapter}{Bibliography}{37}{subsection.3.2.3}%

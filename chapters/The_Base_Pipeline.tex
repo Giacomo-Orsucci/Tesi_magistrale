@@ -123,6 +123,39 @@ This empirical nature is evident in our choices: instead of terminating based on
 
 Finally, these observations highlight one of the primary drawbacks of Genetic Algorithms: identifying a robust parametrization requires significant time dedicated to hyperparameter fine-tuning \cite{bookGA}. It demands extensive experimentation to develop a heuristic sensitivity to how the algorithm responds to varying problem sizes, graph topologies, and interaction densities.
 
+\subsection{Fitness Function Formulation}
+\label{sec:fit_func}
+
+The core of the evolutionary optimization is driven by the evaluation metric, represented in our algorithm by the \textit{Improved Topological Mean Absolute Error (MAE)} fitness function. This custom function calculates the geometric ``quality'' of a candidate layout and its structural isomorphism to the target QUBO matrix, heavily penalizing configurations that violate the hardware's physical constraints. 
+
+While fitness functions are inherently flexible from an algorithmic design perspective and can be personalized to obtain a metric score tailored for specific combinatorial problems, our implementation (documented in the \textit{bench-GA.py} script \cite{orsucci_qubo_ga_quantum}) adopts a strict physics-aware approach. Although multiple fitness functions and their variants were implemented and extensively tested during the experimental phase, the \textit{Improved Topological MAE} consistently yielded the highest quality embeddings. 
+The mathematical design of this optimally selected metric is formalized by the following foundational parameters:
+\begin{itemize}
+    \item Let $N$ be the number of logical variables (atoms).
+    \item An individual in the population is defined by a set of spatial coordinates $\mathbf{r}_i \in \mathbb{R}^2$ for $i = 1, \dots, N$.
+    \item The Euclidean distance between any pair of atoms is denoted as $r_{ij} = ||\mathbf{r}_i - \mathbf{r}_j||$ with $i \neq j$.
+    \item The physical interaction potential between two atoms is strictly governed by the Van der Waals force, expressed as $V_{ij} = C_6 / r_{ij}^6$. 
+\end{itemize}
+
+A critical computational challenge in continuous spatial embeddings is the numerical instability triggered when two atoms are placed too close to each other. As the distance $r_{ij} \to 0$, the physical potential $V_{ij}$ explodes to infinity, effectively destroying the evaluation for the entire array. To circumvent this, the maximum physical potential must be analytically clipped, defining the maximum desired interaction from the scaled target QUBO matrix $Q$ as $Q_{max} = \max_{i<j}(|Q_{ij}|)$, the effective physical potential $\tilde{V}_{ij}$ is bounded as:
+$$ \tilde{V}_{ij} = \min\left( \frac{C_6}{r_{ij}^6}, \ n \cdot Q_{max} \right) $$
+with $n = 5$ acting as a saturation threshold in our configuration.
+
+To accurately evaluate the topological mismatch between the physical layout and the mathematical abstraction, we partition the upper-triangular interactions into two disjoint sets. The active bounds $E_{active} = \{(i,j) \mid |Q_{ij}| > \epsilon\}$ represent the necessary logical connections, while the inactive bounds $E_{inactive} = \{(i,j) \mid |Q_{ij}| \le \epsilon\}$ represent pairs that must not physically interact. A tolerance of $\epsilon = 10^{-5}$ is introduced to safely handle floating-point inaccuracies. This explicit classification ensures that the algorithm can accurately shape the required couplings while actively filtering out the noise.
+
+Consequently, the topological base error ($E_{base}$) is computed by measuring the exact deviation on the active bounds, while simultaneously applying a heavy penalty for any unwanted crosstalk on the inactive ones:
+$$ E_{base} = \sum_{(i,j) \in E_{active}} \left| \tilde{V}_{ij} - Q_{ij} \right| + \lambda \sum_{(i,j) \in E_{inactive}} \tilde{V}_{ij} $$
+where $\lambda = 2.0$ is an amplification multiplier that forces the evolutionary algorithm to prioritize moving unconnected nodes apart.
+
+Beyond the topological layout, the configuration must strictly adhere to the Neutral Atom hardware specifications. Specifically, we must guarantee a minimum inter-atomic distance ($d_{min} = 4.0$ $\mu$m) to respect the optical tweezers' diffraction limits, and confine the entire register within a maximum radius ($R_{max} = 50.0$ $\mu$m) dictated by the global laser's boundaries. These hard physical constraints are enforced through a severe linear penalty function $P$:
+$$ P = K \left( \sum_{i<j} \max(0, d_{min} - r_{ij}) + \sum_{i} \max(0, ||\mathbf{r}_i|| - R_{max}) \right) $$
+where $K = 10^5$ acts as a massive penalty factor that immediately drops physically unfeasible candidates out of the evolutionary mating pool.
+
+Since Genetic Algorithms are natively designed to maximize a specific score, the accumulated topological error and physical penalties are inverted to yield a strictly positive final fitness value $F$:
+$$ F = \frac{1}{E_{base} + P + \delta} $$
+The minimal constant $\delta = 10^{-6}$ is introduced simply to prevent zero-division crashes in the extremely unlikely event that the algorithm discovers a mathematically perfect continuous mapping.
+
+It is straightforward also from above how there is not a single valid method or theroy to biuld "the best" fitness function.
 
 %spiegare con esempio la fitness function, formalizzarla e spiegare perchè è stata scelta.
 %valutare quali istanze (le più rappresentative) andare a riportare spiegando bene e di nostro pugno
