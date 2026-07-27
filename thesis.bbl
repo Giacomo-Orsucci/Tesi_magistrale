@@ -132,4 +132,20 @@ G.~Orsucci, ``{QUBO-GA-QUANTUM}.''
 A.~Eiben and J.~Smith, {\em Introduction To Evolutionary Computing}, vol.~45.
 \newblock 01 2003.
 
+\bibitem{perron2026leveraging}
+C.~Perron, Y.~B{\'e}rub{\'e}-Lauzi{\`e}re, and V.~Drouin-Touchette,
+  ``Leveraging analog neutral-atom quantum computers for diversified pricing in
+  hybrid column-generation frameworks,'' {\em Physical Review A}, vol.~113,
+  no.~2, p.~022617, 2026.
+
+\bibitem{pasqal_qubo_qaa}
+{Pasqal}, ``Qaa to solve a qubo problem | pasqal documentation.''
+  \url{https://docs.pasqal.com/pulser/tutorials/qubo/}, 2026.
+\newblock Accessed: 2026-07-27.
+
+\bibitem{pasqal_mwis_qaa}
+{Pasqal}, ``Qaa to solve a mwis problem - pasqal documentation.''
+  \url{https://docs.pasqal.com/pulser/tutorials/mwis/}, 2026.
+\newblock Accessed: 2026-07-27.
+
 \end{thebibliography}

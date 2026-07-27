@@ -119,7 +119,7 @@ Regarding the genetic operators, a Uniform Crossover was implemented to exchange
 
 It is important to emphasize once again that designing and tuning a Genetic Algorithm must adhere to theoretical guidelines, but it also relies heavily on empirical craftsmanship and domain expertise. Understanding the specific physical constraints of the application problem is crucial for adapting the GA effectively. Consequently, while we cannot claim this to be the absolute optimal configuration mathematically, it certainly represents the most effective setup achieved during our experimental phase. 
 
-This empirical nature is evident in our choices: instead of terminating based on a target fitness score or execution time, we opted for a fixed maximum number of generations (stopping criterion) to better accommodate the stochastic nature of GAs. Furthermore, because every evolutionary run is inherently probabilistic, the algorithm is executed multiple times (multi-shot) for each instance to ensure robust and statistically significant results.
+This empirical nature is evident in our choices: instead of terminating based on a target fitness score or execution time, we opted for a fixed maximum number of generations (stopping criterion) to better accommodate the stochastic nature of GAs. Furthermore, because every evolutionary run is inherently probabilistic, the algorithm is executed multiple times (multi-shot) for each instance to ensure robust and statistically significant results. The best-score run is selected.
 
 Finally, these observations highlight one of the primary drawbacks of Genetic Algorithms: identifying a robust parametrization requires significant time dedicated to hyperparameter fine-tuning \cite{bookGA}. It demands extensive experimentation to develop a heuristic sensitivity to how the algorithm responds to varying problem sizes, graph topologies, and interaction densities.
 
@@ -155,9 +155,105 @@ Since Genetic Algorithms are natively designed to maximize a specific score, the
 $$ F = \frac{1}{E_{base} + P + \delta} $$
 The minimal constant $\delta = 10^{-6}$ is introduced simply to prevent zero-division crashes in the extremely unlikely event that the algorithm discovers a mathematically perfect continuous mapping.
 
-It is straightforward also from above how there is not a single valid method or theroy to biuld "the best" fitness function.
+It is straightforward also from above how there is not a single valid method or theory to build "the best" fitness function.
 
-%spiegare con esempio la fitness function, formalizzarla e spiegare perchè è stata scelta.
+\section{Laser Parametrization}
+
+The laser parametrization phase could easily warrant an entire thesis in itself. The current literature presents a multitude of proposed variants and quantum algorithms with diverse parametrization strategies, and a universally accepted gold standard has not yet been established. For instance, while many studies rely on a foundational adiabatic approach, numerous advanced variants are actively being explored, as demonstrated in \cite{perron2026leveraging}. 
+
+In our case, since the core focus of this thesis is centered on the geometric embedding optimization and the hybrid architecture, we adopted a robust but streamlined approach to the quantum processing phase. We designed the laser parametrization to a level of depth that guarantees physical validity and efficient analog execution, without overcomplicating the pulse sequences as suggested and explained in \cite{pasqal_qubo_qaa}. Consequently, we fixed the following driving parameters: 
+
+\begin{itemize}
+    \item \textbf{Pulse Duration ($T$):} The total execution time of the analog quantum sequence is strictly fixed at $T = 4000$ ns ($4.0 \, \mu$s). This temporal window provides a sufficient timeframe for the adiabatic evolution while remaining well within the coherence time limits of the hardware. This parametrization decision is based on the prescription of Adiabatic Theorem, which dictates a slow and gradual evolution avoiding transitions to unwanted excited states \cite{Henriet2020quantumcomputing}. An alternative can be the Quantum Approximate Optimization Algorithm (QAOA) \cite{pasqal_qubo_qaa}, which uses ultra-short, discretized laser pulses.
+    
+    \item \textbf{Rabi Frequency Profile ($\Omega$):} To induce the quantum transitions, the amplitude pulse is shaped as a smooth interpolation that starts at $0$, peaks at a specific maximum value $\Omega$, and returns to $0$. To ensure the stability of the global laser, $\Omega$ is dynamically calculated as the median of the positive QUBO target weights, but it is strictly capped at $83.3\%$  of the hardware's absolute maximum amplitude capability. This conservative engineering choice prevents hardware saturation, whereas more aggressive alternatives would require complex Optimal Control Theory (OCT) pulse-shaping algorithms.
+    
+    \item \textbf{Detuning Sweep ($\delta$):} The core of the adiabatic execution is enforced via a linear detuning sweep. The frequency profile starts at a negative initial value $\delta_0 = -\Delta$ (forcing the system into a trivial ground state), linearly crosses the resonance frequency, and ends at a symmetrical positive value $\delta_f = +\Delta$ to drive the atoms towards the Rydberg state \cite{ebadi2022quantum}. The magnitude of $\Delta$ is dynamically scaled instance by instance. While non-linear sweeps could theoretically improve the ground-state probability by slowing down near the minimum energy gap, the linear sweep provides the most robust and standard baseline for evaluating our geometric embeddings.
+\end{itemize}
+
+\begin{figure}[htbp]
+    \centering
+    % Usa \textwidth per sfruttare tutta la larghezza della pagina, dato che l'immagine è molto panoramica
+    \includegraphics[width=1.0\textwidth, height = 0.25\textheight]{img/ray_params.png}
+    \caption{Visual representation of the analog adiabatic pulse sequence generated via the Pulser framework. The top panel (green) illustrates the smooth interpolated profile of the Rabi frequency $\Omega$, strictly capped below the hardware threshold. The bottom panel (purple) displays the symmetric linear sweep of the detuning $\delta$ across the resonance frequency, executed over the total $T = 4.0 \, \mu\text{s}$ temporal window.
+    The 'GLOBAL' label indicates the use of a single global laser beam acting on the entire atomic register.}
+    \label{fig:adiabatic_pulse}
+\end{figure}
+
+This standardized adiabatic protocol guarantees that the quantum many-body system is initialized in an easy-to-prepare ground state and is smoothly driven toward the complex energy landscape encoded by our custom physical layout.
+We started from \cite{pasqal_qubo_qaa} to study how to handle QUBO problems on this platform, but the entire Pasqal documentation ecosystem is highly comprehensive and can be useful to read. For instance, an alternative tutorial dedicated to Maximum Weight Independent Set (MWIS) problems \cite{pasqal_mwis_qaa} provides further insights on different problmes' resolution.
+
+\section{GAs: Experimental Results and Limitations}
+\label{sec:ga_results_limits}
+
+While numerous fitness functions, hyperparameters, and QUBO instances were experimented with and validated during the research phase, this section reports the most prominent results to highlight the critical operational aspects of our embedding architecture. 
+
+\subsection{Validation on a 5x5 Instance}
+
+To rigorously validate the embedding model, the experimental phase was initiated with a relatively small-scale $5 \times 5$ instance, as depicted in Figure \ref{fig:5x5_qubo_instance}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/5x5_UDG_r12_s47.png} 
+    \caption{Structure of the small-scale UDG-like QUBO instance ($N=5$) generated via \textit{instance\_generator.py}, inspected using \textit{inspect\_qubo.py}, and subsequently embedded using the \textit{bench-GA.py} module \cite{orsucci_qubo_ga_quantum}.}
+    \label{fig:5x5_qubo_instance}
+\end{figure}
+
+This specific configuration serves as an ideal baseline candidate. Despite its small dimensionality, it features a non-trivial density and a mathematically interesting topology composed of disconnected sub-graphs: a two-node island connecting $q_0$ and $q_2$, and a separate localized chain linking $q_1$, $q_3$, and $q_4$.
+
+The Genetic Algorithm was executed utilizing a multi-start approach consisting of 5 independent runs. This specific volume of restarts was empirically established as an optimal trade-off between maximizing the probability of finding the global spatial optimum and maintaining a manageable classical execution time, thereby mitigating the inherent stochastic nature of evolutionary algorithms. The hyperparameters employed for this specific dimensional scale are detailed in Table \ref{tab:pygad_parameters}.
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l c p{0.55\textwidth}}
+        \hline
+        \textbf{PyGAD Parameter} & \textbf{Configured Value} & \textbf{Conceptual Meaning} \\
+        \hline
+        \texttt{num\_genes} & $2 \times N_{atoms}$ & Chromosome length: represents continuous 2D coordinates $(x,y)$ for all atoms. \\
+        \texttt{sol\_per\_pop} & $100$ & Population size: number of candidate physical layouts per generation. \\
+        \texttt{num\_generations} & $800$ & Termination criterion for the evolutionary loop. \\
+        \texttt{fitness\_func} & \texttt{topological\_fitness\_func} & Custom evaluation metric (incorporates topological error and hardware physical penalties). \\
+        \texttt{parent\_selection\_type} & Tournament & Selection strategy to maintain competitive evolutionary pressure. \\
+        \texttt{K\_tournament} & $3$ & Number of candidate individuals competing in each selection tournament. \\
+        \texttt{num\_parents\_mating} & $20$ & Number of parents successfully selected to compose the mating pool. \\
+        \texttt{crossover\_type} & Uniform & Exchanges individual $(x,y)$ coordinates between parents without disrupting array bounds. \\
+        \texttt{mutation\_type} & Adaptive & Dynamically scales mutation rate to balance exploration and fine-tuning. \\
+        \texttt{mutation\_probability} & $[0.4, 0.05]$ & Assigns a $40\%$ mutation rate to low-fitness individuals and $5\%$ to elite ones. \\
+        \texttt{random\_mutation\_min/max} & $[-3.0, 3.0]$ & Continuous spatial perturbation window (in $\mu$m) for local coordinate adjustments. \\
+        \texttt{keep\_elitism} & $5$ & Preserves the absolute best $5$ layouts across generations without any genetic alteration. \\
+        \texttt{allow\_duplicate\_genes} & False & Prevents multiple atoms from collapsing into the exact same mathematical coordinates. \\
+        \hline
+    \end{tabular}
+    }
+    \caption{Exact hyperparameter configuration adopted for the Genetic Algorithm setup using the PyGAD library, referencing the base architecture for a $5 \times 5$ problem embedding.}
+    \label{tab:pygad_parameters}
+\end{table}
+
+As evident from the table, the parametrization is not excessively aggressive. Because the spatial search space for a 5-node matrix is relatively contained, extremely high mutation parameters are not required to avoid local minima. Under this configuration, the best evolutionary run achieved an excellent spatial fitness score of $0.3968$, demanding a total classical CPU execution time of $144.35$ seconds. Most importantly, this run generated the geometrically sound embedding illustrated in Figure \ref{fig:5x5_register}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/embedding/reg_5x5.png} 
+    \caption{The optimal 2D physical spatial layout generated by the Genetic Algorithm for the $N=5$ instance. The register fully complies with Neutral Atom QPU geometric boundaries.}
+    \label{fig:5x5_register}
+\end{figure}
+
+The physical layout intuitively respects the mathematical constraints previously analyzed, properly isolating the distinct logical islands while strictly adhering to the minimum inter-atomic distance and maximum global radius imposed by the hardware profile. When these physical coordinates were compiled into an adiabatic sequence and submitted to the QPU emulator, the system produced the output distribution shown in Figure \ref{fig:5x5_quantum_res}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/res/res_5x5.png} 
+    \caption{Probability distribution of the measured bitstrings after the adiabatic execution on the QPU emulator. The highest probability peaks correspond perfectly to the optimal solutions of the original QUBO instance.}
+    \label{fig:5x5_quantum_res}
+\end{figure}
+
+The quantum execution demonstrates outstanding performance: the analog platform effortlessly identified the two optimal ground states with exceptionally high probability. This initial validation serves as a highly encouraging proof-of-concept for our hybrid pipeline, setting the baseline to systematically investigate the scalability limits of this exact mathematical approach.
+
+
+%continuare con le altre istanze che riteniamo valga la pena mostrare e con le modalità che riteniamo opportune.
+
 %valutare quali istanze (le più rappresentative) andare a riportare spiegando bene e di nostro pugno
 %i risultati ottenuti e le considerazioni relative al GA e le topologie delle istanze.
 

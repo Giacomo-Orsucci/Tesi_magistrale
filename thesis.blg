@@ -7,45 +7,45 @@ A level-1 auxiliary file: chapters/The_Base_Pipeline.aux
 The style file: ieeetr.bst
 Database file #1: files/biblio.bib
 Warning--empty publisher in bookGA
-You've used 27 entries,
+You've used 30 entries,
             1876 wiz_defined-function locations,
-            635 strings with 8667 characters,
-and the built_in function-call counts, 5966 in all, are:
-= -- 510
-> -- 369
+            649 strings with 9167 characters,
+and the built_in function-call counts, 6544 in all, are:
+= -- 571
+> -- 388
 < -- 1
-+ -- 134
-- -- 107
-* -- 437
-:= -- 931
-add.period$ -- 36
-call.type$ -- 27
-change.case$ -- 26
++ -- 142
+- -- 112
+* -- 465
+:= -- 1010
+add.period$ -- 41
+call.type$ -- 30
+change.case$ -- 29
 chr.to.int$ -- 0
-cite$ -- 28
-duplicate$ -- 271
-empty$ -- 552
-format.name$ -- 107
-if$ -- 1412
+cite$ -- 31
+duplicate$ -- 300
+empty$ -- 612
+format.name$ -- 112
+if$ -- 1562
 int.to.chr$ -- 0
-int.to.str$ -- 27
-missing$ -- 22
-newline$ -- 93
-num.names$ -- 27
-pop$ -- 114
+int.to.str$ -- 30
+missing$ -- 23
+newline$ -- 104
+num.names$ -- 30
+pop$ -- 128
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 158
+skip$ -- 183
 stack$ -- 0
-substring$ -- 164
-swap$ -- 85
+substring$ -- 176
+swap$ -- 98
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 42
-width$ -- 29
-write$ -- 254
+while$ -- 46
+width$ -- 32
+write$ -- 285
 (There was 1 warning)
