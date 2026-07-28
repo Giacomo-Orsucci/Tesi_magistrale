@@ -4,12 +4,15 @@ The top-level auxiliary file: thesis.aux
 A level-1 auxiliary file: chapters/Introduction_to_Quantum_Computing.aux
 A level-1 auxiliary file: chapters/The_Embedding_Problem.aux
 A level-1 auxiliary file: chapters/The_Base_Pipeline.aux
+A level-1 auxiliary file: chapters/GAs_experiment.aux
+A level-1 auxiliary file: appendices/appendix_A_hw.aux
+A level-1 auxiliary file: appendices/appendix_B_AI.aux
 The style file: ieeetr.bst
 Database file #1: files/biblio.bib
 Warning--empty publisher in bookGA
 You've used 30 entries,
             1876 wiz_defined-function locations,
-            649 strings with 9167 characters,
+            652 strings with 9250 characters,
 and the built_in function-call counts, 6544 in all, are:
 = -- 571
 > -- 388

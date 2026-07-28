@@ -1,0 +1,26 @@
+\chapter{Classical Hardware}
+\label{app:hardware_specs}
+
+To ensure the scientific reproducibility of the classical executions presented throughout this thesis, specifically concerning the preprocessing execution times of the Genetic Algorithm and the Simulated Annealing optimization, the precise hardware and software specifications of the local machine utilized for all classical computational tasks are detailed in Table \ref{tab:hw_specs}.
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.3} 
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l p{0.6\textwidth}}
+        \hline
+        \textbf{Component / Environment} & \textbf{Specification} \\
+        \hline
+        \textbf{Processor (CPU)} & AMD Ryzen 7 3700U (4 Cores, 8 Threads) \\
+        \textbf{CPU Clocks} & Base: 2.3 GHz, Max Boost: 4.0 GHz \\
+        \textbf{CPU Cache} & L1: 96 KB/core, L2: 512 KB/core, L3: 4 MB shared \\
+        \textbf{Memory (RAM)} & 20 GB DDR4 @ 2400 MHz (4 GB SODIMM + 16 GB) \\
+        \textbf{Operating System} & Ubuntu 22.04 LTS \\
+        \hline
+    \end{tabular}
+    }
+    \caption{Hardware and OS configuration of the local machine used for the classical embedding optimization and preprocessing phases.}
+    \label{tab:hw_specs}
+\end{table}
+This appendix principally has the scope to contextualize the execution time observed, for this reason
+is important to note that these specifications refer exclusively to the classical operations (embedding optimization and sequence compilation). The actual quantum executions were asynchronously submitted to the remote analog quantum emulator provided by the Jülich Supercomputing Centre, which relies on a dedicated HPC architecture.

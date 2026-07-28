@@ -1,8 +1,8 @@
 
-\chapter{The Base Pipeline and its Limits} 
+\chapter{The Base Pipeline} 
 \label{chap:base_pipeline}
 
-This chapter presents the baseline architecture of our embedding pipeline and the related experimental results. The purpose is to detail how the embedding problem was methodologically approached, which embedding optimization methods were selected and tested, and what scalability limitations  and fitness scores emerged. Finally, will be discussed how these limitations are natively imposed by the interplay between the mathematical formulation and the specific hardware constraints of the target quantum platform.
+This chapter presents the baseline architecture of our embedding pipeline and it precedes the related experimental results. The purpose is to detail how the embedding problem was methodologically approached, which embedding optimization methods were selected and tested, and what scalability limitations  and fitness scores emerged. Finally, will be discussed how these limitations are natively imposed by the interplay between the mathematical formulation and the specific hardware constraints of the target quantum platform.
 
 \section{Base pipeline: conceptual scheme}
 \label{section:conceptual_base_pipeline}
@@ -182,83 +182,3 @@ In our case, since the core focus of this thesis is centered on the geometric em
 
 This standardized adiabatic protocol guarantees that the quantum many-body system is initialized in an easy-to-prepare ground state and is smoothly driven toward the complex energy landscape encoded by our custom physical layout.
 We started from \cite{pasqal_qubo_qaa} to study how to handle QUBO problems on this platform, but the entire Pasqal documentation ecosystem is highly comprehensive and can be useful to read. For instance, an alternative tutorial dedicated to Maximum Weight Independent Set (MWIS) problems \cite{pasqal_mwis_qaa} provides further insights on different problmes' resolution.
-
-\section{GAs: Experimental Results and Limitations}
-\label{sec:ga_results_limits}
-
-While numerous fitness functions, hyperparameters, and QUBO instances were experimented with and validated during the research phase, this section reports the most prominent results to highlight the critical operational aspects of our embedding architecture. 
-
-\subsection{Validation on a 5x5 Instance}
-
-To rigorously validate the embedding model, the experimental phase was initiated with a relatively small-scale $5 \times 5$ instance, as depicted in Figure \ref{fig:5x5_qubo_instance}.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{img/5x5_UDG_r12_s47.png} 
-    \caption{Structure of the small-scale UDG-like QUBO instance ($N=5$) generated via \textit{instance\_generator.py}, inspected using \textit{inspect\_qubo.py}, and subsequently embedded using the \textit{bench-GA.py} module \cite{orsucci_qubo_ga_quantum}.}
-    \label{fig:5x5_qubo_instance}
-\end{figure}
-
-This specific configuration serves as an ideal baseline candidate. Despite its small dimensionality, it features a non-trivial density and a mathematically interesting topology composed of disconnected sub-graphs: a two-node island connecting $q_0$ and $q_2$, and a separate localized chain linking $q_1$, $q_3$, and $q_4$.
-
-The Genetic Algorithm was executed utilizing a multi-start approach consisting of 5 independent runs. This specific volume of restarts was empirically established as an optimal trade-off between maximizing the probability of finding the global spatial optimum and maintaining a manageable classical execution time, thereby mitigating the inherent stochastic nature of evolutionary algorithms. The hyperparameters employed for this specific dimensional scale are detailed in Table \ref{tab:pygad_parameters}.
-
-\begin{table}[htbp]
-    \centering
-    \renewcommand{\arraystretch}{1.3}
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{l c p{0.55\textwidth}}
-        \hline
-        \textbf{PyGAD Parameter} & \textbf{Configured Value} & \textbf{Conceptual Meaning} \\
-        \hline
-        \texttt{num\_genes} & $2 \times N_{atoms}$ & Chromosome length: represents continuous 2D coordinates $(x,y)$ for all atoms. \\
-        \texttt{sol\_per\_pop} & $100$ & Population size: number of candidate physical layouts per generation. \\
-        \texttt{num\_generations} & $800$ & Termination criterion for the evolutionary loop. \\
-        \texttt{fitness\_func} & \texttt{topological\_fitness\_func} & Custom evaluation metric (incorporates topological error and hardware physical penalties). \\
-        \texttt{parent\_selection\_type} & Tournament & Selection strategy to maintain competitive evolutionary pressure. \\
-        \texttt{K\_tournament} & $3$ & Number of candidate individuals competing in each selection tournament. \\
-        \texttt{num\_parents\_mating} & $20$ & Number of parents successfully selected to compose the mating pool. \\
-        \texttt{crossover\_type} & Uniform & Exchanges individual $(x,y)$ coordinates between parents without disrupting array bounds. \\
-        \texttt{mutation\_type} & Adaptive & Dynamically scales mutation rate to balance exploration and fine-tuning. \\
-        \texttt{mutation\_probability} & $[0.4, 0.05]$ & Assigns a $40\%$ mutation rate to low-fitness individuals and $5\%$ to elite ones. \\
-        \texttt{random\_mutation\_min/max} & $[-3.0, 3.0]$ & Continuous spatial perturbation window (in $\mu$m) for local coordinate adjustments. \\
-        \texttt{keep\_elitism} & $5$ & Preserves the absolute best $5$ layouts across generations without any genetic alteration. \\
-        \texttt{allow\_duplicate\_genes} & False & Prevents multiple atoms from collapsing into the exact same mathematical coordinates. \\
-        \hline
-    \end{tabular}
-    }
-    \caption{Exact hyperparameter configuration adopted for the Genetic Algorithm setup using the PyGAD library, referencing the base architecture for a $5 \times 5$ problem embedding.}
-    \label{tab:pygad_parameters}
-\end{table}
-
-As evident from the table, the parametrization is not excessively aggressive. Because the spatial search space for a 5-node matrix is relatively contained, extremely high mutation parameters are not required to avoid local minima. Under this configuration, the best evolutionary run achieved an excellent spatial fitness score of $0.3968$, demanding a total classical CPU execution time of $144.35$ seconds. Most importantly, this run generated the geometrically sound embedding illustrated in Figure \ref{fig:5x5_register}.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{img/embedding/reg_5x5.png} 
-    \caption{The optimal 2D physical spatial layout generated by the Genetic Algorithm for the $N=5$ instance. The register fully complies with Neutral Atom QPU geometric boundaries.}
-    \label{fig:5x5_register}
-\end{figure}
-
-The physical layout intuitively respects the mathematical constraints previously analyzed, properly isolating the distinct logical islands while strictly adhering to the minimum inter-atomic distance and maximum global radius imposed by the hardware profile. When these physical coordinates were compiled into an adiabatic sequence and submitted to the QPU emulator, the system produced the output distribution shown in Figure \ref{fig:5x5_quantum_res}.
-
-\begin{figure}[htbp]
-    \centering
-    \includegraphics[width=0.6\textwidth]{img/res/res_5x5.png} 
-    \caption{Probability distribution of the measured bitstrings after the adiabatic execution on the QPU emulator. The highest probability peaks correspond perfectly to the optimal solutions of the original QUBO instance.}
-    \label{fig:5x5_quantum_res}
-\end{figure}
-
-The quantum execution demonstrates outstanding performance: the analog platform effortlessly identified the two optimal ground states with exceptionally high probability. This initial validation serves as a highly encouraging proof-of-concept for our hybrid pipeline, setting the baseline to systematically investigate the scalability limits of this exact mathematical approach.
-
-
-%continuare con le altre istanze che riteniamo valga la pena mostrare e con le modalità che riteniamo opportune.
-
-%valutare quali istanze (le più rappresentative) andare a riportare spiegando bene e di nostro pugno
-%i risultati ottenuti e le considerazioni relative al GA e le topologie delle istanze.
-
-
-%Passare ad SA, spiegare perchè abbiamo usato SA perchè SA + GRASP (magari basta dire che degli esperimenti preliminari hanno giustificato l'uso di GRASP ecc ecc)
-%Scegliere gli esperimenti più rappresentativi per SA + GRASP (magari qualcuno di confronto con GA e poi quelli che permettono di far vedere che si scala meglio), piccolo 
-%confronto SA-SA + GRASP?
-
