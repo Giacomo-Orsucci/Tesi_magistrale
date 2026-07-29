@@ -17,7 +17,7 @@ To rigorously validate the embedding model, the experimental phase was initiated
 
 This specific configuration serves as an ideal baseline candidate. Despite its small dimensionality, it features a non-trivial density and a mathematically interesting topology composed of disconnected sub-graphs: a two-node island connecting $q_0$ and $q_2$, and a separate localized chain linking $q_1$, $q_3$, and $q_4$.
 
-The Genetic Algorithm was executed utilizing a multi-start approach consisting of 5 independent runs. This specific volume of restarts was empirically established as an optimal trade-off between maximizing the probability of finding the global spatial optimum and maintaining a manageable classical execution time, thereby mitigating the inherent stochastic nature of evolutionary algorithms. The hyperparameters employed for this specific dimensional scale are detailed in Table \ref{tab:pygad_parameters}.
+The Genetic Algorithm was executed utilizing a multi-start approach consisting of 5 independent runs. This specific volume of restarts was empirically established as an optimal trade-off between maximizing the probability of finding the global spatial optimum and maintaining a manageable classical execution time, thereby mitigating the inherent stochastic nature of evolutionary algorithms. The hyperparameters employed for this specific dimensional scale are detailed in Table \ref{tab:pygad_parameters_5x5}.
 
 \begin{table}[htbp]
     \centering
@@ -44,7 +44,7 @@ The Genetic Algorithm was executed utilizing a multi-start approach consisting o
     \end{tabular}
     }
     \caption{Exact hyperparameter configuration adopted for the Genetic Algorithm setup using the PyGAD library, referencing the base architecture for a $5 \times 5$ problem embedding.}
-    \label{tab:pygad_parameters}
+    \label{tab:pygad_parameters_5x5}
 \end{table}
 
 As evident from the table, the parametrization is not excessively aggressive. Because the spatial search space for a 5-node matrix is relatively contained, extremely high mutation parameters are not required to avoid local minima. Under this configuration, the best evolutionary run achieved an excellent spatial fitness score of $0.3968$, demanding a total classical CPU execution time of $144.35$ seconds. Most importantly, this run generated the geometrically feasible embedding illustrated in Figure \ref{fig:5x5_register}.
@@ -93,7 +93,7 @@ This specific configuration presents an increased graph density and a maximum no
         \hline
     \end{tabular}
     }
-    \caption{Boosted hyperparameter configuration for more complex QUBO instances. All other evolutionary operators and parameters not explicitly listed here remain strictly identical to the baseline configuration previously defined in Table \ref{tab:pygad_parameters}.}
+    \caption{Boosted hyperparameter configuration for more complex QUBO instances. All other evolutionary operators and parameters not explicitly listed here remain strictly identical to the baseline configuration previously defined in Table \ref{tab:pygad_parameters_5x5}.}
     \label{tab:pygad_boosted_parameters}
 \end{table}
 
@@ -148,11 +148,11 @@ Consequently, despite the increased dimensionality, the Genetic Algorithm was ex
         \hline
     \end{tabular}
     }
-    \caption{Hyperparameter configuration for further scaling tests. To isolate the impact of the evaluation metric and optimize classical execution times, the population size and generation limits were reverted to their original baseline values ($100$ and $800$, respectively, as in Table \ref{tab:pygad_parameters}.}
+    \caption{Hyperparameter configuration for further scaling tests. To isolate the impact of the evaluation metric and optimize classical execution times, the population size and generation limits were reverted to their original baseline values ($100$ and $800$, respectively, as in Table \ref{tab:pygad_parameters_5x5}.}
     \label{tab:pygad_reverted_parameters}
 \end{table}
 
-Executing the algorithm under these parameters yielded the spatial embedding illustrated in Figure \ref{fig:7x7_register}.
+Executing the algorithm under these parameters (the same baseline parameters for 5x5 instance) yielded the spatial embedding illustrated in Figure \ref{fig:7x7_register}.
 
 \begin{figure}[htbp]
     \centering
@@ -173,6 +173,64 @@ The physical layout reveals a highly structured and well-spaced geometric arrang
 The quantum execution demonstrates perfectly symmetrical and outstanding results, effortlessly isolating the global optima. This instance is reported specifically to prove that the overall embedding difficulty is not dictated solely by the matrix dimensionality ($N$), but rather by a complex interplay of graph density, node degree distribution, and structural topology. Indeed, we observed that for this larger $7 \times 7$ grid, the hybrid pipeline obtained significantly better classical preprocessing times and quantum readout results than it did for the smaller, yet denser, $6 \times 6$ problem.
 
 \section{10x10 instance}
+
+We decided to not present 8x8 and 9x9 instances for brevity and because they don't offers new aspects and insights to discuss, but we directly present the 10x10 instance:
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{img/QUBO_instances/10x10_r12_s52_d3.0.png} 
+    \caption{Structure of the $10 \times 10$ UDG-like QUBO instance generated via \textit{instance\_generator.py}, inspected using \textit{inspect\_qubo.py}, and subsequently embedded using the \textit{bench-GA.py} module \cite{orsucci_qubo_ga_quantum}.}
+    \label{fig:10x10_qubo_instance}
+\end{figure}
+
+As we can see the matrix present a not so low density, but an average and maximum nodes degree not so high. The complexity is given by the instance dimension. precisely as a result of the size we used the following parametrization:
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l c p{0.6\textwidth}}
+        \hline
+        \textbf{PyGAD Parameter} & \textbf{Updated Value} & \textbf{Conceptual Meaning} \\
+        \hline
+        \texttt{sol\_per\_pop} & $300$ & Population size tripled (from $100$) to guarantee massive genetic diversity, strictly required to explore the highly complex spatial landscape of a $10 \times 10$ matrix. \\
+        \texttt{num\_generations} & $1500$ & Increased termination limit (from $800$) to grant the algorithm sufficient time to converge. \\
+        \texttt{fitness\_func} & \texttt{improved\_topological\_mae} & The refined metric used for all complex instances to handle bounds and hardware penalties. \\
+        \texttt{K\_tournament} & $4$ & Increased tournament size (from $3$) to apply a stronger evolutionary pressure, favoring fitter individuals within the vastly expanded population. \\
+        \texttt{keep\_elitism} & $15$ & Increased elitism (from $5$) to securely preserve a larger pool of well-performing spatial configurations, preventing regression during the search. \\
+        \texttt{mutation\_probability} & $[0.10, 0.02]$ & Drastically reduced mutation rates (from $40\%/5\%$ to $10\%/2\%$). In a highly dense $10$-node setup, aggressive mutations are overly destructive to converging layouts. \\
+        \texttt{random\_mutation\_min/max} & $[-1.0, 1.0]$ & Narrowed spatial perturbation window (from $\pm 3.0$ $\mu$m to $\pm 1.0$ $\mu$m). This forces the mutation operator to act as a micro-adjustment fine-tuning tool rather than a global explorer. \\
+        \hline
+    \end{tabular}
+    }
+    \caption{Extreme hyperparameter configuration required to embed a $10 \times 10$ QUBO instance. The parameters reveal a shift toward high population diversity combined with very delicate, fine-grained spatial mutations to prevent layout destruction in dense geometric conditions. Are highlighted the differences between Table \ref{tab:pygad_parameters_5x5}.}
+    \label{tab:pygad_10x10_parameters}
+\end{table}
+
+The resulting embedding is the following:
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/embedding/reg_10x10_d3.0.png} 
+    \caption{The 2D physical spatial layout generated by the Genetic Algorithm for the $N=10$ instance. The register fully complies with Neutral Atom QPU geometric boundaries.}
+    \label{fig:10x10_register}
+\end{figure}
+
+In this case, using a less disruptive mutation has been a winning intuition because we have a topology with a chain of 6 qubits and some isolated pairs. An another time is evident how is important to 
+personalize the parametrization on the problem and the topology that presents. For this reason in this case we have an optimal result with a fitness score of 0.0583 (an another time is evident the quantum resilience) and an execution time of 1408.8 seconds and 10 restarts:
+
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\textwidth]{img/res/res_10x10_d3.0.png} 
+    \caption{Probability distribution of the measured bitstrings after the adiabatic execution. The analog system successfully identifies the true mathematical ground states with a dominant probability mass, indicating a highly effective spatial embedding.}
+    \label{fig:10x10_quantum_res}
+\end{figure}
+
+But other configurations and runs highlighted how with this dimension (and, of course, our limited hardware) we are starting to struggle in finding a good solution without too much manual hyper tuning and without using too extreme configuration and 
+execution time. This is the fixed frontier for our Genetic Algorithm approach, because with this and higher dimensions the method starts to wave. To give an impression on scaling limits, we will present the empirical observation on a 15x15 instance in the following.
+
 
 \section{15x15 instance}
 

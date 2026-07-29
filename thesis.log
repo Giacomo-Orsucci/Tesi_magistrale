@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.7.16)  28 JUL 2026 17:39
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.7.16)  29 JUL 2026 13:31
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -886,31 +886,58 @@ File: img/res/res_7x7.png Graphic file (type png)
 <use img/res/res_7x7.png>
 Package pdftex.def Info: img/res/res_7x7.png  used on input line 168.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
- [47] [48 <./img/embedding/reg_7x7.png> <./img/res/res_7x7.png>]) [49]
+ [47] [48 <./img/embedding/reg_7x7.png> <./img/res/res_7x7.png>]
+<img/QUBO_instances/10x10_r12_s52_d3.0.png, id=613, 562.1pt x 394.47375pt>
+File: img/QUBO_instances/10x10_r12_s52_d3.0.png Graphic file (type png)
+<use img/QUBO_instances/10x10_r12_s52_d3.0.png>
+Package pdftex.def Info: img/QUBO_instances/10x10_r12_s52_d3.0.png  used on input line 181.
+(pdftex.def)             Requested size: 234.00238pt x 164.21518pt.
+
+Underfull \hbox (badness 1009) in paragraph at lines 205--205
+[]|\T1/cmr/m/n/12 Increased ter-mi-na-tion limit (from $\OT1/cmr/m/n/12 800$\T1/cmr/m/n/12 ) to
+ []
+
+
+Underfull \hbox (badness 2503) in paragraph at lines 205--205
+[]|\T1/cmr/m/n/12 Drastically re-duced mu-ta-tion rates (from
+ []
+
+<img/embedding/reg_10x10_d3.0.png, id=618, 654.7662pt x 722.7pt>
+File: img/embedding/reg_10x10_d3.0.png Graphic file (type png)
+<use img/embedding/reg_10x10_d3.0.png>
+Package pdftex.def Info: img/embedding/reg_10x10_d3.0.png  used on input line 215.
+(pdftex.def)             Requested size: 312.00119pt x 344.37778pt.
+[49 <./img/QUBO_instances/10x10_r12_s52_d3.0.png>] [50] [51 <./img/embedding/reg_10x10_d3.0.png>]
+<img/res/res_10x10_d3.0.png, id=636, 1011.78pt x 505.89pt>
+File: img/res/res_10x10_d3.0.png Graphic file (type png)
+<use img/res/res_10x10_d3.0.png>
+Package pdftex.def Info: img/res/res_10x10_d3.0.png  used on input line 226.
+(pdftex.def)             Requested size: 390.0pt x 195.00368pt.
+ [52 <./img/res/res_10x10_d3.0.png>]) [53]
 \openout2 = `appendices/appendix_A_hw.aux'.
 
  (./appendices/appendix_A_hw.tex
 Appendix A.
-) [50
+) [54
 
 
 
 
-] [51]
+] [55]
 \openout2 = `appendices/appendix_B_AI.aux'.
 
  (./appendices/appendix_B_AI.tex
 Appendix B.
-) [52
+) [56
 
 
 
 
-] [53] (./thesis.bbl [54
+] [57] (./thesis.bbl [58
 
 
 
-] [55] [56]
+] [59] [60]
 Underfull \hbox (badness 10000) in paragraph at lines 121--125
 []\T1/cmr/m/n/12 Pasqal, ``Pasqal de-liv-ers italy's first neu-tral atom quan-
  []
@@ -930,24 +957,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 127--130
 []\T1/cmr/m/n/12 G. Or-succi, ``QUBO-GA-QUANTUM.'' []$\T1/cmtt/m/n/12 https : / / github . com /
  []
 
-) [57] (./thesis.aux (./chapters/Introduction_to_Quantum_Computing.aux) (./chapters/The_Embedding_Problem.aux) (./chapters/The_Base_Pipeline.aux) (./chapters/GAs_experiment.aux) (./appendices/appendix_A_hw.aux) (./appendices/appendix_B_AI.aux))
+) [61] (./thesis.aux (./chapters/Introduction_to_Quantum_Computing.aux) (./chapters/The_Embedding_Problem.aux) (./chapters/The_Base_Pipeline.aux) (./chapters/GAs_experiment.aux) (./appendices/appendix_A_hw.aux) (./appendices/appendix_B_AI.aux))
 Package rerunfilecheck Info: File `thesis.out' has not changed.
 (rerunfilecheck)             Checksum: 96F1BF4E3F0E44D156AF43453B207531;7046.
  )
 (\end occurred when \ifx on line 2 was incomplete) 
 Here is how much of TeX's memory you used:
- 26025 strings out of 478287
- 474880 string characters out of 5849289
- 767056 words of memory out of 5000000
- 43533 multiletter control sequences out of 15000+600000
+ 26058 strings out of 478287
+ 475795 string characters out of 5849289
+ 768128 words of memory out of 5000000
+ 43555 multiletter control sequences out of 15000+600000
  494443 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,12n,89p,1224b,758s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsl1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1728.pfb>
-Output written on thesis.pdf (60 pages, 2099224 bytes).
+Output written on thesis.pdf (64 pages, 2216228 bytes).
 PDF statistics:
- 824 PDF objects out of 1000 (max. 8388607)
- 657 compressed objects within 7 object streams
- 157 named destinations out of 1000 (max. 500000)
- 328 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 856 PDF objects out of 1000 (max. 8388607)
+ 677 compressed objects within 7 object streams
+ 165 named destinations out of 1000 (max. 500000)
+ 343 words of extra memory for PDF output out of 10000 (max. 10000000)
 
