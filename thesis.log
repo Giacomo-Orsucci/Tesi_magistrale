@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.7.16)  29 JUL 2026 13:31
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.7.16)  29 JUL 2026 17:41
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -622,7 +622,7 @@ Package csquotes Info: Redefining alias 'default' -> 'english'.
 File: l3backend-pdftex.def 2022-01-12 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count338
 \l__pdf_internal_box=\box80
-) (./thesis.aux (./chapters/Introduction_to_Quantum_Computing.aux) (./chapters/The_Embedding_Problem.aux) (./chapters/The_Base_Pipeline.aux) (./chapters/GAs_experiment.aux) (./appendices/appendix_A_hw.aux) (./appendices/appendix_B_AI.aux))
+) (./thesis.aux (./chapters/Introduction_to_Quantum_Computing.aux) (./chapters/The_Embedding_Problem.aux) (./chapters/The_Base_Pipeline.aux) (./chapters/GAs_experiment.aux) (./chapters/SA_experiment.aux) (./appendices/appendix_A_hw.aux) (./appendices/appendix_B_AI.aux))
 \openout1 = `thesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 72.
@@ -680,7 +680,7 @@ LaTeX Info: Redefining \nameref on input line 72.
 \openout4 = `thesis.out'.
 
 \c@lstlisting=\count346
-<./img/stemma.pdf, id=126, 1622.06pt x 1673.45195pt>
+<./img/stemma.pdf, id=134, 1622.06pt x 1673.45195pt>
 File: ./img/stemma.pdf Graphic file (type pdf)
 <use ./img/stemma.pdf>
 Package pdftex.def Info: ./img/stemma.pdf  used on input line 79.
@@ -721,13 +721,13 @@ Chapter 1.
 
 
 ] [2] [3] [4] [5] [6]
-<img/2D-3D_neutral_atom_reg.png, id=255, 902.37125pt x 596.2275pt>
+<img/2D-3D_neutral_atom_reg.png, id=265, 902.37125pt x 596.2275pt>
 File: img/2D-3D_neutral_atom_reg.png Graphic file (type png)
 <use img/2D-3D_neutral_atom_reg.png>
 Package pdftex.def Info: img/2D-3D_neutral_atom_reg.png  used on input line 58.
 (pdftex.def)             Requested size: 312.00119pt x 206.1536pt.
  [7 <./img/2D-3D_neutral_atom_reg.png>]
-<img/principal_compo_QPU.png, id=268, 665.48625pt x 555.07375pt>
+<img/principal_compo_QPU.png, id=278, 665.48625pt x 555.07375pt>
 File: img/principal_compo_QPU.png Graphic file (type png)
 <use img/principal_compo_QPU.png>
 Package pdftex.def Info: img/principal_compo_QPU.png  used on input line 79.
@@ -757,7 +757,7 @@ Overfull \hbox (1.7255pt too wide) in paragraph at lines 186--186
 
  (./chapters/The_Base_Pipeline.tex
 Chapter 3.
-<img/base_pipeline.png, id=406, 443.6575pt x 423.5825pt>
+<img/base_pipeline.png, id=416, 443.6575pt x 423.5825pt>
 File: img/base_pipeline.png Graphic file (type png)
 <use img/base_pipeline.png>
 Package pdftex.def Info: img/base_pipeline.png  used on input line 12.
@@ -781,7 +781,7 @@ Overfull \hbox (17.90959pt too wide) in paragraph at lines 44--45
 \T1/cmr/m/n/12 uni-formly within the op-er-a-tional area us-ing po-lar co-or-di-nates. A hardware-
  []
 
-<img/QUBO_example.png, id=435, 578.16pt x 392.46625pt>
+<img/QUBO_example.png, id=445, 578.16pt x 392.46625pt>
 File: img/QUBO_example.png Graphic file (type png)
 <use img/QUBO_example.png>
 Package pdftex.def Info: img/QUBO_example.png  used on input line 52.
@@ -802,17 +802,17 @@ Underfull \hbox (badness 1946) in paragraph at lines 109--109
  []
 
 [30] [31] [32] [33] [34] [35] [36]
-<img/ray_params.png, id=503, 1619.04875pt x 372.39125pt>
+<img/ray_params.png, id=513, 1619.04875pt x 372.39125pt>
 File: img/ray_params.png Graphic file (type png)
 <use img/ray_params.png>
-Package pdftex.def Info: img/ray_params.png  used on input line 177.
+Package pdftex.def Info: img/ray_params.png  used on input line 187.
 (pdftex.def)             Requested size: 389.98781pt x 148.00493pt.
-) [37] [38 <./img/ray_params.png>]
+ [37]) [38 <./img/ray_params.png>]
 \openout2 = `chapters/GAs_experiment.aux'.
 
  (./chapters/GAs_experiment.tex
 Chapter 4.
-<img/QUBO_instances/5x5_UDG_r12_s47.png, id=518, 502.87875pt x 305.14pt>
+<img/QUBO_instances/5x5_UDG_r12_s47.png, id=528, 502.87875pt x 305.14pt>
 File: img/QUBO_instances/5x5_UDG_r12_s47.png Graphic file (type png)
 <use img/QUBO_instances/5x5_UDG_r12_s47.png>
 Package pdftex.def Info: img/QUBO_instances/5x5_UDG_r12_s47.png  used on input line 13.
@@ -835,19 +835,19 @@ Underfull \hbox (badness 1609) in paragraph at lines 45--45
 
 LaTeX Warning: Float too large for page by 2.91096pt on input line 48.
 
-<img/embedding/reg_5x5.png, id=528, 633.8079pt x 313.6518pt>
+<img/embedding/reg_5x5.png, id=538, 633.8079pt x 313.6518pt>
 File: img/embedding/reg_5x5.png Graphic file (type png)
 <use img/embedding/reg_5x5.png>
 Package pdftex.def Info: img/embedding/reg_5x5.png  used on input line 54.
 (pdftex.def)             Requested size: 312.00119pt x 154.40382pt.
 [40 <./img/QUBO_instances/5x5_UDG_r12_s47.png>] [41]
-<img/res/res_5x5.png, id=542, 1011.78pt x 505.89pt>
+<img/res/res_5x5.png, id=552, 1011.78pt x 505.89pt>
 File: img/res/res_5x5.png Graphic file (type png)
 <use img/res/res_5x5.png>
 Package pdftex.def Info: img/res/res_5x5.png  used on input line 63.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
  [42 <./img/embedding/reg_5x5.png> <./img/res/res_5x5.png>]
-<img/QUBO_instances/6x6_UDG_r12_s48.png, id=551, 505.89pt x 322.20375pt>
+<img/QUBO_instances/6x6_UDG_r12_s48.png, id=561, 505.89pt x 322.20375pt>
 File: img/QUBO_instances/6x6_UDG_r12_s48.png Graphic file (type png)
 <use img/QUBO_instances/6x6_UDG_r12_s48.png>
 Package pdftex.def Info: img/QUBO_instances/6x6_UDG_r12_s48.png  used on input line 75.
@@ -858,86 +858,123 @@ Underfull \hbox (badness 1009) in paragraph at lines 95--95
  []
 
 [43 <./img/QUBO_instances/6x6_UDG_r12_s48.png>]
-<img/embedding/reg_6x6.png, id=564, 578.16pt x 213.1965pt>
+<img/embedding/reg_6x6.png, id=574, 578.16pt x 213.1965pt>
 File: img/embedding/reg_6x6.png Graphic file (type png)
 <use img/embedding/reg_6x6.png>
 Package pdftex.def Info: img/embedding/reg_6x6.png  used on input line 104.
 (pdftex.def)             Requested size: 312.00119pt x 115.04956pt.
  [44 <./img/embedding/reg_6x6.png>]
-<img/res/res_6x6.png, id=573, 1011.78pt x 505.89pt>
+<img/res/res_6x6.png, id=583, 1011.78pt x 505.89pt>
 File: img/res/res_6x6.png Graphic file (type png)
 <use img/res/res_6x6.png>
 Package pdftex.def Info: img/res/res_6x6.png  used on input line 113.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
  [45 <./img/res/res_6x6.png>]
-<img/QUBO_instances/7x7_UDG_r12_s49.png, id=582, 505.89pt x 338.26375pt>
+<img/QUBO_instances/7x7_UDG_r12_s49.png, id=592, 505.89pt x 338.26375pt>
 File: img/QUBO_instances/7x7_UDG_r12_s49.png Graphic file (type png)
 <use img/QUBO_instances/7x7_UDG_r12_s49.png>
 Package pdftex.def Info: img/QUBO_instances/7x7_UDG_r12_s49.png  used on input line 130.
 (pdftex.def)             Requested size: 234.00238pt x 156.46516pt.
  [46 <./img/QUBO_instances/7x7_UDG_r12_s49.png>]
-<img/embedding/reg_7x7.png, id=596, 722.7pt x 541.3023pt>
+<img/embedding/reg_7x7.png, id=605, 722.7pt x 541.3023pt>
 File: img/embedding/reg_7x7.png Graphic file (type png)
 <use img/embedding/reg_7x7.png>
-Package pdftex.def Info: img/embedding/reg_7x7.png  used on input line 159.
+Package pdftex.def Info: img/embedding/reg_7x7.png  used on input line 142.
 (pdftex.def)             Requested size: 312.00119pt x 233.68878pt.
-<img/res/res_7x7.png, id=598, 1011.78pt x 505.89pt>
+<img/res/res_7x7.png, id=607, 1011.78pt x 505.89pt>
 File: img/res/res_7x7.png Graphic file (type png)
 <use img/res/res_7x7.png>
-Package pdftex.def Info: img/res/res_7x7.png  used on input line 168.
+Package pdftex.def Info: img/res/res_7x7.png  used on input line 151.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
- [47] [48 <./img/embedding/reg_7x7.png> <./img/res/res_7x7.png>]
-<img/QUBO_instances/10x10_r12_s52_d3.0.png, id=613, 562.1pt x 394.47375pt>
+ [47 <./img/embedding/reg_7x7.png>] [48 <./img/res/res_7x7.png>]
+<img/QUBO_instances/10x10_r12_s52_d3.0.png, id=621, 562.1pt x 394.47375pt>
 File: img/QUBO_instances/10x10_r12_s52_d3.0.png Graphic file (type png)
 <use img/QUBO_instances/10x10_r12_s52_d3.0.png>
-Package pdftex.def Info: img/QUBO_instances/10x10_r12_s52_d3.0.png  used on input line 181.
+Package pdftex.def Info: img/QUBO_instances/10x10_r12_s52_d3.0.png  used on input line 163.
 (pdftex.def)             Requested size: 234.00238pt x 164.21518pt.
 
-Underfull \hbox (badness 1009) in paragraph at lines 205--205
+Underfull \hbox (badness 1009) in paragraph at lines 187--187
 []|\T1/cmr/m/n/12 Increased ter-mi-na-tion limit (from $\OT1/cmr/m/n/12 800$\T1/cmr/m/n/12 ) to
  []
 
 
-Underfull \hbox (badness 2503) in paragraph at lines 205--205
+Underfull \hbox (badness 2503) in paragraph at lines 187--187
 []|\T1/cmr/m/n/12 Drastically re-duced mu-ta-tion rates (from
  []
 
-<img/embedding/reg_10x10_d3.0.png, id=618, 654.7662pt x 722.7pt>
+<img/embedding/reg_10x10_d3.0.png, id=628, 654.7662pt x 722.7pt>
 File: img/embedding/reg_10x10_d3.0.png Graphic file (type png)
 <use img/embedding/reg_10x10_d3.0.png>
-Package pdftex.def Info: img/embedding/reg_10x10_d3.0.png  used on input line 215.
+Package pdftex.def Info: img/embedding/reg_10x10_d3.0.png  used on input line 196.
 (pdftex.def)             Requested size: 312.00119pt x 344.37778pt.
 [49 <./img/QUBO_instances/10x10_r12_s52_d3.0.png>] [50] [51 <./img/embedding/reg_10x10_d3.0.png>]
-<img/res/res_10x10_d3.0.png, id=636, 1011.78pt x 505.89pt>
+<img/res/res_10x10_d3.0.png, id=647, 1011.78pt x 505.89pt>
 File: img/res/res_10x10_d3.0.png Graphic file (type png)
 <use img/res/res_10x10_d3.0.png>
-Package pdftex.def Info: img/res/res_10x10_d3.0.png  used on input line 226.
+Package pdftex.def Info: img/res/res_10x10_d3.0.png  used on input line 205.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
- [52 <./img/res/res_10x10_d3.0.png>]) [53]
+ [52 <./img/res/res_10x10_d3.0.png>]
+<img/QUBO_instances/15x15_r12_s57.png, id=657, 815.045pt x 480.79625pt>
+File: img/QUBO_instances/15x15_r12_s57.png Graphic file (type png)
+<use img/QUBO_instances/15x15_r12_s57.png>
+Package pdftex.def Info: img/QUBO_instances/15x15_r12_s57.png  used on input line 217.
+(pdftex.def)             Requested size: 272.99881pt x 161.04022pt.
+
+Underfull \hbox (badness 1033) in paragraph at lines 242--242
+[]|\T1/cmr/m/n/12 Population size quadru-pled (from $\OT1/cmr/m/n/12 100$\T1/cmr/m/n/12 ) to
+ []
+
+
+Underfull \hbox (badness 1496) in paragraph at lines 242--242
+\T1/cmr/m/n/12 max-i-mize ge-netic di-ver-sity, at-tempt-ing to
+ []
+
+<img/embedding/reg_15x15.png, id=664, 722.7pt x 632.3625pt>
+File: img/embedding/reg_15x15.png Graphic file (type png)
+<use img/embedding/reg_15x15.png>
+Package pdftex.def Info: img/embedding/reg_15x15.png  used on input line 251.
+(pdftex.def)             Requested size: 312.00119pt x 273.00092pt.
+[53 <./img/QUBO_instances/15x15_r12_s57.png>] [54] [55 <./img/embedding/reg_15x15.png>]
+<img/res/res_15x15.png, id=683, 1011.78pt x 505.89pt>
+File: img/res/res_15x15.png Graphic file (type png)
+<use img/res/res_15x15.png>
+Package pdftex.def Info: img/res/res_15x15.png  used on input line 260.
+(pdftex.def)             Requested size: 390.0pt x 195.00368pt.
+ [56 <./img/res/res_15x15.png>]) [57]
+\openout2 = `chapters/SA_experiment.aux'.
+
+ (./chapters/SA_experiment.tex
+Chapter 5.
+) [58
+
+
+
+
+]
 \openout2 = `appendices/appendix_A_hw.aux'.
 
  (./appendices/appendix_A_hw.tex
 Appendix A.
-) [54
+) [59
 
 
 
 
-] [55]
+] [60]
 \openout2 = `appendices/appendix_B_AI.aux'.
 
  (./appendices/appendix_B_AI.tex
 Appendix B.
-) [56
+) [61
 
 
 
 
-] [57] (./thesis.bbl [58
+] [62] (./thesis.bbl [63
 
 
 
-] [59] [60]
+] [64] [65]
 Underfull \hbox (badness 10000) in paragraph at lines 121--125
 []\T1/cmr/m/n/12 Pasqal, ``Pasqal de-liv-ers italy's first neu-tral atom quan-
  []
@@ -957,24 +994,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 127--130
 []\T1/cmr/m/n/12 G. Or-succi, ``QUBO-GA-QUANTUM.'' []$\T1/cmtt/m/n/12 https : / / github . com /
  []
 
-) [61] (./thesis.aux (./chapters/Introduction_to_Quantum_Computing.aux) (./chapters/The_Embedding_Problem.aux) (./chapters/The_Base_Pipeline.aux) (./chapters/GAs_experiment.aux) (./appendices/appendix_A_hw.aux) (./appendices/appendix_B_AI.aux))
+) [66] (./thesis.aux (./chapters/Introduction_to_Quantum_Computing.aux) (./chapters/The_Embedding_Problem.aux) (./chapters/The_Base_Pipeline.aux) (./chapters/GAs_experiment.aux) (./chapters/SA_experiment.aux) (./appendices/appendix_A_hw.aux) (./appendices/appendix_B_AI.aux))
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 96F1BF4E3F0E44D156AF43453B207531;7046.
+(rerunfilecheck)             Checksum: D0ACEF86C32A27947A6CE2BBE862D909;7635.
  )
 (\end occurred when \ifx on line 2 was incomplete) 
 Here is how much of TeX's memory you used:
- 26058 strings out of 478287
- 475795 string characters out of 5849289
- 768128 words of memory out of 5000000
- 43555 multiletter control sequences out of 15000+600000
+ 26123 strings out of 478287
+ 477743 string characters out of 5849289
+ 768768 words of memory out of 5000000
+ 43600 multiletter control sequences out of 15000+600000
  494443 words of font info for 92 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,12n,89p,1224b,758s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsl1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1728.pfb>
-Output written on thesis.pdf (64 pages, 2216228 bytes).
+Output written on thesis.pdf (69 pages, 2375733 bytes).
 PDF statistics:
- 856 PDF objects out of 1000 (max. 8388607)
- 677 compressed objects within 7 object streams
- 165 named destinations out of 1000 (max. 500000)
- 343 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 910 PDF objects out of 1000 (max. 8388607)
+ 718 compressed objects within 8 object streams
+ 175 named destinations out of 1000 (max. 500000)
+ 374 words of extra memory for PDF output out of 10000 (max. 10000000)
 

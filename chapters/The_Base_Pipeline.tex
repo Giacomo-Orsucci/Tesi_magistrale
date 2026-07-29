@@ -157,6 +157,16 @@ The minimal constant $\delta = 10^{-6}$ is introduced simply to prevent zero-div
 
 It is straightforward also from above how there is not a single valid method or theory to build "the best" fitness function.
 
+\section{Alternative Embedding: SA}
+%GIUSTO PER DARE TRACCIA SU CUI CONTINUARE:
+
+%Da valutare quanto approfondire e sicuramente da ricontrollare bene il collegamente con il prima ed il dopo.
+
+%Here we explain and present in brevity an alternative embedding approach using Simulated Annealing. Numerous publications use Simulated Annealing to approximate energy solutions also as a benchmark for proposed quantum algorithm like in \cite{} and in \cite{das2025grid}, works that inspired the idea to
+%use SA, instead as a benchmark or as an approximation, to  find a feasible embedding for our QUBO problems. Moreover, as we will see in the following \cite{das2025grid} inspired the idea to try a divide et impera approach.
+
+
+
 \section{Laser Parametrization}
 
 The laser parametrization phase could easily warrant an entire thesis in itself. The current literature presents a multitude of proposed variants and quantum algorithms with diverse parametrization strategies, and a universally accepted gold standard has not yet been established. For instance, while many studies rely on a foundational adiabatic approach, numerous advanced variants are actively being explored, as demonstrated in \cite{perron2026leveraging}. 
@@ -182,3 +192,4 @@ In our case, since the core focus of this thesis is centered on the geometric em
 
 This standardized adiabatic protocol guarantees that the quantum many-body system is initialized in an easy-to-prepare ground state and is smoothly driven toward the complex energy landscape encoded by our custom physical layout.
 We started from \cite{pasqal_qubo_qaa} to study how to handle QUBO problems on this platform, but the entire Pasqal documentation ecosystem is highly comprehensive and can be useful to read. For instance, an alternative tutorial dedicated to Maximum Weight Independent Set (MWIS) problems \cite{pasqal_mwis_qaa} provides further insights on different problmes' resolution.
+

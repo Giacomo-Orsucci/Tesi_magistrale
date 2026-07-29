@@ -65,7 +65,7 @@ The physical layout intuitively respects the mathematical constraints previously
     \label{fig:5x5_quantum_res}
 \end{figure}
 
-The quantum execution demonstrates outstanding performance: the analog platform identified the two optimal ground states found with classical brute-force method (suitable for small instances like in this case) with exceptionally high probability and symmetry. This initial validation serves as a highly encouraging proof-of-concept for our hybrid pipeline, setting the baseline to systematically investigate the scalability limits of this exact mathematical approach.
+The quantum execution demonstrates outstanding performance: the analog platform identified the two optimal ground states found with classical brute-force method (suitable for small, not big instances like in this case and in the following) with exceptionally high probability and symmetry. This initial validation serves as a highly encouraging proof-of-concept for our hybrid pipeline, setting the baseline to systematically investigate the scalability limits of this exact mathematical approach.
 \section{Scaling Validation on a 6x6 Instance}
 
 Continuing the systematic scaling tests, the problem dimensionality was incrementally increased. For the $6 \times 6$ dimensional scale, the target matrix is depicted in Figure \ref{fig:6x6_qubo_instance}.
@@ -111,11 +111,11 @@ This configuration yielded a relatively low best spatial fitness score of $0.013
 \begin{figure}[htbp]
     \centering
     \includegraphics[width=1.0\textwidth]{img/res/res_6x6.png} 
-    \caption{Probability distribution of the measured bitstrings after the adiabatic execution. Unlike the smaller instance, the highest probability peak corresponds to a false local minimum, while the true mathematical optimal solutions retain a lower, yet sufficient, cumulative probability mass.}
+    \caption{Probability distribution of the measured bitstrings after the adiabatic execution. Unlike the smaller instance, one of the highest probability peaks corresponds to a false local minimum, while the true mathematical optimal solutions retain a lower, yet sufficient and satisfactory, cumulative probability mass.}
     \label{fig:6x6_quantum_res}
 \end{figure}
 
-Analyzing the probability distribution, a critical phenomenon emerges: the highest probability peak no longer corresponds to the true mathematical ground state, but rather to an excited state (a false local minimum). However, the true optimal solutions are still identified with a sufficiently high cumulative probability mass. Since quantum computation ultimately relies on statistical sampling, successfully isolating the optimal energy solution among the measured bitstrings constitutes a valid problem resolution.
+Analyzing the probability distribution, a critical phenomenon emerges: one of the highest probability peaks no longer corresponds to the true mathematical ground state, but rather to an excited state (a false local minimum). However, the true optimal solutions are still identified with a sufficiently high cumulative probability mass. Since quantum computation ultimately relies on statistical sampling, successfully isolating the optimal energy solution among the measured bitstrings constitutes a valid problem resolution.
 
 Crucially, this result highlights the \textit{analog resilience} of the Neutral Atom QPU. It demonstrates that finding a mathematically "perfect" embedding is not strictly necessary; a "good enough" layout (even with a low fitness score of $0.0136$) can still guide the quantum dynamics toward the global optimum with an acceptable degree of success. 
 
@@ -134,25 +134,8 @@ This specific instance is presented to highlight an interesting consideration re
 
 It is important to note that while a larger number of nodes typically implies a higher spatial embedding difficulty, this specific matrix exhibits a lower graph density and a reduced maximum node degree compared to the previous $6 \times 6$ instance. As will be demonstrated, these specific topological traits significantly facilitate the algorithmic layout process.
 
-Consequently, despite the increased dimensionality, the Genetic Algorithm was executed using a less aggressive configuration, altering only a single parameter compared to the baseline $5 \times 5$ setup, as detailed in Table \ref{tab:pygad_reverted_parameters}.
+Consequently, despite the increased dimensionality, the Genetic Algorithm was reverted to the less aggressive baseline configuration originally established for the 5x5 setup (detailed in Table \ref{tab:pygad_parameters_5x5}). Executing the algorithm under these parameters yielded the spatial embedding illustrated in Figure \ref{fig:7x7_register}.
 
-\begin{table}[htbp]
-    \centering
-    \renewcommand{\arraystretch}{1.3}
-    \resizebox{\textwidth}{!}{
-    \begin{tabular}{l c p{0.6\textwidth}}
-        \hline
-        \textbf{PyGAD Parameter} & \textbf{Updated Value} & \textbf{Conceptual Meaning} \\
-        \hline
-        \texttt{fitness\_func} & \texttt{improved\_topological\_MAE} & Retained the refined metric (handling complex bounds and hardware penalties) to guide the layout effectively. \\
-        \hline
-    \end{tabular}
-    }
-    \caption{Hyperparameter configuration for further scaling tests. To isolate the impact of the evaluation metric and optimize classical execution times, the population size and generation limits were reverted to their original baseline values ($100$ and $800$, respectively, as in Table \ref{tab:pygad_parameters_5x5}.}
-    \label{tab:pygad_reverted_parameters}
-\end{table}
-
-Executing the algorithm under these parameters (the same baseline parameters for 5x5 instance) yielded the spatial embedding illustrated in Figure \ref{fig:7x7_register}.
 
 \begin{figure}[htbp]
     \centering
@@ -170,11 +153,10 @@ The physical layout reveals a highly structured and well-spaced geometric arrang
     \label{fig:7x7_quantum_res}
 \end{figure}
 
-The quantum execution demonstrates perfectly symmetrical and outstanding results, effortlessly isolating the global optima. This instance is reported specifically to prove that the overall embedding difficulty is not dictated solely by the matrix dimensionality ($N$), but rather by a complex interplay of graph density, node degree distribution, and structural topology. Indeed, we observed that for this larger $7 \times 7$ grid, the hybrid pipeline obtained significantly better classical preprocessing times and quantum readout results than it did for the smaller, yet denser, $6 \times 6$ problem.
+The quantum execution demonstrates perfectly symmetrical and outstanding results, effortlessly isolating the global optima. This instance is reported specifically to prove that the overall embedding difficulty is not dictated solely by the matrix dimensionality ($N$), but rather by a complex interplay of graph density, node degree distribution, and structural topology. Indeed, we observed that for this larger $7 \times 7$ grid, the hybrid pipeline obtained significantly better classical preprocessing times and quantum readout results than it did for the smaller, yet denser, $6 \times 6$ problem as expected returning to a baseline parametrization.
+\section{Scaling Limits: A 10x10 Instance}
 
-\section{10x10 instance}
-
-We decided to not present 8x8 and 9x9 instances for brevity and because they don't offers new aspects and insights to discuss, but we directly present the 10x10 instance:
+For the sake of brevity, intermediate dimensions (such as $8 \times 8$ and $9 \times 9$) are omitted, as they do not offer fundamentally new insights into the algorithm's behavior. Instead, the analysis directly advances to a $10 \times 10$ problem, mathematically formulated in Figure \ref{fig:10x10_qubo_instance}.
 
 \begin{figure}[htbp]
     \centering
@@ -183,7 +165,7 @@ We decided to not present 8x8 and 9x9 instances for brevity and because they don
     \label{fig:10x10_qubo_instance}
 \end{figure}
 
-As we can see the matrix present a not so low density, but an average and maximum nodes degree not so high. The complexity is given by the instance dimension. precisely as a result of the size we used the following parametrization:
+The matrix exhibits a moderate density, combined with relatively low average and maximum node degrees. Therefore, the computational complexity is driven primarily by the raw dimensionality ($N=10$) rather than dense interplay. To tackle the vastly expanded continuous search space, the hyperparameters required the profound adjustments detailed in Table \ref{tab:pygad_10x10_parameters}.
 
 \begin{table}[htbp]
     \centering
@@ -195,7 +177,7 @@ As we can see the matrix present a not so low density, but an average and maximu
         \hline
         \texttt{sol\_per\_pop} & $300$ & Population size tripled (from $100$) to guarantee massive genetic diversity, strictly required to explore the highly complex spatial landscape of a $10 \times 10$ matrix. \\
         \texttt{num\_generations} & $1500$ & Increased termination limit (from $800$) to grant the algorithm sufficient time to converge. \\
-        \texttt{fitness\_func} & \texttt{improved\_topological\_mae} & The refined metric used for all complex instances to handle bounds and hardware penalties. \\
+        \texttt{fitness\_func} & \texttt{improved\_topological\_MAE} & The refined metric used for all complex instances to handle bounds and hardware penalties. \\
         \texttt{K\_tournament} & $4$ & Increased tournament size (from $3$) to apply a stronger evolutionary pressure, favoring fitter individuals within the vastly expanded population. \\
         \texttt{keep\_elitism} & $15$ & Increased elitism (from $5$) to securely preserve a larger pool of well-performing spatial configurations, preventing regression during the search. \\
         \texttt{mutation\_probability} & $[0.10, 0.02]$ & Drastically reduced mutation rates (from $40\%/5\%$ to $10\%/2\%$). In a highly dense $10$-node setup, aggressive mutations are overly destructive to converging layouts. \\
@@ -203,12 +185,11 @@ As we can see the matrix present a not so low density, but an average and maximu
         \hline
     \end{tabular}
     }
-    \caption{Extreme hyperparameter configuration required to embed a $10 \times 10$ QUBO instance. The parameters reveal a shift toward high population diversity combined with very delicate, fine-grained spatial mutations to prevent layout destruction in dense geometric conditions. Are highlighted the differences between Table \ref{tab:pygad_parameters_5x5}.}
+    \caption{Extreme hyperparameter configuration required to embed a $10 \times 10$ QUBO instance. The parameters reveal a shift toward high population diversity combined with very delicate, fine-grained spatial mutations to prevent layout destruction in dense geometric conditions. All explicitly listed values highlight the necessary deviations from the initial $5 \times 5$ baseline established in Table \ref{tab:pygad_parameters_5x5}.}
     \label{tab:pygad_10x10_parameters}
 \end{table}
 
-The resulting embedding is the following:
-
+Under these extreme parameters, the best run produced the spatial embedding illustrated in Figure \ref{fig:10x10_register}.
 
 \begin{figure}[htbp]
     \centering
@@ -217,9 +198,7 @@ The resulting embedding is the following:
     \label{fig:10x10_register}
 \end{figure}
 
-In this case, using a less disruptive mutation has been a winning intuition because we have a topology with a chain of 6 qubits and some isolated pairs. An another time is evident how is important to 
-personalize the parametrization on the problem and the topology that presents. For this reason in this case we have an optimal result with a fitness score of 0.0583 (an another time is evident the quantum resilience) and an execution time of 1408.8 seconds and 10 restarts:
-
+Constraining the mutation operators proved to be a winning intuition. The specific topology of this instance, characterized by a long chain of 6 qubits alongside isolated pairs, is highly sensitive to spatial perturbations. Once again, it is evident that heavily personalizing the evolutionary parameters based on the expected graph topology is strictly mandatory, as failing to do so incurs a prohibitive computational overhead. After 10 independent restarts and $1408.8$ seconds of classical execution, the best spatial configuration achieved a fitness score of $0.0583$. Despite this relatively low mathematical score, the quantum resilience of the analog platform is confirmed by the output distribution in Figure \ref{fig:10x10_quantum_res}.
 
 \begin{figure}[htbp]
     \centering
@@ -228,24 +207,67 @@ personalize the parametrization on the problem and the topology that presents. F
     \label{fig:10x10_quantum_res}
 \end{figure}
 
-But other configurations and runs highlighted how with this dimension (and, of course, our limited hardware) we are starting to struggle in finding a good solution without too much manual hyper tuning and without using too extreme configuration and 
-execution time. This is the fixed frontier for our Genetic Algorithm approach, because with this and higher dimensions the method starts to wave. To give an impression on scaling limits, we will present the empirical observation on a 15x15 instance in the following.
+While the analog system successfully isolated the ground state for this specific seed, broader testing across various $10 \times 10$ Genetic Algorithm configurations highlighted a critical breaking point. At this dimensional scale, the Genetic Algorithm begins to struggle severely. Finding a valid spatial configuration now requires extreme manual hyperparameter tuning, massive population sizes, and heavy execution times. This represents the fixed operational frontier for the pure Genetic Algorithm approach: beyond this threshold, the heuristic engine begins to falter under the spatial curse of dimensionality, especially when constrained by the classical hardware detailed in Appendix \ref{app:hardware_specs}. To definitively demonstrate these scaling limits, an empirical observation of a $15 \times 15$ instance will be presented in the following section.
+\section{Algorithmic Breakdown: A 15x15 Instance}
+
+This instance serves as the definitive empirical evidence of the scaling limitations inherent to the direct Genetic Algorithm approach. The mathematical formulation of this stress-test scenario is presented in Figure \ref{fig:15x15_qubo_instance}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.7\textwidth]{img/QUBO_instances/15x15_r12_s57.png} 
+    \caption{Structure of the $15 \times 15$ UDG-like QUBO instance generated via \textit{instance\_generator.py}, inspected using \textit{inspect\_qubo.py}, and subsequently embedded using the \textit{bench-GA.py} module \cite{orsucci_qubo_ga_quantum}.}
+    \label{fig:15x15_qubo_instance}
+\end{figure}
+
+Although the matrix exhibits a moderate density and average node degree, the true computational bottleneck arises directly from the expanded dimensionality of the problem ($N=15$). To counteract the exponential growth of the continuous spatial search space, extensive hyperparameter tuning was conducted. The configuration yielding the highest relative fitness score is detailed in Table \ref{tab:pygad_15x15_parameters}.
+
+\begin{table}[htbp]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l c p{0.6\textwidth}}
+        \hline
+        \textbf{PyGAD Parameter} & \textbf{Updated Value} & \textbf{Conceptual Meaning} \\
+        \hline
+        \texttt{sol\_per\_pop} & $400$ & Population size quadrupled (from $100$) to maximize genetic diversity, attempting to cover the large geometric search space. \\
+        \texttt{num\_generations} & $3000$ & Extreme increase in the termination limit (from $800$) to grant the heuristic engine a massive timeframe to incrementally converge. \\
+        \texttt{fitness\_func} & \texttt{improved\_topological\_MAE} & The refined evaluation metric strictly required to handle hardware boundary penalties. \\
+        \texttt{K\_tournament} & $5$ & Maximum tournament size applied (from $3$) to exert extreme evolutionary pressure, forcing the selection of only the highly fit individuals from the massive population pool. \\
+        \texttt{num\_parents\_mating} & $10$ & Reduced mating pool (from $20$). Combined with the huge population, this creates a severe reproductive bottleneck, allowing only the absolute best topological traits to propagate. \\
+        \texttt{keep\_elitism} & $20$ & Quadrupled elitism (from $5$) to aggressively protect the best geometric partial solutions from being disrupted by crossover and mutation over the $3000$ generations. \\
+        \texttt{mutation\_probability} & $[0.10, 0.01]$ & Ultra-low mutation rates (from $40\%/5\%$ down to $10\%/1\%$). In a $15$-node continuous embedding, the geometric density is critical; random mutations are almost guaranteed to cause fatal node overlaps. \\
+        \texttt{random\_mutation\_min/max} & $[-1.0, 1.0]$ & Strictly narrowed spatial perturbation window (from $\pm 3.0$ $\mu$m to $\pm 1.0$ $\mu$m) to constrain the mutation operator to purely local, micro-metric fine-tuning. \\
+        \hline
+    \end{tabular}
+    }
+    \caption{Heavy-duty hyperparameter configuration required to attempt the embedding of a $15 \times 15$ QUBO instance. The parametrization clearly highlights the algorithmic struggle against the curse of dimensionality: a massive computational effort (population and generations) is heavily bottlenecked by extreme selection pressure and microscopic mutation rates to prevent the destruction of highly dense layouts. Values are compared against the $5 \times 5$ baseline from Table \ref{tab:pygad_parameters_5x5}.}
+    \label{tab:pygad_15x15_parameters}
+\end{table}
+
+This heavy-duty parametrization clearly reflects an attempt to overcome the geometric complexity through a brute-force increase in computational effort. However, despite a lengthy classical execution time of $2032.72$ seconds, the algorithm only achieved a severely degraded fitness score of $0.0075$, generating the spatial layout illustrated in Figure \ref{fig:15x15_register}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.8\textwidth]{img/embedding/reg_15x15.png} 
+    \caption{The 2D physical spatial layout generated by the Genetic Algorithm for the $N=15$ instance. The register fully complies with Neutral Atom QPU geometric boundaries.}
+    \label{fig:15x15_register}
+\end{figure}
+
+While the heuristic engine attempted to organize the atoms into localized clusters (islands), the geometric mapping proved fundamentally inadequate to capture the target topological constraints. The failure of this direct embedding approach is unequivocally confirmed by the quantum simulation readout in Figure \ref{fig:15x15_quantum_res}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=1.0\textwidth]{img/res/res_15x15.png} 
+    \caption{Probability distribution of the measured bitstrings after the adiabatic execution. The analog system fails to identify a valid ground state or a dominant probability mass, confirming the complete breakdown of the spatial embedding.}
+    \label{fig:15x15_quantum_res}
+\end{figure}
+
+As the problem dimensionality scaled to this $15 \times 15$ UDG instance, the Genetic Algorithm officially crossed its operational breaking point. It is important to contextualize this limitation: all classical preprocessing and embedding optimizations in this phase were executed locally on consumer-grade hardware (refer to Appendix \ref{app:hardware_specs} for detailed specifications). With access to High-Performance Computing (HPC) classical infrastructure, the execution times would decrease, potentially allowing the GA to process slightly larger matrices within the same temporal window. 
+
+However, regardless of the underlying hardware power, the intrinsic mathematical behavior of Genetic Algorithms applied to this highly-constrained continuous mapping proves to be computationally unsustainable for large-scale matrices. For this reason, to push the boundaries of our hybrid architecture and efficiently embed larger QUBO problems, alternative optimization methods had to be investigated. Among the numerous heuristic alternatives available, Simulated Annealing (SA) was selected for its proven theoretical efficacy in combinatorial landscapes, and its implementation will be thoroughly presented and analyzed in the following chapter.
 
 
-\section{15x15 instance}
 
-
-
-
-We have surely to consider that all the classical part has been executed on my laptop with the hardware specification in Appendix A \ref{app:hardware_specs}, with a better hardware and possibly a HP classical hardware capacity we would have been able, within the same execution time, to embed bigger matrices, but it is
-however clear how in a "common" configuration of execution Genetic Algorithm imposes severe limitations in scalability. For this reasons other embedding methods has been studied and experimented and for the good results shown, Simulated Annealing will be presented in the following.
-
-
-
-%continuare con le altre istanze che riteniamo valga la pena mostrare e con le modalità che riteniamo opportune.
-
-%valutare quali istanze (le più rappresentative) andare a riportare spiegando bene e di nostro pugno
-%i risultati ottenuti e le considerazioni relative al GA e le topologie delle istanze.
 
 
 %Passare ad SA, spiegare perchè abbiamo usato SA perchè SA + GRASP (magari basta dire che degli esperimenti preliminari hanno giustificato l'uso di GRASP ecc ecc)

@@ -24,13 +24,15 @@
 \contentsline {subsection}{\numberline {3.2.1}Genetic Algorithm Framework}{29}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}GA Parametrization: Explanation and Example}{30}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Fitness Function Formulation}{33}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Laser Parametrization}{36}{section.3.3}%
+\contentsline {section}{\numberline {3.3}Alternative Embedding: SA}{36}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Laser Parametrization}{36}{section.3.4}%
 \contentsline {chapter}{\numberline {4}GAs: Experimental Results and Limitations}{39}{chapter.4}%
 \contentsline {section}{\numberline {4.1}Validation on a 5x5 Instance}{39}{section.4.1}%
 \contentsline {section}{\numberline {4.2}Scaling Validation on a 6x6 Instance}{43}{section.4.2}%
 \contentsline {section}{\numberline {4.3}Scaling Analysis: A 7x7 Instance}{46}{section.4.3}%
-\contentsline {section}{\numberline {4.4}10x10 instance}{49}{section.4.4}%
-\contentsline {section}{\numberline {4.5}15x15 instance}{53}{section.4.5}%
-\contentsline {chapter}{\numberline {A}Classical Hardware}{54}{appendix.A}%
-\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{56}{appendix.B}%
-\contentsline {chapter}{Bibliography}{58}{appendix.B}%
+\contentsline {section}{\numberline {4.4}Scaling Limits: A 10x10 Instance}{48}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Algorithmic Breakdown: A 15x15 Instance}{53}{section.4.5}%
+\contentsline {chapter}{\numberline {5}SA: Experimental Results}{58}{chapter.5}%
+\contentsline {chapter}{\numberline {A}Classical Hardware}{59}{appendix.A}%
+\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{61}{appendix.B}%
+\contentsline {chapter}{Bibliography}{63}{appendix.B}%
