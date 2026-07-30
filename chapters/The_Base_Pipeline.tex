@@ -157,13 +157,72 @@ The minimal constant $\delta = 10^{-6}$ is introduced simply to prevent zero-div
 
 It is straightforward also from above how there is not a single valid method or theory to build "the best" fitness function.
 
-\section{Alternative Embedding: SA}
-%GIUSTO PER DARE TRACCIA SU CUI CONTINUARE:
+\section{Alternative Embedding: Simulated Annealing (SA)}
+\label{sec:sa_theory}
 
-%Da valutare quanto approfondire e sicuramente da ricontrollare bene il collegamente con il prima ed il dopo.
+To address the probable scalability limitations of Genetic Algorithms (as we will see in experimental report chapters in the following), Simulated Annealing (SA) was investigated and implemented as an alternative embedding strategy. In the current quantum computing literature, SA is frequently employed as a classical baseline or approximation tool to benchmark the energy solutions of proposed quantum algorithms, as demonstrated by Das et al. \cite{das2025grid}. However, our architecture innovatively re-purposes this heuristic: rather than using SA to solve the abstract mathematical QUBO problem, we deploy it to optimize the continuous physical spatial embedding.
 
-%Here we explain and present in brevity an alternative embedding approach using Simulated Annealing. Numerous publications use Simulated Annealing to approximate energy solutions also as a benchmark for proposed quantum algorithm like in \cite{} and in \cite{das2025grid}, works that inspired the idea to
-%use SA, instead as a benchmark or as an approximation, to  find a feasible embedding for our QUBO problems. Moreover, as we will see in the following \cite{das2025grid} inspired the idea to try a divide et impera approach.
+Furthermore, the work by Das et al. \cite{das2025grid} not only provided the benchmark context for SA but also served as a foundational inspiration for the spatial partitioning strategy, the \textit{divide et impera} approach, that will be extensively explored in the subsequent chapters of this thesis.
+
+The primary rationale behind shifting to SA lies in the inherent structural vulnerability of population-based approaches. During genetic evolution, operators (particularly continuous crossover) can easily disrupt high-quality spatial candidates found during the search. In a heavily constrained continuous 2D plane, blindly recombining coordinate arrays often leads to catastrophic atomic overlaps, violating the hardware's minimum distance limits ($d_{min}$). 
+
+To circumvent this destructive nature, SA operates as a probabilistic, \textit{single-trajectory} metaheuristic. Originally formulated by Kirkpatrick et al. \cite{kirkpatrick1983optimization}, the algorithm draws a direct mathematical analogy from the metallurgical process of annealing, where a material is heated and then slowly cooled to minimize its internal energy and form a defect-free crystalline structure. Instead of maintaining a vast population, the algorithm operates on a single valid spatial layout at a time, applying strictly controlled, localized geometric perturbations to iteratively minimize a cost function. Thus, this method constitutes a theoretically sound alternative to evaluate scalability capacities in direct contrast with Genetic Algorithm approaches.
+
+\subsection{Energy Formulation and Perturbation Strategy}
+
+While the Genetic Algorithm was designed to maximize an inverted fitness score, the SA framework natively translates our topological evaluation metric into an "internal energy" $E$ to be minimized. The objective function computes the total energy of a given geometric configuration $S = \{\mathbf{r}_1, \mathbf{r}_2, \dots, \mathbf{r}_N\}$, where $\mathbf{r}_i \in \mathbb{R}^2$ represents the spatial coordinates of the $i$-th atom.
+
+Rather than redefining the underlying physics of the system, SA directly leverages the mathematical foundations established for the Improved Topological evaluation detailed in Section 3.2.3. Specifically, the Van der Waals potential numerical clipping ($\tau$), the active and inactive bounds partitioning (via the tolerance $\epsilon$), and the geometric constraints penalty ($P_{geom}$) remain structurally identical. 
+
+Consequently, the total internal energy $E(S)$ is formulated as the direct summation of the three core components:
+$$ E(S) = E_{active} + E_{crosstalk} + P_{geom} $$
+
+Where $E_{active}$ computes the absolute deviation strictly on the necessary logical connections, $E_{crosstalk}$ strongly penalizes any unwanted physical interactions generated between theoretically independent nodes, and $P_{geom}$ enforces the Neutral Atom hardware boundaries. By directly minimizing this composite energy, the algorithm natively optimizes the layout without requiring the mathematical inversion step necessary in GAs.
+
+To balance deep local fine-tuning with global exploration while minimizing this energy, the algorithm dynamically selects among three distinct geometric moves to generate the neighborhood state $S'$:
+\begin{itemize}
+    \item \textbf{Jitter (Micro-displacement):} With a high probability (empirically set to $60\%$ in our "basic" implementation), a single atom is shifted by a microscopic amount. Crucially, the maximum radius of this displacement scales proportionally with the current system temperature, allowing for wider jumps early on and extremely precise sub-micrometer fine-tuning near the end of the execution.
+    \item \textbf{Swap (Topological exchange):} With a moderate probability (e.g., $20\%$), the coordinates of two distinct atoms are perfectly swapped. This move is vital for resolving topological entanglements without altering the overall physical footprint and density of the register.
+    \item \textbf{Jump (Global exploration):} With the remaining probability (e.g., $20\%$), an atom is entirely removed from its position and randomly re-placed anywhere within the permissible $R_{max}$ boundary, preventing the algorithm from stagnating in isolated clusters.
+\end{itemize}
+
+\subsection{Thermodynamic Evolution}
+
+The decision to transition to the newly generated geometric state $S'$ is strictly governed by the Metropolis acceptance criterion \cite{metropolis1953equation}. If the new configuration reduces the total topological error (i.e., $\Delta E = E(S') - E(S) < 0$), the transition is definitively accepted. However, to escape non-convex spatial local minima, SA allows transitions to worse configurations ($\Delta E > 0$) with a probability $P$ dictated by the Boltzmann distribution:
+
+$$P(S \rightarrow S') = e^{-\frac{\Delta E}{T}}$$
+
+Here, $T$ acts as the artificial "temperature" of the system, controlled by a specific \textit{cooling schedule} (defined by an initial temperature, a minimum threshold, a cooling rate multiplier, and a fixed number of exploration steps per temperature level). 
+
+During the high-temperature phase, $P \approx 1$, allowing the system to perform a random walk and freely explore the global geometric landscape. As $T$ gradually decreases, the probability of accepting worse configurations vanishes, and the algorithm smoothly transitions into a greedy hill-climbing search. By relying on this thermodynamic localized exploration, SA aims to navigate the continuous spatial constraints of the Neutral Atom platform with significantly higher structural stability than its evolutionary counterpart.
+
+\subsection{SA Parametrization: Explanation and Example}
+
+To ensure structural consistency with the Genetic Algorithm methodology, we present the baseline hyperparameter configuration utilized for the Simulated Annealing engine. Just as the GA requires balancing population size and mutation rates, SA demands a careful tuning of its thermodynamic variables to guarantee convergence without excessive computational overhead. 
+
+The core of the execution is governed by the \textit{Cooling Schedule}, which dictates how the artificial temperature drops over time, directly controlling the exploration-exploitation trade-off. For instance, Table \ref{tab:sa_parameters_baseline} details the baseline configuration implemented in our framework, mirroring the variables defined in the \textit{bench-SA.py} module.
+
+\begin{table}[H]
+    \centering
+    \renewcommand{\arraystretch}{1.3}
+    \resizebox{\textwidth}{!}{
+    \begin{tabular}{l c p{0.55\textwidth}}
+        \hline
+        \textbf{SA Parameter} & \textbf{Configured Value} & \textbf{Conceptual Meaning} \\
+        \hline
+        \texttt{num\_restarts} & $10$ & Multi-start execution approach. The algorithm is independently restarted to mitigate stochastic initialization, selecting the absolute minimum energy state found. \\
+        \texttt{T\_INIT} & $50000.0$ & Initial Temperature. Purposely set extremely high to allow the algorithm to overcome the massive early-stage hardware penalties and freely explore the space. \\
+        \texttt{T\_MIN} & $0.1$ & Minimum Temperature (Stopping Criterion). The threshold at which the system freezes into a final layout, executing only strictly improving micro-adjustments. \\
+        \texttt{COOLING\_RATE} & $0.98$ & The exponential decay factor applied to the temperature after each thermodynamic cycle ($T = T \times 0.98$). Represents a relatively slow and careful cooling process. \\
+        \texttt{STEPS\_PER\_TEMP} & $800$ & Markov Chain length. The number of neighboring configurations generated and evaluated at each discrete temperature level before applying the cooling reduction. \\
+        \hline
+    \end{tabular}
+    }
+    \caption{Baseline hyperparameter configuration for the Simulated Annealing setup. The parameters define a slow exponential cooling schedule designed to carefully optimize the highly constrained 2D spatial layouts.}
+    \label{tab:sa_parameters_baseline}
+\end{table}
+
+This specific parametrization reflects the intrinsic difficulty of the spatial embedding problem. The initial temperature ($T_{INIT}$) must be sufficiently large to "melt" any initial configuration that severely violates the $d_{min}$ constraint (which generates massive penalty values). Concurrently, the combination of a high cooling rate ($0.98$) and a substantial number of steps per level ($800$) ensures that the algorithm meticulously sweeps the continuous coordinate space before freezing. As with the GA, these parameters act as the architectural baseline and can be dynamically tuned to tackle instances of varying density and dimensionality.
 
 
 
@@ -191,5 +250,22 @@ In our case, since the core focus of this thesis is centered on the geometric em
 \end{figure}
 
 This standardized adiabatic protocol guarantees that the quantum many-body system is initialized in an easy-to-prepare ground state and is smoothly driven toward the complex energy landscape encoded by our custom physical layout.
-We started from \cite{pasqal_qubo_qaa} to study how to handle QUBO problems on this platform, but the entire Pasqal documentation ecosystem is highly comprehensive and can be useful to read. For instance, an alternative tutorial dedicated to Maximum Weight Independent Set (MWIS) problems \cite{pasqal_mwis_qaa} provides further insights on different problmes' resolution.
+We started from \cite{pasqal_qubo_qaa} to study how to handle QUBO problems on this platform, but the entire Pasqal documentation ecosystem is highly comprehensive and can be useful to read. For instance, an alternative tutorial dedicated to Maximum Weight Independent Set (MWIS) problems \cite{pasqal_mwis_qaa} provides further insights on different problems' resolution.
 
+\section{The base 5x5 instance}
+
+%STRUTTURA GENERALE PER ISTANZE GIÀ VISTE PER GA:
+
+%si rimanda a formulazione QUBO già presentata
+%parametrizzatione SA
+%embedding 
+%risultato
+
+
+%PER le istanze superiore direi uguale ma presentando la nuova formulazione QUBO.
+
+\section{Compaison with 10x10 instance}
+
+\section{15x15: GAs rupture}
+
+%valutare quali altri mettere di scala superiore.

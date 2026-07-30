@@ -132,6 +132,15 @@ G.~Orsucci, ``{QUBO-GA-QUANTUM}.''
 A.~Eiben and J.~Smith, {\em Introduction To Evolutionary Computing}, vol.~45.
 \newblock 01 2003.
 
+\bibitem{kirkpatrick1983optimization}
+S.~Kirkpatrick, C.~D. Gelatt~Jr, and M.~P. Vecchi, ``Optimization by simulated
+  annealing,'' {\em Science}, vol.~220, no.~4598, pp.~671--680, 1983.
+
+\bibitem{metropolis1953equation}
+N.~Metropolis, A.~W. Rosenbluth, M.~N. Rosenbluth, A.~H. Teller, and E.~Teller,
+  ``Equation of state calculations by fast computing machines,'' {\em The
+  Journal of Chemical Physics}, vol.~21, no.~6, pp.~1087--1092, 1953.
+
 \bibitem{perron2026leveraging}
 C.~Perron, Y.~B{\'e}rub{\'e}-Lauzi{\`e}re, and V.~Drouin-Touchette,
   ``Leveraging analog neutral-atom quantum computers for diversified pricing in
