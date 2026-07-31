@@ -222,9 +222,23 @@ The core of the execution is governed by the \textit{Cooling Schedule}, which di
     \label{tab:sa_parameters_baseline}
 \end{table}
 
-This specific parametrization reflects the intrinsic difficulty of the spatial embedding problem. The initial temperature ($T_{INIT}$) must be sufficiently large to "melt" any initial configuration that severely violates the $d_{min}$ constraint (which generates massive penalty values). Concurrently, the combination of a high cooling rate ($0.98$) and a substantial number of steps per level ($800$) ensures that the algorithm meticulously sweeps the continuous coordinate space before freezing. As with the GA, these parameters act as the architectural baseline and can be dynamically tuned to tackle instances of varying density and dimensionality.
+The baseline SA implementation is detailed above and in \textit{bench-SA.py} \cite{orsucci_qubo_ga_quantum}. However, preliminary tests demonstrated the efficacy of hybridizing this method with a greedy initialization, as implemented in \textit{bench-SA-greedy-init.py} \cite{orsucci_qubo_ga_quantum}:
 
+\subsection{SA Enhancements: GRASP and Quenching}
 
+While the baseline thermodynamic evolution provides a robust foundation for escaping local minima, preliminary experimental evaluations highlighted the necessity for further heuristic refinements. To accelerate convergence and guarantee more precision, the SA engine was augmented with a \textit{Greedy Randomized Adaptive Search Procedure} (GRASP) initialization, a final Quenching phase, and a Dynamic Early Stopping mechanism.
+
+\begin{itemize}
+    \item \textbf{GRASP Initialization:} Purely random spatial initialization often forces the SA to waste thousands of iterations merely bringing strongly interacting nodes close together. To bypass this, we implemented a greedy deterministic pre-placer. Before the cooling phase begins, nodes are sorted by their total interaction weight (node strength). The most heavily connected atom (the "hub" or highest-degree node) is placed precisely at the center of the register ($0, 0$). Subsequent nodes are iteratively placed: if a node shares a strong target bond with an already placed atom, it is spawned in a close "orbit" (randomly assigned between $1.2$ and $1.8 \times d_{min}$). Conversely, theoretically independent nodes are pushed directly to the outer boundary ($R_{max} - d_{min}$). This physics-aware initialization provides the SA with a highly optimized starting energy state.
+    
+    \item \textbf{Quenching Phase (Zero-Temperature Fine-Tuning):} Once the exponential cooling schedule reaches $T_{MIN}$, the thermodynamic acceptance of worse configurations is halted. However, the resulting configuration might still retain sub-micrometer geometric imperfections. To resolve this, a \textit{Quenching} phase is appended: a strict, deterministic hill-climbing search comprising $1500$ iterations. During this phase, only strict micro-displacements ($\pm 0.3\,\mu\text{m}$) that strictly reduce the topological energy are accepted, effectively squeezing out the final fractions of mathematical error from the layout.
+    
+    \item \textbf{Dynamic Early Stopping:} Because the embedding is executed inside a multi-start loop (e.g., $10$ independent restarts), waiting for all runs to finish can incur unnecessary classical overhead if a good enough embedding is discovered early. An early stopping condition was introduced by calculating a dynamic energy target ($E_{target} = N \times 12.0$). If any specific SA restart achieves an energy score strictly below this threshold, the algorithm assumes the layout is physically optimal for analog quantum execution, immediately halting any remaining scheduled restarts.
+\end{itemize}
+
+While the quantities reported above were empirically determined and serve as baseline examples, these combined enhancements elevate the embedding engine from a standard Simulated Annealing implementation to a highly specialized, domain-aware spatial solver. For this reason, and validated by the experimental results reported in Chapter \ref{chap:SA_experiment}, this enhanced embedding algorithm has been elected as the optimal approach for our specific application and target hardware.
+
+Additionally, a spatial initialization inspired by the Fruchterman-Reingold (FR) force-directed algorithm was tested. However, this approach yielded sub-optimal convergence and exhibited poorer scaling capabilities within our continuous SA framework. As explicitly noted in recent literature \cite{tarquini2026dronedeliverypackingproblem}, the success of FR relies heavily on extensive classical post-processing to correct hardware constraint violations. Furthermore, for larger graph dimensions, automated FR embedding proved practically infeasible, necessitating manual atomic placement to guarantee a valid Unit Disk Graph topology. By contrast, our GRASP-enhanced SA approach natively computes valid geometric embeddings without requiring manual topological interventions.
 
 \section{Laser Parametrization}
 
@@ -251,21 +265,3 @@ In our case, since the core focus of this thesis is centered on the geometric em
 
 This standardized adiabatic protocol guarantees that the quantum many-body system is initialized in an easy-to-prepare ground state and is smoothly driven toward the complex energy landscape encoded by our custom physical layout.
 We started from \cite{pasqal_qubo_qaa} to study how to handle QUBO problems on this platform, but the entire Pasqal documentation ecosystem is highly comprehensive and can be useful to read. For instance, an alternative tutorial dedicated to Maximum Weight Independent Set (MWIS) problems \cite{pasqal_mwis_qaa} provides further insights on different problems' resolution.
-
-\section{The base 5x5 instance}
-
-%STRUTTURA GENERALE PER ISTANZE GIÀ VISTE PER GA:
-
-%si rimanda a formulazione QUBO già presentata
-%parametrizzatione SA
-%embedding 
-%risultato
-
-
-%PER le istanze superiore direi uguale ma presentando la nuova formulazione QUBO.
-
-\section{Compaison with 10x10 instance}
-
-\section{15x15: GAs rupture}
-
-%valutare quali altri mettere di scala superiore.

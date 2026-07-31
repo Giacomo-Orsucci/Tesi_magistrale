@@ -28,17 +28,18 @@
 \contentsline {subsection}{\numberline {3.3.1}Energy Formulation and Perturbation Strategy}{37}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Thermodynamic Evolution}{39}{subsection.3.3.2}%
 \contentsline {subsection}{\numberline {3.3.3}SA Parametrization: Explanation and Example}{39}{subsection.3.3.3}%
-\contentsline {section}{\numberline {3.4}Laser Parametrization}{42}{section.3.4}%
-\contentsline {section}{\numberline {3.5}The base 5x5 instance}{44}{section.3.5}%
-\contentsline {section}{\numberline {3.6}Compaison with 10x10 instance}{44}{section.3.6}%
-\contentsline {section}{\numberline {3.7}15x15: GAs rupture}{44}{section.3.7}%
-\contentsline {chapter}{\numberline {4}GAs: Experimental Results and Limitations}{45}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Validation on a 5x5 Instance}{45}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Scaling Validation on a 6x6 Instance}{49}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Scaling Analysis: A 7x7 Instance}{52}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Scaling Limits: A 10x10 Instance}{54}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Algorithmic Breakdown: A 15x15 Instance}{59}{section.4.5}%
-\contentsline {chapter}{\numberline {5}SA: Experimental Results}{64}{chapter.5}%
-\contentsline {chapter}{\numberline {A}Classical Hardware}{65}{appendix.A}%
-\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{67}{appendix.B}%
-\contentsline {chapter}{Bibliography}{69}{appendix.B}%
+\contentsline {subsection}{\numberline {3.3.4}SA Enhancements: GRASP and Quenching}{42}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Laser Parametrization}{44}{section.3.4}%
+\contentsline {chapter}{\numberline {4}GAs: Experimental Results and Limitations}{47}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Validation on a 5x5 Instance}{47}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Scaling Validation on a 6x6 Instance}{51}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Scaling Analysis: A 7x7 Instance}{54}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Scaling Limits: A 10x10 Instance}{56}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Algorithmic Breakdown: A 15x15 Instance}{61}{section.4.5}%
+\contentsline {chapter}{\numberline {5}SA: Experimental Results}{66}{chapter.5}%
+\contentsline {section}{\numberline {5.1}The Base $5\times 5$ Instance Validation}{67}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Scaling Up: The $10\times 10$ Instance}{70}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Overcoming the Bottleneck: The $15\times 15$ Instance}{74}{section.5.3}%
+\contentsline {chapter}{\numberline {A}Classical Hardware}{79}{appendix.A}%
+\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{81}{appendix.B}%
+\contentsline {chapter}{Bibliography}{83}{appendix.B}%

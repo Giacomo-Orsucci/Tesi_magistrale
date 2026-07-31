@@ -1,6 +1,6 @@
 
 \chapter{GAs: Experimental Results and Limitations}
-\label{GAs_experiment}
+\label{chap:GAs_experiment}
 
 While numerous fitness functions, hyperparameters, and QUBO instances were experimented with and validated during the research phase, this section reports the most prominent results to highlight the critical operational aspects in using Genetic Algorithm with our embedding architecture. 
 
@@ -209,7 +209,7 @@ Constraining the mutation operators proved to be a winning intuition. The specif
 
 While the analog system successfully isolated the ground state for this specific seed, broader testing across various $10 \times 10$ Genetic Algorithm configurations highlighted a critical breaking point. At this dimensional scale, the Genetic Algorithm begins to struggle severely. Finding a valid spatial configuration now requires extreme manual hyperparameter tuning, massive population sizes, and heavy execution times. This represents the fixed operational frontier for the pure Genetic Algorithm approach: beyond this threshold, the heuristic engine begins to falter under the spatial curse of dimensionality, especially when constrained by the classical hardware detailed in Appendix \ref{app:hardware_specs}. To definitively demonstrate these scaling limits, an empirical observation of a $15 \times 15$ instance will be presented in the following section.
 \section{Algorithmic Breakdown: A 15x15 Instance}
-
+\label{sec:15x15_GA}
 This instance serves as the definitive empirical evidence of the scaling limitations inherent to the direct Genetic Algorithm approach. The mathematical formulation of this stress-test scenario is presented in Figure \ref{fig:15x15_qubo_instance}.
 
 \begin{figure}[htbp]
