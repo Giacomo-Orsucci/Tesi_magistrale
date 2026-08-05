@@ -1,0 +1,54 @@
+\chapter{The \textit{Divide et Impera} Architecture}
+\label{chap:divide_et_impera}
+
+This chapter introduces the \textit{Divide et Impera} (Divide and Conquer) approach, our final and most advanced architectural proposal for solving large-scale QUBO problems. Designed to explicitly bypass the computational and hardware bottlenecks identified in the previous chapters, this distributed architecture successfully scales up to massive 100-variable instances. We first outline the general pipeline of this framework, followed by an in-depth algorithmic breakdown of its core components. Finally, we present the experimental results obtained from testing this architecture on a set of dense $100\times100$ matrices, drawing our ultimate conclusions on its performance and overall scalability.
+
+\section{Pipeline Overview}
+\label{sec:divide_et_impera_pipeline}
+
+The fundamental execution flow of our distributed architecture is visually summarized in Figure \ref{fig:divide_et_impera_pipeline}. This conceptual logic was explicitly implemented within our codebase through the \textit{bench-partitioned-GA.py} and \textit{bench-SA-partitioned-greedy-init.py} orchestration scripts \cite{orsucci_qubo_ga_quantum}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.9\textwidth]{img/divide_et_impera/divide_et_impera_pipeline.png} 
+    \caption{Flowchart of the \textit{Divide et Impera} pipeline. The process highlights a distributed hybrid classical-quantum approach, introducing a significantly more sophisticated routing and partitioning logic compared to the baseline pipeline.}
+    \label{fig:divide_et_impera_pipeline}
+\end{figure}
+
+As illustrated in Figure \ref{fig:divide_et_impera_pipeline}, the conceptual schema shares its foundational roots with the baseline pipeline explored in Chapters 4 and 5, yet it introduces a radical paradigm shift in handling the embedding phase. Rather than forcing a massive, densely connected QUBO matrix onto a single constrained spatial register, the original problem is algorithmically shattered into smaller, geometrically manageable sub-problems. These disjointed sub-graphs are then individually embedded and routed to the analog quantum emulator for independent execution. Once all the distributed quantum jobs are completed (as detailed later in this chapter), their localized analog readouts are computationally stitched back together to reconstruct the global state of the original combinatorial problem.
+
+This localized partitioning strategy allows us to solve massive QUBO instances that would otherwise be strictly infeasible. By breaking the problem down, we effectively bypass the sheer physical limitations of the Neutral Atom QPU (in terms of maximum radial distance and hardware interconnectivity) as well as the exponential execution delays that plague classical preprocessing heuristics on large graph spaces.
+
+Furthermore, this modular approach possesses inherent scalability. As quantum hardware capacities and classical embedding heuristics continue to evolve, the architecture can straightforwardly accommodate larger baseline partitions, thereby seamlessly increasing the maximum size of the global instances that can be targeted. 
+
+The following sections detail the novel algorithmic components that make this distributed architecture possible.
+
+\subsection{Spectral Clustering and Graph Translation}
+\label{subsec:spectral_clustering}
+
+The most critical phase of this architecture is the intelligent topological division of the target problem. Randomly splitting the QUBO matrix would sever crucial quadratic interactions, devastating the physical meaning of the final solution. Therefore, the problem is structurally translated into an equivalent network topology by treating the QUBO matrix $Q$ as a weighted adjacency matrix.
+
+Specifically, we extract an undirected Affinity Matrix $A$ representing the structural dependencies of the system. The affinity between any two nodes $i$ and $j$ is defined by the absolute magnitude of their quadratic interaction, while explicitly ignoring the linear local detuning terms on the main diagonal:
+\begin{equation}
+    A_{ij} = |Q_{ij}| (1 - \delta_{ij})
+\end{equation}
+where $\delta_{ij}$ is the Kronecker delta. The absolute value is employed because, for the physical embedding constraints, any strong interaction (whether strictly attractive or strictly repulsive) dictates that the respective neutral atoms must be placed in close spatial proximity to successfully execute the Rydberg blockade dynamics.
+
+With the topological affinity mapped, the pipeline employs \textbf{Spectral Clustering}. This technique leverages the eigenvalues of the graph Laplacian matrix to identify natural topological "cuts" within the network, effectively grouping nodes that share dense interconnections while severing the weakest links. 
+
+However, standard spectral clustering algorithms require a predefined number of target clusters ($k$), and they do not inherently guarantee an upper limit on the size of the resulting partitions. To strictly enforce our hardware limitations, we implemented a \textbf{Recursive Size-Capped} logic. The pipeline dynamically calculates the number of expected sub-clusters as $k = \max(2, \text{round}(N / \text{target\_capacity}))$. Once the spectral cut is executed, the algorithm evaluates the cardinality of each resulting sub-graph. If any partition still exceeds the maximum hardware capacity (defined as $\text{target\_size} + \text{tolerance}$), the spectral clustering algorithm recursively calls itself exclusively on that overgrown sub-graph. This procedural recursion is visually represented in the looping feedback path of Figure \ref{fig:divide_et_impera_pipeline}. 
+
+Ultimately, this guarantees that every single combinatorial fragment produced by the orchestrator strictly complies with the spatial boundaries of the analog QPU, completely eliminating the risk of un-embeddable graphs.
+
+
+\subsection{Dynamic Heuristic Routing}
+\label{subsec:dynamic_heuristic_routing}
+
+As shown in Figure \ref{fig:divide_et_impera_pipeline}, once the global problem is partitioned into smaller sub-graphs, each fragment is independently routed through a dynamic switch mechanism. Acknowledging that deploying complex metaheuristics and analog quantum emulation for trivial problems is computationally wasteful, the pipeline evaluates the size of each sub-cluster against a \texttt{min\_size} threshold (configured between 3 and 5 nodes in our parametrization). Based on this threshold, the architecture automatically selects one of two distinct evaluation strategies:
+
+\begin{itemize}
+    \item \textbf{Exact Classical Solver (Brute-Force):} If the sub-graph cardinality is strictly smaller than the \texttt{min\_size} threshold, the spatial embedding phase and the quantum QPU execution are entirely bypassed. The localized combinatorial fragment is so trivial that it is instantly and optimally solved using an exact classical brute-force evaluation over its discrete binary space ($x \in \{0,1\}^n$).
+    \item \textbf{Heuristic Embedding (GA/SA):} For larger sub-graphs that exceed the trivial threshold, the pipeline routes the matrix to the core embedding engines. Here, either the Genetic Algorithm (GA) or the Simulated Annealing (SA) heuristic is employed to navigate the continuous spatial search space, mapping the logical nodes to physical atom coordinates. This balances computational efficiency with embedding success rates, successfully preparing complex localized layouts for the analog quantum execution.
+\end{itemize}
+
+Crucially, this dynamic routing logic makes our proposed architecture fundamentally modular and highly extensible. The \textit{Divide et Impera} framework is completely agnostic to both the specific partitioning method and the underlying embedding algorithms. Any of these specific components can be seamlessly swapped or upgraded if a more efficient spatial metaheuristic or clustering algorithm is developed in the future.

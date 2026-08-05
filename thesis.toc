@@ -42,6 +42,10 @@
 \contentsline {section}{\numberline {5.3}Overcoming the Bottleneck: The $15\times 15$ Instance}{74}{section.5.3}%
 \contentsline {section}{\numberline {5.4}Scaling Up: The $20\times 20$ Instance}{77}{section.5.4}%
 \contentsline {section}{\numberline {5.5}A Denser $20\times 20$ Instance}{82}{section.5.5}%
-\contentsline {chapter}{\numberline {A}Classical Hardware}{86}{appendix.A}%
-\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{88}{appendix.B}%
-\contentsline {chapter}{Bibliography}{90}{appendix.B}%
+\contentsline {chapter}{\numberline {6}The \textit {Divide et Impera} Architecture}{86}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Pipeline Overview}{86}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Spectral Clustering and Graph Translation}{88}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Dynamic Heuristic Routing}{90}{subsection.6.1.2}%
+\contentsline {chapter}{\numberline {A}Classical Hardware}{92}{appendix.A}%
+\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{94}{appendix.B}%
+\contentsline {chapter}{Bibliography}{96}{appendix.B}%

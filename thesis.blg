@@ -6,6 +6,7 @@ A level-1 auxiliary file: chapters/The_Embedding_Problem.aux
 A level-1 auxiliary file: chapters/The_Base_Pipeline.aux
 A level-1 auxiliary file: chapters/GAs_experiment.aux
 A level-1 auxiliary file: chapters/SA_experiment.aux
+A level-1 auxiliary file: chapters/Divide_et_Impera.aux
 A level-1 auxiliary file: appendices/appendix_A_hw.aux
 A level-1 auxiliary file: appendices/appendix_B_AI.aux
 The style file: ieeetr.bst
@@ -13,7 +14,7 @@ Database file #1: files/biblio.bib
 Warning--empty publisher in bookGA
 You've used 32 entries,
             1876 wiz_defined-function locations,
-            668 strings with 9688 characters,
+            669 strings with 9717 characters,
 and the built_in function-call counts, 7298 in all, are:
 = -- 652
 > -- 416
