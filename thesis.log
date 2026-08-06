@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.7.16)  5 AUG 2026 18:15
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2022/dev/Debian) (preloaded format=pdflatex 2026.7.16)  6 AUG 2026 17:46
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -680,7 +680,7 @@ LaTeX Info: Redefining \nameref on input line 73.
 \openout4 = `thesis.out'.
 
 \c@lstlisting=\count346
-<./img/stemma.pdf, id=186, 1622.06pt x 1673.45195pt>
+<./img/stemma.pdf, id=190, 1622.06pt x 1673.45195pt>
 File: ./img/stemma.pdf Graphic file (type pdf)
 <use ./img/stemma.pdf>
 Package pdftex.def Info: ./img/stemma.pdf  used on input line 80.
@@ -721,13 +721,13 @@ Chapter 1.
 
 
 ] [2] [3] [4] [5] [6]
-<img/2D-3D_neutral_atom_reg.png, id=336, 902.37125pt x 596.2275pt>
+<img/2D-3D_neutral_atom_reg.png, id=341, 902.37125pt x 596.2275pt>
 File: img/2D-3D_neutral_atom_reg.png Graphic file (type png)
 <use img/2D-3D_neutral_atom_reg.png>
 Package pdftex.def Info: img/2D-3D_neutral_atom_reg.png  used on input line 58.
 (pdftex.def)             Requested size: 312.00119pt x 206.1536pt.
  [7 <./img/2D-3D_neutral_atom_reg.png>]
-<img/principal_compo_QPU.png, id=349, 665.48625pt x 555.07375pt>
+<img/principal_compo_QPU.png, id=354, 665.48625pt x 555.07375pt>
 File: img/principal_compo_QPU.png Graphic file (type png)
 <use img/principal_compo_QPU.png>
 Package pdftex.def Info: img/principal_compo_QPU.png  used on input line 79.
@@ -757,7 +757,7 @@ Overfull \hbox (1.7255pt too wide) in paragraph at lines 186--186
 
  (./chapters/The_Base_Pipeline.tex
 Chapter 3.
-<img/base_pipeline.png, id=487, 443.6575pt x 423.5825pt>
+<img/base_pipeline.png, id=492, 443.6575pt x 423.5825pt>
 File: img/base_pipeline.png Graphic file (type png)
 <use img/base_pipeline.png>
 Package pdftex.def Info: img/base_pipeline.png  used on input line 12.
@@ -781,7 +781,7 @@ Overfull \hbox (17.90959pt too wide) in paragraph at lines 44--45
 \T1/cmr/m/n/12 uni-formly within the op-er-a-tional area us-ing po-lar co-or-di-nates. A hardware-
  []
 
-<img/QUBO_example.png, id=516, 578.16pt x 392.46625pt>
+<img/QUBO_example.png, id=521, 578.16pt x 392.46625pt>
 File: img/QUBO_example.png Graphic file (type png)
 <use img/QUBO_example.png>
 Package pdftex.def Info: img/QUBO_example.png  used on input line 52.
@@ -822,7 +822,7 @@ Overfull \hbox (0.32664pt too wide) in paragraph at lines 241--242
  []
 
 [43] [44]
-<img/ray_params.png, id=630, 1619.04875pt x 372.39125pt>
+<img/ray_params.png, id=635, 1619.04875pt x 372.39125pt>
 File: img/ray_params.png Graphic file (type png)
 <use img/ray_params.png>
 Package pdftex.def Info: img/ray_params.png  used on input line 260.
@@ -832,7 +832,7 @@ Package pdftex.def Info: img/ray_params.png  used on input line 260.
 
  (./chapters/GAs_experiment.tex
 Chapter 4.
-<img/QUBO_instances/5x5_UDG_r12_s47.png, id=646, 502.87875pt x 305.14pt>
+<img/QUBO_instances/5x5_UDG_r12_s47.png, id=651, 502.87875pt x 305.14pt>
 File: img/QUBO_instances/5x5_UDG_r12_s47.png Graphic file (type png)
 <use img/QUBO_instances/5x5_UDG_r12_s47.png>
 Package pdftex.def Info: img/QUBO_instances/5x5_UDG_r12_s47.png  used on input line 13.
@@ -855,19 +855,19 @@ Underfull \hbox (badness 1609) in paragraph at lines 45--45
 
 LaTeX Warning: Float too large for page by 2.91096pt on input line 48.
 
-<img/embedding/reg_5x5.png, id=656, 633.8079pt x 313.6518pt>
+<img/embedding/reg_5x5.png, id=661, 633.8079pt x 313.6518pt>
 File: img/embedding/reg_5x5.png Graphic file (type png)
 <use img/embedding/reg_5x5.png>
 Package pdftex.def Info: img/embedding/reg_5x5.png  used on input line 54.
 (pdftex.def)             Requested size: 312.00119pt x 154.40382pt.
 [48 <./img/QUBO_instances/5x5_UDG_r12_s47.png>] [49]
-<img/res/res_5x5.png, id=669, 1011.78pt x 505.89pt>
+<img/res/res_5x5.png, id=674, 1011.78pt x 505.89pt>
 File: img/res/res_5x5.png Graphic file (type png)
 <use img/res/res_5x5.png>
 Package pdftex.def Info: img/res/res_5x5.png  used on input line 63.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
  [50 <./img/embedding/reg_5x5.png> <./img/res/res_5x5.png>]
-<img/QUBO_instances/6x6_UDG_r12_s48.png, id=678, 505.89pt x 322.20375pt>
+<img/QUBO_instances/6x6_UDG_r12_s48.png, id=683, 505.89pt x 322.20375pt>
 File: img/QUBO_instances/6x6_UDG_r12_s48.png Graphic file (type png)
 <use img/QUBO_instances/6x6_UDG_r12_s48.png>
 Package pdftex.def Info: img/QUBO_instances/6x6_UDG_r12_s48.png  used on input line 75.
@@ -878,87 +878,87 @@ Underfull \hbox (badness 1009) in paragraph at lines 95--95
  []
 
 [51 <./img/QUBO_instances/6x6_UDG_r12_s48.png>]
-<img/embedding/reg_6x6.png, id=692, 578.16pt x 213.1965pt>
+<img/embedding/reg_6x6.png, id=697, 578.16pt x 213.1965pt>
 File: img/embedding/reg_6x6.png Graphic file (type png)
 <use img/embedding/reg_6x6.png>
 Package pdftex.def Info: img/embedding/reg_6x6.png  used on input line 104.
 (pdftex.def)             Requested size: 312.00119pt x 115.04956pt.
  [52 <./img/embedding/reg_6x6.png>]
-<img/res/res_6x6.png, id=701, 1011.78pt x 505.89pt>
+<img/res/res_6x6.png, id=706, 1011.78pt x 505.89pt>
 File: img/res/res_6x6.png Graphic file (type png)
 <use img/res/res_6x6.png>
 Package pdftex.def Info: img/res/res_6x6.png  used on input line 113.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
  [53 <./img/res/res_6x6.png>]
-<img/QUBO_instances/7x7_UDG_r12_s49.png, id=710, 505.89pt x 338.26375pt>
+<img/QUBO_instances/7x7_UDG_r12_s49.png, id=715, 505.89pt x 338.26375pt>
 File: img/QUBO_instances/7x7_UDG_r12_s49.png Graphic file (type png)
 <use img/QUBO_instances/7x7_UDG_r12_s49.png>
 Package pdftex.def Info: img/QUBO_instances/7x7_UDG_r12_s49.png  used on input line 130.
 (pdftex.def)             Requested size: 234.00238pt x 156.46516pt.
  [54 <./img/QUBO_instances/7x7_UDG_r12_s49.png>]
-<img/embedding/reg_7x7.png, id=721, 722.7pt x 541.3023pt>
+<img/embedding/reg_7x7.png, id=726, 722.7pt x 541.3023pt>
 File: img/embedding/reg_7x7.png Graphic file (type png)
 <use img/embedding/reg_7x7.png>
 Package pdftex.def Info: img/embedding/reg_7x7.png  used on input line 142.
 (pdftex.def)             Requested size: 312.00119pt x 233.68878pt.
-<img/res/res_7x7.png, id=723, 1011.78pt x 505.89pt>
+<img/res/res_7x7.png, id=728, 1011.78pt x 505.89pt>
 File: img/res/res_7x7.png Graphic file (type png)
 <use img/res/res_7x7.png>
 Package pdftex.def Info: img/res/res_7x7.png  used on input line 151.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
  [55 <./img/embedding/reg_7x7.png>] [56 <./img/res/res_7x7.png>]
-<img/QUBO_instances/10x10_r12_s52_d3.0.png, id=737, 562.1pt x 394.47375pt>
+<img/QUBO_instances/10x10_r12_s52_d3.0.png, id=742, 562.1pt x 394.47375pt>
 File: img/QUBO_instances/10x10_r12_s52_d3.0.png Graphic file (type png)
 <use img/QUBO_instances/10x10_r12_s52_d3.0.png>
-Package pdftex.def Info: img/QUBO_instances/10x10_r12_s52_d3.0.png  used on input line 163.
+Package pdftex.def Info: img/QUBO_instances/10x10_r12_s52_d3.0.png  used on input line 164.
 (pdftex.def)             Requested size: 234.00238pt x 164.21518pt.
 
-Underfull \hbox (badness 1009) in paragraph at lines 187--187
+Underfull \hbox (badness 1009) in paragraph at lines 188--188
 []|\T1/cmr/m/n/12 Increased ter-mi-na-tion limit (from $\OT1/cmr/m/n/12 800$\T1/cmr/m/n/12 ) to
  []
 
 
-Underfull \hbox (badness 2503) in paragraph at lines 187--187
+Underfull \hbox (badness 2503) in paragraph at lines 188--188
 []|\T1/cmr/m/n/12 Drastically re-duced mu-ta-tion rates (from
  []
 
-<img/embedding/reg_10x10_d3.0.png, id=744, 654.7662pt x 722.7pt>
+<img/embedding/reg_10x10_d3.0.png, id=749, 654.7662pt x 722.7pt>
 File: img/embedding/reg_10x10_d3.0.png Graphic file (type png)
 <use img/embedding/reg_10x10_d3.0.png>
-Package pdftex.def Info: img/embedding/reg_10x10_d3.0.png  used on input line 196.
+Package pdftex.def Info: img/embedding/reg_10x10_d3.0.png  used on input line 197.
 (pdftex.def)             Requested size: 312.00119pt x 344.37778pt.
 [57 <./img/QUBO_instances/10x10_r12_s52_d3.0.png>] [58] [59 <./img/embedding/reg_10x10_d3.0.png>]
-<img/res/res_10x10_d3.0.png, id=765, 1011.78pt x 505.89pt>
+<img/res/res_10x10_d3.0.png, id=770, 1011.78pt x 505.89pt>
 File: img/res/res_10x10_d3.0.png Graphic file (type png)
 <use img/res/res_10x10_d3.0.png>
-Package pdftex.def Info: img/res/res_10x10_d3.0.png  used on input line 205.
+Package pdftex.def Info: img/res/res_10x10_d3.0.png  used on input line 206.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
  [60 <./img/res/res_10x10_d3.0.png>]
-<img/QUBO_instances/15x15_r12_s57.png, id=774, 815.045pt x 480.79625pt>
+<img/QUBO_instances/15x15_r12_s57.png, id=779, 815.045pt x 480.79625pt>
 File: img/QUBO_instances/15x15_r12_s57.png Graphic file (type png)
 <use img/QUBO_instances/15x15_r12_s57.png>
-Package pdftex.def Info: img/QUBO_instances/15x15_r12_s57.png  used on input line 217.
+Package pdftex.def Info: img/QUBO_instances/15x15_r12_s57.png  used on input line 218.
 (pdftex.def)             Requested size: 272.99881pt x 161.04022pt.
 
-Underfull \hbox (badness 1033) in paragraph at lines 242--242
+Underfull \hbox (badness 1033) in paragraph at lines 243--243
 []|\T1/cmr/m/n/12 Population size quadru-pled (from $\OT1/cmr/m/n/12 100$\T1/cmr/m/n/12 ) to
  []
 
 
-Underfull \hbox (badness 1496) in paragraph at lines 242--242
+Underfull \hbox (badness 1496) in paragraph at lines 243--243
 \T1/cmr/m/n/12 max-i-mize ge-netic di-ver-sity, at-tempt-ing to
  []
 
-<img/embedding/reg_15x15.png, id=781, 722.7pt x 632.3625pt>
+<img/embedding/reg_15x15.png, id=786, 722.7pt x 632.3625pt>
 File: img/embedding/reg_15x15.png Graphic file (type png)
 <use img/embedding/reg_15x15.png>
-Package pdftex.def Info: img/embedding/reg_15x15.png  used on input line 251.
+Package pdftex.def Info: img/embedding/reg_15x15.png  used on input line 252.
 (pdftex.def)             Requested size: 312.00119pt x 273.00092pt.
 [61 <./img/QUBO_instances/15x15_r12_s57.png>] [62] [63 <./img/embedding/reg_15x15.png>]
-<img/res/res_15x15.png, id=801, 1011.78pt x 505.89pt>
+<img/res/res_15x15.png, id=806, 1011.78pt x 505.89pt>
 File: img/res/res_15x15.png Graphic file (type png)
 <use img/res/res_15x15.png>
-Package pdftex.def Info: img/res/res_15x15.png  used on input line 260.
+Package pdftex.def Info: img/res/res_15x15.png  used on input line 261.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
  [64 <./img/res/res_15x15.png>]) [65]
 \openout2 = `chapters/SA_experiment.aux'.
@@ -993,13 +993,13 @@ Underfull \hbox (badness 1584) in paragraph at lines 28--28
  []
 
 [67]
-<img/embedding/reg_5x5_SA.png, id=828, 294.8616pt x 614.295pt>
+<img/embedding/reg_5x5_SA.png, id=833, 294.8616pt x 614.295pt>
 File: img/embedding/reg_5x5_SA.png Graphic file (type png)
 <use img/embedding/reg_5x5_SA.png>
 Package pdftex.def Info: img/embedding/reg_5x5_SA.png  used on input line 39.
 (pdftex.def)             Requested size: 155.99762pt x 324.99364pt.
  [68]
-<img/res/res_5x5_SA.png, id=835, 1011.78pt x 505.89pt>
+<img/res/res_5x5_SA.png, id=840, 1011.78pt x 505.89pt>
 File: img/res/res_5x5_SA.png Graphic file (type png)
 <use img/res/res_5x5_SA.png>
 Package pdftex.def Info: img/res/res_5x5_SA.png  used on input line 50.
@@ -1028,13 +1028,13 @@ Underfull \hbox (badness 1584) in paragraph at lines 77--77
  []
 
 [70 <./img/res/res_5x5_SA.png>] [71]
-<img/embedding/reg_10x10_SA.png, id=856, 715.473pt x 706.0779pt>
+<img/embedding/reg_10x10_SA.png, id=862, 715.473pt x 706.0779pt>
 File: img/embedding/reg_10x10_SA.png Graphic file (type png)
 <use img/embedding/reg_10x10_SA.png>
 Package pdftex.def Info: img/embedding/reg_10x10_SA.png  used on input line 88.
-(pdftex.def)             Requested size: 234.00238pt x 230.92706pt.
+(pdftex.def)             Requested size: 272.99881pt x 269.41132pt.
  [72 <./img/embedding/reg_10x10_SA.png>]
-<img/res/res_10x10_SA.png, id=864, 1011.78pt x 505.89pt>
+<img/res/res_10x10_SA.png, id=870, 1011.78pt x 505.89pt>
 File: img/res/res_10x10_SA.png Graphic file (type png)
 <use img/res/res_10x10_SA.png>
 Package pdftex.def Info: img/res/res_10x10_SA.png  used on input line 99.
@@ -1062,18 +1062,19 @@ Underfull \hbox (badness 1584) in paragraph at lines 127--127
 \T1/cmr/m/n/12 the tem-per-a-ture af-ter each ther-mo-dy-
  []
 
-[74] [75]
-<img/embedding/reg_15x15_SA.png, id=884, 529.7391pt x 722.7pt>
+[74]
+<img/embedding/reg_15x15_SA.png, id=886, 529.7391pt x 722.7pt>
 File: img/embedding/reg_15x15_SA.png Graphic file (type png)
 <use img/embedding/reg_15x15_SA.png>
 Package pdftex.def Info: img/embedding/reg_15x15_SA.png  used on input line 138.
-(pdftex.def)             Requested size: 0.0pt x 0.0pt.
-<img/res/res_15x15_SA.png, id=886, 1011.78pt x 505.89pt>
+(pdftex.def)             Requested size: 234.00238pt x 319.23508pt.
+ [75 <./img/embedding/reg_15x15_SA.png>]
+<img/res/res_15x15_SA.png, id=895, 1011.78pt x 505.89pt>
 File: img/res/res_15x15_SA.png Graphic file (type png)
 <use img/res/res_15x15_SA.png>
 Package pdftex.def Info: img/res/res_15x15_SA.png  used on input line 147.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
- [76 <./img/embedding/reg_15x15_SA.png> <./img/res/res_15x15_SA.png>]
+ [76 <./img/res/res_15x15_SA.png>]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 158.
@@ -1086,13 +1087,12 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 158.
 
-[77]
-<img/QUBO_instances/20x20_r12_s62_d3.0.png, id=901, 1065.9825pt x 566.115pt>
+<img/QUBO_instances/20x20_r12_s62_d3.0.png, id=903, 1065.9825pt x 566.115pt>
 File: img/QUBO_instances/20x20_r12_s62_d3.0.png Graphic file (type png)
 <use img/QUBO_instances/20x20_r12_s62_d3.0.png>
 Package pdftex.def Info: img/QUBO_instances/20x20_r12_s62_d3.0.png  used on input line 167.
 (pdftex.def)             Requested size: 312.00119pt x 165.68947pt.
-
+[77]
 Underfull \hbox (badness 1584) in paragraph at lines 189--189
 \T1/cmr/m/n/12 the tem-per-a-ture af-ter each ther-mo-dy-
  []
@@ -1103,13 +1103,13 @@ Underfull \hbox (badness 1931) in paragraph at lines 189--189
  []
 
 [78 <./img/QUBO_instances/20x20_r12_s62_d3.0.png>]
-<img/embedding/reg_20x20_d3.0.png, id=914, 676.4472pt x 722.7pt>
+<img/embedding/reg_20x20_d3.0.png, id=920, 676.4472pt x 722.7pt>
 File: img/embedding/reg_20x20_d3.0.png Graphic file (type png)
 <use img/embedding/reg_20x20_d3.0.png>
 Package pdftex.def Info: img/embedding/reg_20x20_d3.0.png  used on input line 198.
-(pdftex.def)             Requested size: 234.00238pt x 250.00444pt.
+(pdftex.def)             Requested size: 272.99881pt x 291.66634pt.
  [79]
-<img/res/res_20x20_d3.0.png, id=921, 1011.78pt x 505.89pt>
+<img/res/res_20x20_d3.0.png, id=927, 1011.78pt x 505.89pt>
 File: img/res/res_20x20_d3.0.png Graphic file (type png)
 <use img/res/res_20x20_d3.0.png>
 Package pdftex.def Info: img/res/res_20x20_d3.0.png  used on input line 207.
@@ -1128,39 +1128,37 @@ Package hyperref Warning: Token not allowed in a PDF string (Unicode):
 (hyperref)                removing `math shift' on input line 217.
 
 [81 <./img/res/res_20x20_d3.0.png>]
-<img/QUBO_instances/20x20_r12_s62_d5.0.png, id=935, 1065.9825pt x 563.10374pt>
+<img/QUBO_instances/20x20_r12_s62_d5.0.png, id=941, 1065.9825pt x 563.10374pt>
 File: img/QUBO_instances/20x20_r12_s62_d5.0.png Graphic file (type png)
 <use img/QUBO_instances/20x20_r12_s62_d5.0.png>
 Package pdftex.def Info: img/QUBO_instances/20x20_r12_s62_d5.0.png  used on input line 224.
 (pdftex.def)             Requested size: 312.00119pt x 164.80814pt.
 
-Underfull \hbox (badness 1635) in paragraph at lines 244--244
+Underfull \hbox (badness 1635) in paragraph at lines 246--246
 []|\T1/cmr/m/n/12 Massive multi-start ex-e-cu-tion.
  []
 
 
-Underfull \hbox (badness 3281) in paragraph at lines 244--244
+Underfull \hbox (badness 3281) in paragraph at lines 246--246
 \T1/cmr/m/n/12 fo-cus-ing strictly on lo-cal-ized
  []
 
 
-Underfull \hbox (badness 2277) in paragraph at lines 244--244
+Underfull \hbox (badness 2277) in paragraph at lines 246--246
 []|\T1/cmr/m/n/12 Markov Chain length. Sig-
  []
 
 [82 <./img/QUBO_instances/20x20_r12_s62_d5.0.png>]
-Overfull \vbox (54.14171pt too high) has occurred while \output is active []
-
- [83]
-<img/embedding/reg_20x20_d5.0_third.png, id=952, 651.8754pt x 722.7pt>
+<img/embedding/reg_20x20_d5.0_third.png, id=953, 651.8754pt x 722.7pt>
 File: img/embedding/reg_20x20_d5.0_third.png Graphic file (type png)
 <use img/embedding/reg_20x20_d5.0_third.png>
-Package pdftex.def Info: img/embedding/reg_20x20_d5.0_third.png  used on input line 253.
+Package pdftex.def Info: img/embedding/reg_20x20_d5.0_third.png  used on input line 255.
 (pdftex.def)             Requested size: 234.00238pt x 259.42192pt.
-<img/res/res_20x20_d5.0_third.png, id=954, 1011.78pt x 505.89pt>
+ [83]
+<img/res/res_20x20_d5.0_third.png, id=961, 1011.78pt x 505.89pt>
 File: img/res/res_20x20_d5.0_third.png Graphic file (type png)
 <use img/res/res_20x20_d5.0_third.png>
-Package pdftex.def Info: img/res/res_20x20_d5.0_third.png  used on input line 262.
+Package pdftex.def Info: img/res/res_20x20_d5.0_third.png  used on input line 264.
 (pdftex.def)             Requested size: 390.0pt x 195.00368pt.
  [84 <./img/embedding/reg_20x20_d5.0_third.png>]) [85 <./img/res/res_20x20_d5.0_third.png>]
 \openout2 = `chapters/Divide_et_Impera.aux'.
@@ -1173,36 +1171,57 @@ Chapter 6.
 
 
 ]
-<img/divide_et_impera/divide_et_impera_pipeline.png, id=975, 773.89125pt x 522.95375pt>
+<img/divide_et_impera/divide_et_impera_pipeline.png, id=981, 773.89125pt x 522.95375pt>
 File: img/divide_et_impera/divide_et_impera_pipeline.png Graphic file (type png)
 <use img/divide_et_impera/divide_et_impera_pipeline.png>
 Package pdftex.def Info: img/divide_et_impera/divide_et_impera_pipeline.png  used on input line 13.
 (pdftex.def)             Requested size: 350.99762pt x 237.18626pt.
- [87 <./img/divide_et_impera/Divide_et_impera_pipeline.png>] [88] [89]) [90] [91]
+ [87 <./img/divide_et_impera/Divide_et_impera_pipeline.png>] [88]
+Overfull \hbox (4.67297pt too wide) in paragraph at lines 47--48
+[]\T1/cmr/m/n/12 Spectral clus-ter-ing eval-u-ates the eigen-val-ues and eigen-vec-tors of this Lapla-
+ []
+
+[89] [90] [91] [92]
+<img/divide_et_impera/Retrieval-merging.png, id=1029, 372.39125pt x 533.995pt>
+File: img/divide_et_impera/Retrieval-merging.png Graphic file (type png)
+<use img/divide_et_impera/Retrieval-merging.png>
+Package pdftex.def Info: img/divide_et_impera/Retrieval-merging.png  used on input line 102.
+(pdftex.def)             Requested size: 155.99762pt x 223.69785pt.
+ [93 <./img/divide_et_impera/Retrieval-merging.png>]
+Overfull \hbox (4.32077pt too wide) in paragraph at lines 122--123
+[]\T1/cmr/m/n/12 It sorts these can-di-date nodes based on their lin-ear di-ag-o-nal weights
+ []
+
+[94]
+Overfull \hbox (9.85759pt too wide) in paragraph at lines 127--130
+[]\T1/cmr/bx/n/12 Low-Temperature SA Tun-ing (Post-Processing): \T1/cmr/m/n/12 While the greedy
+ []
+
+) [95]
 \openout2 = `appendices/appendix_A_hw.aux'.
 
  (./appendices/appendix_A_hw.tex
 Appendix A.
-) [92
+) [96
 
 
 
 
-] [93]
+] [97]
 \openout2 = `appendices/appendix_B_AI.aux'.
 
  (./appendices/appendix_B_AI.tex
 Appendix B.
-) [94
+) [98
 
 
 
 
-] [95] (./thesis.bbl [96
+] [99] (./thesis.bbl [100
 
 
 
-] [97] [98]
+] [101] [102]
 Underfull \hbox (badness 10000) in paragraph at lines 121--125
 []\T1/cmr/m/n/12 Pasqal, ``Pasqal de-liv-ers italy's first neu-tral atom quan-
  []
@@ -1222,24 +1241,24 @@ Underfull \hbox (badness 10000) in paragraph at lines 127--130
 []\T1/cmr/m/n/12 G. Or-succi, ``QUBO-GA-QUANTUM.'' []$\T1/cmtt/m/n/12 https : / / github . com /
  []
 
-[99]) [100] (./thesis.aux (./chapters/Introduction_to_Quantum_Computing.aux) (./chapters/The_Embedding_Problem.aux) (./chapters/The_Base_Pipeline.aux) (./chapters/GAs_experiment.aux) (./chapters/SA_experiment.aux) (./chapters/Divide_et_Impera.aux) (./appendices/appendix_A_hw.aux) (./appendices/appendix_B_AI.aux))
+[103]) [104] (./thesis.aux (./chapters/Introduction_to_Quantum_Computing.aux) (./chapters/The_Embedding_Problem.aux) (./chapters/The_Base_Pipeline.aux) (./chapters/GAs_experiment.aux) (./chapters/SA_experiment.aux) (./chapters/Divide_et_Impera.aux) (./appendices/appendix_A_hw.aux) (./appendices/appendix_B_AI.aux))
 Package rerunfilecheck Info: File `thesis.out' has not changed.
-(rerunfilecheck)             Checksum: 4E911738A0BC5B2A05D4FCE48E862024;10720.
+(rerunfilecheck)             Checksum: 88C6C4352E412C8B5D4694E99E19DDBC;11152.
  )
 (\end occurred when \ifx on line 2 was incomplete) 
 Here is how much of TeX's memory you used:
- 26374 strings out of 478287
- 484007 string characters out of 5849289
- 775492 words of memory out of 5000000
- 43755 multiletter control sequences out of 15000+600000
+ 26409 strings out of 478287
+ 484676 string characters out of 5849289
+ 776124 words of memory out of 5000000
+ 43768 multiletter control sequences out of 15000+600000
  498483 words of font info for 104 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,89p,1224b,758s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 84i,13n,89p,1224b,758s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbi2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1440.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfbx2488.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfcc1728.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm0800.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfsl1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1095.pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfxc1728.pfb>
-Output written on thesis.pdf (104 pages, 3164982 bytes).
+Output written on thesis.pdf (108 pages, 3194855 bytes).
 PDF statistics:
- 1253 PDF objects out of 1440 (max. 8388607)
- 986 compressed objects within 10 object streams
- 245 named destinations out of 1000 (max. 500000)
- 543 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1306 PDF objects out of 1440 (max. 8388607)
+ 1031 compressed objects within 11 object streams
+ 266 named destinations out of 1000 (max. 500000)
+ 556 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -43,9 +43,10 @@
 \contentsline {section}{\numberline {5.4}Scaling Up: The $20\times 20$ Instance}{77}{section.5.4}%
 \contentsline {section}{\numberline {5.5}A Denser $20\times 20$ Instance}{82}{section.5.5}%
 \contentsline {chapter}{\numberline {6}The \textit {Divide et Impera} Architecture}{86}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Pipeline Overview}{86}{section.6.1}%
+\contentsline {section}{\numberline {6.1}Pipeline Overview: Divide et Impera phase}{86}{section.6.1}%
 \contentsline {subsection}{\numberline {6.1.1}Spectral Clustering and Graph Translation}{88}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Dynamic Heuristic Routing}{90}{subsection.6.1.2}%
-\contentsline {chapter}{\numberline {A}Classical Hardware}{92}{appendix.A}%
-\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{94}{appendix.B}%
-\contentsline {chapter}{Bibliography}{96}{appendix.B}%
+\contentsline {subsection}{\numberline {6.1.2}Dynamic Heuristic Routing}{91}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Pipeline Overview: Retrieval and Merging Phase}{93}{section.6.2}%
+\contentsline {chapter}{\numberline {A}Classical Hardware}{96}{appendix.A}%
+\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{98}{appendix.B}%
+\contentsline {chapter}{Bibliography}{100}{appendix.B}%

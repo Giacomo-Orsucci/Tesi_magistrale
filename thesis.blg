@@ -12,36 +12,36 @@ A level-1 auxiliary file: appendices/appendix_B_AI.aux
 The style file: ieeetr.bst
 Database file #1: files/biblio.bib
 Warning--empty publisher in bookGA
-You've used 32 entries,
+You've used 34 entries,
             1876 wiz_defined-function locations,
-            669 strings with 9717 characters,
-and the built_in function-call counts, 7298 in all, are:
-= -- 652
-> -- 416
+            680 strings with 10007 characters,
+and the built_in function-call counts, 7570 in all, are:
+= -- 680
+> -- 424
 < -- 1
-+ -- 152
-- -- 120
-* -- 523
-:= -- 1111
-add.period$ -- 43
-call.type$ -- 32
-change.case$ -- 31
++ -- 156
+- -- 122
+* -- 533
+:= -- 1151
+add.period$ -- 47
+call.type$ -- 34
+change.case$ -- 33
 chr.to.int$ -- 0
-cite$ -- 33
-duplicate$ -- 336
-empty$ -- 675
-format.name$ -- 120
-if$ -- 1746
+cite$ -- 35
+duplicate$ -- 344
+empty$ -- 711
+format.name$ -- 122
+if$ -- 1816
 int.to.chr$ -- 0
-int.to.str$ -- 32
+int.to.str$ -- 34
 missing$ -- 25
-newline$ -- 110
-num.names$ -- 32
-pop$ -- 130
+newline$ -- 118
+num.names$ -- 34
+pop$ -- 142
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 214
+skip$ -- 220
 stack$ -- 0
 substring$ -- 248
 swap$ -- 118
@@ -50,7 +50,7 @@ text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 54
-width$ -- 34
-write$ -- 307
+while$ -- 56
+width$ -- 36
+write$ -- 327
 (There was 1 warning)

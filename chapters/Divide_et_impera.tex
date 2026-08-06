@@ -3,8 +3,8 @@
 
 This chapter introduces the \textit{Divide et Impera} (Divide and Conquer) approach, our final and most advanced architectural proposal for solving large-scale QUBO problems. Designed to explicitly bypass the computational and hardware bottlenecks identified in the previous chapters, this distributed architecture successfully scales up to massive 100-variable instances. We first outline the general pipeline of this framework, followed by an in-depth algorithmic breakdown of its core components. Finally, we present the experimental results obtained from testing this architecture on a set of dense $100\times100$ matrices, drawing our ultimate conclusions on its performance and overall scalability.
 
-\section{Pipeline Overview}
-\label{sec:divide_et_impera_pipeline}
+\section{Pipeline Overview: Divide et Impera phase}
+\label{sec:divide_et_impera_pipeline_divide}
 
 The fundamental execution flow of our distributed architecture is visually summarized in Figure \ref{fig:divide_et_impera_pipeline}. This conceptual logic was explicitly implemented within our codebase through the \textit{bench-partitioned-GA.py} and \textit{bench-SA-partitioned-greedy-init.py} orchestration scripts \cite{orsucci_qubo_ga_quantum}.
 
@@ -17,8 +17,7 @@ The fundamental execution flow of our distributed architecture is visually summa
 
 As illustrated in Figure \ref{fig:divide_et_impera_pipeline}, the conceptual schema shares its foundational roots with the baseline pipeline explored in Chapters 4 and 5, yet it introduces a radical paradigm shift in handling the embedding phase. Rather than forcing a massive, densely connected QUBO matrix onto a single constrained spatial register, the original problem is algorithmically shattered into smaller, geometrically manageable sub-problems. These disjointed sub-graphs are then individually embedded and routed to the analog quantum emulator for independent execution. Once all the distributed quantum jobs are completed (as detailed later in this chapter), their localized analog readouts are computationally stitched back together to reconstruct the global state of the original combinatorial problem.
 
-This localized partitioning strategy allows us to solve massive QUBO instances that would otherwise be strictly infeasible. By breaking the problem down, we effectively bypass the sheer physical limitations of the Neutral Atom QPU (in terms of maximum radial distance and hardware interconnectivity) as well as the exponential execution delays that plague classical preprocessing heuristics on large graph spaces.
-
+This localized partitioning strategy allows us to solve massive QUBO instances that would otherwise be strictly infeasible due to geometric constraints or excessive qubit requirements. By breaking the problem down, we effectively bypass the physical limitations of the Neutral Atom QPU as well as the exponential execution delays that plague classical preprocessing heuristics on large graph spaces.
 Furthermore, this modular approach possesses inherent scalability. As quantum hardware capacities and classical embedding heuristics continue to evolve, the architecture can straightforwardly accommodate larger baseline partitions, thereby seamlessly increasing the maximum size of the global instances that can be targeted. 
 
 The following sections detail the novel algorithmic components that make this distributed architecture possible.
@@ -32,23 +31,102 @@ Specifically, we extract an undirected Affinity Matrix $A$ representing the stru
 \begin{equation}
     A_{ij} = |Q_{ij}| (1 - \delta_{ij})
 \end{equation}
-where $\delta_{ij}$ is the Kronecker delta. The absolute value is employed because, for the physical embedding constraints, any strong interaction (whether strictly attractive or strictly repulsive) dictates that the respective neutral atoms must be placed in close spatial proximity to successfully execute the Rydberg blockade dynamics.
+where $\delta_{ij}$ is the Kronecker delta (which equals $1$ when $i=j$, and $0$ otherwise). This mathematical formulation serves a fundamental algorithmic purpose: it forces all diagonal elements to zero ($A_{ii} = 0$). In a QUBO matrix, the diagonal values represent linear bias terms (individual node weights), whereas the off-diagonal values represent the quadratic couplings (the actual structural edges connecting different nodes). Since Spectral Clustering relies on the strength of network connections to identify optimal graph cuts, including individual node biases would heavily skew the partitioning logic. By leveraging the Kronecker delta, we mathematically guarantee that the clustering algorithm focuses exclusively on the pure topological interconnectivity of the network.
 
-With the topological affinity mapped, the pipeline employs \textbf{Spectral Clustering}. This technique leverages the eigenvalues of the graph Laplacian matrix to identify natural topological "cuts" within the network, effectively grouping nodes that share dense interconnections while severing the weakest links. 
+Furthermore, the absolute value is employed because, for the physical embedding constraints, any strong interaction (whether strictly attractive or strictly repulsive) dictates that the respective neutral atoms must be placed in close spatial proximity to successfully execute the Rydberg blockade dynamics.
 
-However, standard spectral clustering algorithms require a predefined number of target clusters ($k$), and they do not inherently guarantee an upper limit on the size of the resulting partitions. To strictly enforce our hardware limitations, we implemented a \textbf{Recursive Size-Capped} logic. The pipeline dynamically calculates the number of expected sub-clusters as $k = \max(2, \text{round}(N / \text{target\_capacity}))$. Once the spectral cut is executed, the algorithm evaluates the cardinality of each resulting sub-graph. If any partition still exceeds the maximum hardware capacity (defined as $\text{target\_size} + \text{tolerance}$), the spectral clustering algorithm recursively calls itself exclusively on that overgrown sub-graph. This procedural recursion is visually represented in the looping feedback path of Figure \ref{fig:divide_et_impera_pipeline}. 
+With the topological affinity mapped, the pipeline employs \textbf{Spectral Clustering} to partition the network. The mathematical foundation of this technique relies on the construction of the Graph Laplacian. First, we define the Degree Matrix $D$, a diagonal matrix where each entry represents the sum of the affinities attached to a specific node:
+\begin{equation}
+    D_{ii} = \sum_{j} A_{ij}
+\end{equation}
+Subsequently, the unnormalized Graph Laplacian matrix $L$ is computed as the difference between the Degree Matrix and the Affinity Matrix:
+\begin{equation}
+    L = D - A
+\end{equation}
 
-Ultimately, this guarantees that every single combinatorial fragment produced by the orchestrator strictly complies with the spatial boundaries of the analog QPU, completely eliminating the risk of un-embeddable graphs.
+Spectral clustering evaluates the eigenvalues and eigenvectors of this Laplacian matrix $L$. Specifically, the multiplicity of the zero eigenvalue indicates the number of disconnected components in the graph, while the eigenvector associated with the second smallest eigenvalue (known as the Fiedler vector \cite{spectral_MA}) provides the optimal continuous relaxation for the discrete graph partitioning problem. By mapping the nodes into this lower-dimensional spectral space, the algorithm identifies natural topological "cuts" within the network, effectively grouping nodes that share dense interconnections while severing the weakest links.
 
+However, standard spectral clustering algorithms require a predefined number of target clusters ($k$), and they do not inherently guarantee an upper limit on the size of the resulting partitions. To strictly enforce our hardware limitations, we implemented a \textbf{Recursive Size-Capped} logic. The pipeline dynamically calculates the number of expected sub-clusters as:
+\begin{equation}
+    k = \max(2, \text{round}(N / \text{target\_capacity}))
+\end{equation}
+and tolerates only a strictly defined variance. Once the spectral cut is executed, the algorithm evaluates the cardinality of each resulting sub-graph. If any partition still exceeds the maximum hardware capacity, defined as:
+\begin{equation}
+    \text{target\_size} + \text{tolerance}
+\end{equation}
+the spectral clustering algorithm recursively calls itself exclusively on that overgrown sub-graph. This procedural recursion is visually represented in the looping feedback path of Figure \ref{fig:divide_et_impera_pipeline}. 
+
+To formally wrap-up a single iteration of this spatial division, we present the algorithmic pseudo-code derived from \cite{spectral_DM}:
+
+\begin{figure}[H]
+    \centering
+    \fbox{
+    \begin{minipage}{0.85\textwidth}
+    \vspace{0.2cm}
+    \textbf{Algorithm: Spectral Graph Clustering}
+    \begin{enumerate}
+        \item Create a sparsified similarity graph $\mathcal{G}$ (represented by our matrix $A$).
+        \item Compute the graph Laplacian for $\mathcal{G}$, denoted as $\mathbf{L}$.
+        \item Create a matrix $\mathbf{V}$ consisting of the first $k$ eigenvectors of $\mathbf{L}$.
+        \item Apply K-means clustering on the rows of $\mathbf{V}$ to obtain the $k$ discrete clusters.
+    \end{enumerate}
+    \vspace{0.1cm}
+    \end{minipage}
+    }
+    \caption{High-level algorithmic description of a single Spectral Clustering iteration, adapted from \cite{spectral_DM}.}
+    \label{fig:spectral_algorithm}
+\end{figure}
+
+Ultimately, this highlights how the graph translation remains entirely implicit: no supplementary data structures are instantiated, completely avoiding unnecessary computational overhead. Furthermore, this recursive process guarantees that every single combinatorial fragment produced by the orchestrator strictly complies with the maximum qubit capacity of the analog QPU, eliminating the risk of un-embeddable graphs.
 
 \subsection{Dynamic Heuristic Routing}
 \label{subsec:dynamic_heuristic_routing}
 
-As shown in Figure \ref{fig:divide_et_impera_pipeline}, once the global problem is partitioned into smaller sub-graphs, each fragment is independently routed through a dynamic switch mechanism. Acknowledging that deploying complex metaheuristics and analog quantum emulation for trivial problems is computationally wasteful, the pipeline evaluates the size of each sub-cluster against a \texttt{min\_size} threshold (configured between 3 and 5 nodes in our parametrization). Based on this threshold, the architecture automatically selects one of two distinct evaluation strategies:
+As shown in Figure \ref{fig:divide_et_impera_pipeline}, once the global problem is partitioned into smaller sub-problems, each fragment is independently routed through a dynamic switch mechanism. Acknowledging that deploying complex metaheuristics and analog quantum emulation for trivial problems is computationally wasteful, the pipeline evaluates the size of each sub-cluster against a \texttt{min\_size} threshold (configured between 3 and 5 nodes in our parametrization). Based on this threshold, the architecture automatically selects one of two distinct evaluation strategies:
 
 \begin{itemize}
     \item \textbf{Exact Classical Solver (Brute-Force):} If the sub-graph cardinality is strictly smaller than the \texttt{min\_size} threshold, the spatial embedding phase and the quantum QPU execution are entirely bypassed. The localized combinatorial fragment is so trivial that it is instantly and optimally solved using an exact classical brute-force evaluation over its discrete binary space ($x \in \{0,1\}^n$).
     \item \textbf{Heuristic Embedding (GA/SA):} For larger sub-graphs that exceed the trivial threshold, the pipeline routes the matrix to the core embedding engines. Here, either the Genetic Algorithm (GA) or the Simulated Annealing (SA) heuristic is employed to navigate the continuous spatial search space, mapping the logical nodes to physical atom coordinates. This balances computational efficiency with embedding success rates, successfully preparing complex localized layouts for the analog quantum execution.
 \end{itemize}
 
-Crucially, this dynamic routing logic makes our proposed architecture fundamentally modular and highly extensible. The \textit{Divide et Impera} framework is completely agnostic to both the specific partitioning method and the underlying embedding algorithms. Any of these specific components can be seamlessly swapped or upgraded if a more efficient spatial metaheuristic or clustering algorithm is developed in the future.
+Crucially, this dynamic routing logic makes our proposed architecture fundamentally modular and highly extensible, because the \textit{Divide et Impera} framework is completely agnostic to both the specific partitioning method and the underlying embedding algorithms. Consequently, any of these specific components can be seamlessly swapped or upgraded if a more efficient spatial metaheuristic or clustering algorithm is developed in the future.
+\section{Pipeline Overview: Retrieval and Merging Phase}
+\label{sec:divide_et_impera_pipeline_merging}
+
+The final architectural phase of the \textit{Divide et Impera} pipeline is the retrieval and global merging process. Once the problem has been partitioned and the sub-graphs independently embedded and executed, the localized solutions must be meticulously reconstructed to form a valid, high-quality global solution for the original QUBO instance. 
+
+The execution logic of this reconstruction phase is visually summarized in Figure \ref{fig:retrieval_merging_pipeline}.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=0.4\textwidth]{img/divide_et_impera/Retrieval-merging.png} 
+    \caption{Flowchart of the Retrieval and Merging phase. The diagram illustrates the asynchronous data retrieval, the exact energy-based filtering for quantum results, the deterministic greedy conflict resolution, and the final thermodynamic fine-tuning.}
+    \label{fig:retrieval_merging_pipeline}
+\end{figure}
+
+As implemented in our orchestration scripts, this phase strictly avoids naive concatenations, which would inevitably trigger massive physical and mathematical conflicts at the boundaries of the disjointed clusters. Instead, the process is divided into three highly specialized sequential steps:
+
+\begin{enumerate}
+    \item \textbf{Asynchronous Retrieval and Energy Filtering:} 
+    Relying on a previously compiled JSON job registry, the orchestrator queries the localized results. If a sub-problem was historically classified as trivial (falling below the \texttt{min\_size} threshold), its exact classical brute-force solution is instantly retrieved. Conversely, for jobs submitted to the analog quantum emulator, the system retrieves a statistical distribution of bitstrings. 
+    Crucially, instead of blindly selecting the most frequent quantum measurement, the pipeline evaluates every unique sampled state against its specific local QUBO sub-matrix in order to find the true local minimum:
+    \begin{equation}
+        E_{local} = x^T Q_{sub} x
+    \end{equation}
+    The bitstring that yields the absolute minimum local energy is selected. This computational filtering acts as a powerful error-mitigation strategy, effectively bypassing potential quantum noise or false local minima that might dominate the raw probability distribution.
+
+    \item \textbf{Greedy Conflict Resolution:} 
+    Once the best local bitstrings are identified, they must be combined. Because the independent clusters might propose conflicting Rydberg excitations (setting adjacent boundary nodes to $1$), a deterministic greedy merging protocol is enforced, inspired by the methodologies discussed in \cite{das2025grid}. The algorithm operates as follows:
+    \begin{itemize}
+        \item It isolates all nodes proposed to be in the excited state (bit = $1$) across all local solutions.
+        \item It sorts these candidate nodes based on their linear diagonal weights ($Q_{ii}$), prioritizing the variables with the strongest intrinsic bias.
+        \item It iterates through the sorted list, accepting a node into the final global state \textit{only} if its inclusion does not generate a mathematical conflict (i.e., $Q_{ij} > 0$) with any previously accepted node.
+    \end{itemize}
+    This fast, deterministic approach guarantees that the reconstructed global solution strictly adheres to the topological constraints of the problem, resolving boundary overlaps efficiently.
+
+    \item \textbf{Low-Temperature SA Tuning (Post-Processing):} 
+    While the greedy approach successfully generates a valid global state, it is inherently deterministic and prone to settling into sub-optimal configurations at the cluster intersections, exposing its limitations as also highlighted in \cite{das2025grid}. To address this, our proposed improvement applies a final localized perturbation using Simulated Annealing. 
+    Unlike a standard SA execution starting from a random state, this phase utilizes the greedy-merged bitstring as a \textit{hot-start} initialization. By restricting the inverse temperature parameter ($\beta$) to a narrow, high-value range, the thermodynamic engine performs strictly localized, low-temperature micro-adjustments. This fine-tuning squeezes out the remaining topological errors without destroying the highly optimized global structure assembled in the previous steps.
+\end{enumerate}
+
+Ultimately, this multi-tiered reconstruction ensures that the hybrid architecture extracts the maximum possible value from the localized quantum executions, delivering a highly competitive global energy minimum.
