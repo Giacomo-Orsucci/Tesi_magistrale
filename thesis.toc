@@ -47,6 +47,10 @@
 \contentsline {subsection}{\numberline {6.1.1}Spectral Clustering and Graph Translation}{88}{subsection.6.1.1}%
 \contentsline {subsection}{\numberline {6.1.2}Dynamic Heuristic Routing}{91}{subsection.6.1.2}%
 \contentsline {section}{\numberline {6.2}Pipeline Overview: Retrieval and Merging Phase}{93}{section.6.2}%
-\contentsline {chapter}{\numberline {A}Classical Hardware}{96}{appendix.A}%
-\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{98}{appendix.B}%
-\contentsline {chapter}{Bibliography}{100}{appendix.B}%
+\contentsline {section}{\numberline {6.3}Experimental Results}{96}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Scaling to 50 Nodes: A $50\times 50$ Instance}{96}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}100x100 instance}{99}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}100x100 denser instance}{99}{subsection.6.3.3}%
+\contentsline {chapter}{\numberline {A}Classical Hardware}{100}{appendix.A}%
+\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{102}{appendix.B}%
+\contentsline {chapter}{Bibliography}{104}{appendix.B}%

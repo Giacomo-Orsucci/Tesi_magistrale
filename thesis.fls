@@ -1389,6 +1389,15 @@ INPUT ./img/divide_et_impera/Retrieval-merging.png
 INPUT img/divide_et_impera/Retrieval-merging.png
 INPUT ./img/divide_et_impera/Retrieval-merging.png
 INPUT ./img/divide_et_impera/Retrieval-merging.png
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmr12.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmex10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx12.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/cm/cmbx7.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msam10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/amsfonts/symbols/msbm10.tfm
+INPUT /usr/share/texlive/texmf-dist/fonts/tfm/public/rsfs/rsfs10.tfm
 INPUT ./appendices/appendix_A_hw.tex
 INPUT ./appendices/appendix_A_hw.tex
 INPUT ./appendices/appendix_A_hw.tex

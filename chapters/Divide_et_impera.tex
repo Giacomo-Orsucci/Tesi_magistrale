@@ -130,3 +130,61 @@ As implemented in our orchestration scripts, this phase strictly avoids naive co
 \end{enumerate}
 
 Ultimately, this multi-tiered reconstruction ensures that the hybrid architecture extracts the maximum possible value from the localized quantum executions, delivering a highly competitive global energy minimum.
+
+\section{Experimental Results}
+\label{sec:divide_et_impera_results}
+
+This section presents the most significant and representative experimental results obtained using the \textit{Divide et Impera} pipeline. For the sake of brevity, and because the core topological and computational behaviors remain consistent, this analysis will focus exclusively on the Simulated Annealing (SA) variant of the distributed architecture. While the Genetic Algorithm (GA) approach proved to be functionally effective, it is omitted from this detailed exposition due to its inherent limitations regarding the maximum manageable sub-problem capacity and overall execution time. The SA engine, conversely, allows us to push the true boundaries of the architecture, effectively targeting massive global instances by accommodating significantly larger individual clusters.
+
+Specifically, the experimental validation targets massive problem scales, notably $50\times50$ and $100\times100$ QUBO matrices. Due to their overwhelming geometric density and dimensionality, these specific instances cannot be visually depicted as was done for smaller topologies. Instead, they will be analytically characterized strictly through their core topological and statistical metrics.
+
+\subsection{Scaling to 50 Nodes: A $50\times50$ Instance}
+\label{subsec:divide_et_impera_50x50}
+
+The first large-scale validation of the \textit{Divide et Impera} architecture is performed on a $50\times50$ QUBO matrix. At this dimensionality, the continuous spatial search space completely exceeds the capabilities of the baseline monolithic embedding approaches discussed in the previous chapters. To properly contextualize the computational challenge, the topological complexity of this specific instance is analytically characterized by the following structural metrics:
+
+\begin{itemize}
+    \item \textbf{Graph Density:} $10.9\%$ ($134$ active connections out of $1225$ possible undirected edges).
+    \item \textbf{Node Degree Distribution:} Minimum degree of $2$, maximum degree of $9$, with an average connectivity of $5.4$ edges per node.
+    \item \textbf{Weight Uniformity:} Constant off-diagonal penalty of $2.00$ and a uniform linear diagonal mean of $1.00$ (Standard Deviation of edges: $0.0$). This perfectly adheres to the physical constraints enforced by the QPU global laser driving mechanism and the generation constraints as for the previous instances.
+\end{itemize}
+
+While an overall density of $10.9\%$ might appear mathematically sparse, in the context of 2D continuous spatial embeddings, it still presents a formidable geometric challenge. Specifically, a maximum node degree of $9$ dictates that at least one atomic qubit must be physically surrounded by $9$ distinct, highly-interacting neighbors within its Rydberg blockade radius ($R_b$). Balancing this dense local clustering while strictly avoiding physical overlap violations ($d_{min}$) requires a highly optimized topological layout. Consequently, this instance serves as a rigorous initial stress test for the clustering and distributed partitioning logic of our architecture.
+
+As governed by the orchestrator, the Spectral Clustering engine successfully shattered the $50$-node global problem into $5$ independent, geometrically manageable sub-clusters (containing $11$, $8$, $11$, $11$, and $9$ nodes, respectively). Because the dimensionality of each sub-problem is vastly reduced compared to a monolithic approach, the Simulated Annealing engine no longer requires the extreme thermodynamic brute-force configuration previously seen for the $20\times20$ matrix. Instead, a much lighter, adaptive parametrization was dynamically deployed based on the cluster size, as detailed in Table \ref{tab:sa_params_50x50}:
+
+\begin{table}[H]
+    \centering
+    \resizebox{1.0\textwidth}{!}{
+    \begin{tabular}{|l|c|c|p{7cm}|}
+    \hline
+    \textbf{SA Parameter} & \textbf{Standard Cluster} (9-11 nodes) & \textbf{Small Cluster} (8 nodes) & \textbf{Conceptual Meaning} \\
+    \hline
+    \texttt{num\_restarts} & 5 & 5 & Reduced multi-start execution (down from 15). The smaller spatial search space mitigates the need for aggressive stochastic restarts. \\
+    \hline
+    \texttt{T\_INIT} & 100.0 & 80.0 & Initial Temperature. Kept relatively low to preserve the structural integrity of the GRASP pre-placer initialization. \\
+    \hline
+    \texttt{T\_MIN} & 0.01 & 0.10 & Minimum Temperature stopping criterion before the final Quenching phase. \\
+    \hline
+    \texttt{COOLING\_RATE} & 0.98 & 0.95 & Exponential decay factor. Faster cooling is permitted on smaller topologies. \\
+    \hline
+    \texttt{STEPS\_PER\_TEMP} & 1000 & 300 & MCMC steps per epoch. Drastically reduced compared to monolithic executions, significantly cutting down classical preprocessing time. \\
+    \hline
+    \end{tabular}
+    }
+    \caption{Adaptive thermodynamic hyperparameter configuration deployed for the fragmented $50\times50$ QUBO instance.}
+    \label{tab:sa_params_50x50}
+\end{table}
+
+This adaptive configuration definitively proves the primary computational advantage of the \textit{Divide et Impera} paradigm: by distributing the topological complexity, the localized classical embedding times drop drastically. The architecture effectively transforms a previously intractable $50$-node continuous mapping problem into a series of highly efficient, computationally tractable geometric optimization tasks.
+
+However, while the classical execution time drops considerably thanks to smaller clusters, the primary focus of this evaluation remains the convergence quality of the final combinatorial state and the overall resilience of the architecture. As observed during the retrieval phase, the pipeline actively mitigates quantum noise by evaluating the exact local energy of every unique bitstring sampled by the QPU, rather than blindly trusting the highest-probability measurement. Upon executing the deterministic greedy merging protocol on these filtered local minima, the reconstructed global solution yielded a highly competitive baseline energy of $-14.0$. 
+
+Crucially, the architecture demonstrates an outstanding algorithmic resilience against suboptimal spatial embeddings. Despite any residual topological penalties accumulated within the individual fragmented clusters, the combination of the exact energy-based quantum state filtering and the subsequent low-temperature SA tuning successfully absorbed these imperfections. This dual-layered mitigation seamlessly refined the boundary interactions between the disjointed graphs, dropping the final global energy to $-16.0$. This refined result perfectly matches the global minimum independently approximated using the D-Wave Simulated Annealing classical benchmark.
+
+Consequently, this provides compelling evidence that the \textit{Divide et Impera} pipeline is not only highly effective at scaling to larger dimensions but is also robust. It maintains the capability to reliably identify global optima even when the underlying mathematical problem is heavily fragmented and the isolated physical embeddings are geometrically imperfect.
+
+
+\subsection{100x100 instance}
+
+\subsection{100x100 denser instance}
