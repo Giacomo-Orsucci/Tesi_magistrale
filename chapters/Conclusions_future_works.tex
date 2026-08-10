@@ -1,0 +1,43 @@
+\chapter{Conclusions and Future Works}
+\label{chap:conclusions}
+
+This final chapter synthesizes the core findings of the research, acknowledging the boundaries of the current implementation, and outlining the evolutionary trajectories of the proposed architecture. Following a structured scientific approach, we first crystallize the fundamental take-home messages derived from the experimental phase, proceed to objectively define the limitations of the study, and finally propose a direct outlook for future developments in the rapidly evolving field of Neutral Atom quantum optimization.
+
+\section{Discussion: Take-Home Messages}
+\label{sec:discussion}
+
+The primary objective of this thesis was to design, implement, and validate a scalable hybrid quantum-classical architecture capable of solving massive Quadratic Unconstrained Binary Optimization (QUBO) problems. This extensive research effort provided firsthand exposure to the modern-day capabilities and limitations of Neutral Atom platforms. Through rigorous experimental evaluation, several critical conclusions have emerged:
+
+\begin{itemize}
+    \item \textbf{Current Hardware Viability:} Neutral Atom platforms have proven to be highly promising architectures. They already possess the capacity to tackle real-world combinatorial optimization problems beyond mere toy-dimension instances, achieving significant results even when supported by consumer-grade classical preprocessing hardware.
+    
+    \item \textbf{The Necessity of Partitioning:} Despite these promises, physical and architectural limitations impose strict ceilings on direct monolithic embedding. Scaling to industrial-grade problems strictly requires a paradigm shift. The \textit{Divide et Impera} architecture demonstrates that topological fragmentation is the key to bypassing continuous spatial constraints, transforming intractable global configurations into mathematically manageable, physically compliant micro-tasks.
+    
+    \item \textbf{Future-Proof Modularity:} The proposed distributed approach is inherently modular. As hardware capabilities expand and more efficient heuristic embedding algorithms are developed, the scaling capacity of the \textit{Divide et Impera} pipeline will amplify accordingly, effectively multiplying the maximum dimensions of embeddable matrices without requiring a structural redesign of the orchestration logic.
+\end{itemize}
+
+\section{Limitations of the Current Study}
+\label{sec:limitations}
+
+While the proposed architecture successfully scaled to massive dimensions, this research inherently operates within defined technological boundaries. The most prominent limitation lies in the reliance on analog emulation. 
+
+Due to broader availability constraints, the quantum execution phase was conducted via the remote Jülich Supercomputing Centre (JSC) emulator. Although the emulator was strictly configured to mirror the exact physical hardware profile of the \textit{Jade} QPU, the entire pipeline currently rests upon a "theoretical success". To definitively validate the architecture, the embedding layouts and the distributed merging logic must be subjected to the actual environmental decoherence, pulse imperfections, and unsimulated quantum noise intrinsic to real physical hardware. Furthermore, the testing phase was constrained to specific Unit Disk Graph (UDG) topologies generated via our proposed methods; extending this validation across a wider, more heterogeneous spectrum of graph densities remains a valid future step.
+
+\section{Future Outlook}
+\label{sec:outlook}
+
+Looking beyond the scope of this thesis, the \textit{Divide et Impera} pipeline provides a robust foundation ready for immediate expansion. The effervescent nature of the Neutral Atom ecosystem offers multiple compelling trajectories for future researchers:
+
+\begin{itemize}
+    \item \textbf{Direct Physical Deployment:} The most immediate next step involves submitting the generated JSON job registries directly to a physical Neutral Atom QPU. This will allow researchers to evaluate the true empirical resilience of the pipeline against raw physical noise.
+    
+    \item \textbf{Alternative Embedding Methods:} Alternative spatial embedding heuristics can be integrated and evaluated. Future research could potentially bypass pure heuristic layouts by exploring entirely different algorithmic approaches, possibly capitalizing on the availability of more powerful classical hardware to reduce preprocessing bottlenecks.    
+    
+    \item \textbf{Quantum-Native Boundary Resolution:} The current pipeline relies on a classical greedy approach supplemented by Simulated Annealing to merge the sub-clusters. A highly innovative future direction involves a pure quantum merging phase. By "freezing" the internal atoms that reached an optimal state during the localized executions, the orchestrator could isolate strictly the conflicting boundary nodes. This isolated "border graph" could then be resubmitted to the QPU. By computing only the optimal activation configuration for the boundaries, the classical computational burden of the merging phase would be minimized, fully delegating the conflict resolution to the quantum hardware.
+    
+    \item \textbf{Advanced Laser Pulse Optimization:} The present experimental framework utilized a standardized, fixed adiabatic laser sweep. However, pulse-shaping methodologies represent a rapidly advancing frontier in Neutral Atom architectures. Future works could explore and integrate (for example) Optimal Control Theory (OCT) \cite{glaser2015training} to dynamically shape the Rabi frequency $\Omega(t)$ and detuning $\Delta(t)$ profiles, minimizing diabatic transitions. Furthermore, exploring analog implementations of the Quantum Approximate Optimization Algorithm (Analog QAOA) \cite{pichler2018quantum}, which relies on discrete bang-bang pulse variations rather than continuous adiabatic evolution, could in theory boost the raw quantum ground-state probability, thereby easing the classical merging phase.
+    
+    \item \textbf{Alternative Problem Formulations:} The current pipeline is natively tailored to QUBO matrices that map efficiently to UDG structures. Future developments could expand the orchestrator to accept higher-level combinatorial problems (e.g., Karp's NP-complete problems or generalized integer programming), introducing an automated translation and mapping layer to convert these broad formulations into platform-compliant UDG topologies.
+\end{itemize}
+
+Ultimately, the promises of Neutral Atom architectures, both in academic literature and real-world applications, guarantee that the hybrid methodologies explored in this thesis will rapidly evolve, opening new frontiers in the landscape of quantum combinatorial optimization.

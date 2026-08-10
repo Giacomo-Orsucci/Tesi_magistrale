@@ -167,4 +167,14 @@ S.~Marinai, ``Data mining course material (slides).'' Lecture slides, Data
   Mining course, University of Florence, 2025.
 \newblock Unpublished.
 
+\bibitem{glaser2015training}
+S.~J. Glaser, U.~Boscain, T.~Calarco, C.~P. Koch, W.~K{\"o}ckenberger,
+  R.~Kosloff, I.~Kuprov, B.~Luy, S.~Schirmer, T.~Schulte-Herbr{\"u}ggen, {\em
+  et~al.}, ``Training schr{\"o}dinger's cat: quantum optimal control,'' {\em
+  The European Physical Journal D}, vol.~69, no.~12, p.~279, 2015.
+
+\bibitem{pichler2018quantum}
+H.~Pichler, S.-T. Wang, L.~Zhou, S.~Choi, and M.~D. Lukin, ``Quantum
+  optimization for maximum independent set using rydberg atom arrays,'' 2018.
+
 \end{thebibliography}

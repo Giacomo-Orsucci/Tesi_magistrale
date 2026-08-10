@@ -7,50 +7,51 @@ A level-1 auxiliary file: chapters/The_Base_Pipeline.aux
 A level-1 auxiliary file: chapters/GAs_experiment.aux
 A level-1 auxiliary file: chapters/SA_experiment.aux
 A level-1 auxiliary file: chapters/Divide_et_Impera.aux
+A level-1 auxiliary file: chapters/Conclusions_future_works.aux
 A level-1 auxiliary file: appendices/appendix_A_hw.aux
 A level-1 auxiliary file: appendices/appendix_B_AI.aux
 The style file: ieeetr.bst
 Database file #1: files/biblio.bib
 Warning--empty publisher in bookGA
-You've used 34 entries,
+You've used 36 entries,
             1876 wiz_defined-function locations,
-            680 strings with 10007 characters,
-and the built_in function-call counts, 7570 in all, are:
-= -- 680
-> -- 424
+            692 strings with 10568 characters,
+and the built_in function-call counts, 8097 in all, are:
+= -- 715
+> -- 476
 < -- 1
-+ -- 156
-- -- 122
-* -- 533
-:= -- 1151
-add.period$ -- 47
-call.type$ -- 34
-change.case$ -- 33
++ -- 174
+- -- 138
+* -- 579
+:= -- 1240
+add.period$ -- 49
+call.type$ -- 36
+change.case$ -- 35
 chr.to.int$ -- 0
-cite$ -- 35
-duplicate$ -- 344
-empty$ -- 711
-format.name$ -- 122
-if$ -- 1816
+cite$ -- 37
+duplicate$ -- 363
+empty$ -- 750
+format.name$ -- 138
+if$ -- 1935
 int.to.chr$ -- 0
-int.to.str$ -- 34
-missing$ -- 25
-newline$ -- 118
-num.names$ -- 34
-pop$ -- 142
+int.to.str$ -- 36
+missing$ -- 26
+newline$ -- 124
+num.names$ -- 36
+pop$ -- 151
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 220
+skip$ -- 234
 stack$ -- 0
-substring$ -- 248
-swap$ -- 118
+substring$ -- 254
+swap$ -- 125
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 56
-width$ -- 36
-write$ -- 327
+while$ -- 59
+width$ -- 38
+write$ -- 345
 (There was 1 warning)

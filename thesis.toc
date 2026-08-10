@@ -49,8 +49,12 @@
 \contentsline {section}{\numberline {6.2}Pipeline Overview: Retrieval and Merging Phase}{93}{section.6.2}%
 \contentsline {section}{\numberline {6.3}Experimental Results}{96}{section.6.3}%
 \contentsline {subsection}{\numberline {6.3.1}Scaling to 50 Nodes: A $50\times 50$ Instance}{96}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}100x100 instance}{99}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}100x100 denser instance}{99}{subsection.6.3.3}%
-\contentsline {chapter}{\numberline {A}Classical Hardware}{100}{appendix.A}%
-\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{102}{appendix.B}%
-\contentsline {chapter}{Bibliography}{104}{appendix.B}%
+\contentsline {subsection}{\numberline {6.3.2}The Operational Frontier: A $100\times 100$ Instance}{99}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Pushing the Density Limit: A Denser $100\times 100$ Instance}{102}{subsection.6.3.3}%
+\contentsline {chapter}{\numberline {7}Conclusions and Future Works}{107}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Discussion: Take-Home Messages}{107}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Limitations of the Current Study}{108}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Future Outlook}{109}{section.7.3}%
+\contentsline {chapter}{\numberline {A}Classical Hardware}{112}{appendix.A}%
+\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{114}{appendix.B}%
+\contentsline {chapter}{Bibliography}{116}{appendix.B}%
