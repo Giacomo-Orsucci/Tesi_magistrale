@@ -9,52 +9,52 @@
 \contentsline {paragraph}{Register loading}{8}{section*.3}%
 \contentsline {paragraph}{Quantum processing and register readout}{10}{section*.4}%
 \contentsline {paragraph}{Quantum analog mode execution}{11}{section*.5}%
-\contentsline {chapter}{\numberline {2}The Embedding Problem: Theoretical Framework}{13}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Combinatorial Optimization and Computational and Geometrical Complexity}{13}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Unit Disk Graphs (UDG) and the Maximum Independent Set (MIS)}{15}{section.2.2}%
-\contentsline {section}{\numberline {2.3}Literature and State of the Art}{18}{section.2.3}%
-\contentsline {section}{\numberline {2.4}Quadratic Unconstrained Binary Optimization (QUBO)}{20}{section.2.4}%
-\contentsline {paragraph}{Investigated QUBO Instances}{22}{section*.6}%
-\contentsline {chapter}{\numberline {3}The Base Pipeline}{23}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Base pipeline: conceptual scheme}{23}{section.3.1}%
-\contentsline {subsection}{\numberline {3.1.1}Hardware Constraints and the Jülich HPC Emulator}{24}{subsection.3.1.1}%
-\contentsline {subsection}{\numberline {3.1.2}QUBO Instance Generation}{26}{subsection.3.1.2}%
-\contentsline {subsection}{\numberline {3.1.3}Instance Loading and Matrix Parsing}{28}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Embedding Optimization using Genetic Algorithms (GA)}{28}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Genetic Algorithm Framework}{29}{subsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.2.2}GA Parametrization: Explanation and Example}{30}{subsection.3.2.2}%
-\contentsline {subsection}{\numberline {3.2.3}Fitness Function Formulation}{33}{subsection.3.2.3}%
-\contentsline {section}{\numberline {3.3}Alternative Embedding: Simulated Annealing (SA)}{36}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Energy Formulation and Perturbation Strategy}{37}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Thermodynamic Evolution}{39}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}SA Parametrization: Explanation and Example}{39}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}SA Enhancements: GRASP and Quenching}{42}{subsection.3.3.4}%
-\contentsline {section}{\numberline {3.4}Laser Parametrization}{44}{section.3.4}%
-\contentsline {chapter}{\numberline {4}GAs: Experimental Results and Limitations}{47}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Validation on a 5x5 Instance}{47}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Scaling Validation on a 6x6 Instance}{51}{section.4.2}%
-\contentsline {section}{\numberline {4.3}Scaling Analysis: A 7x7 Instance}{54}{section.4.3}%
-\contentsline {section}{\numberline {4.4}Scaling Limits: A 10x10 Instance}{56}{section.4.4}%
-\contentsline {section}{\numberline {4.5}Algorithmic Breakdown: A 15x15 Instance}{61}{section.4.5}%
-\contentsline {chapter}{\numberline {5}SA: Experimental Results}{66}{chapter.5}%
-\contentsline {section}{\numberline {5.1}The Base $5\times 5$ Instance Validation}{67}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Scaling Up: The $10\times 10$ Instance}{70}{section.5.2}%
-\contentsline {section}{\numberline {5.3}Overcoming the Bottleneck: The $15\times 15$ Instance}{74}{section.5.3}%
-\contentsline {section}{\numberline {5.4}Scaling Up: The $20\times 20$ Instance}{77}{section.5.4}%
-\contentsline {section}{\numberline {5.5}A Denser $20\times 20$ Instance}{82}{section.5.5}%
-\contentsline {chapter}{\numberline {6}The \textit {Divide et Impera} Architecture}{86}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Pipeline Overview: Divide et Impera phase}{86}{section.6.1}%
-\contentsline {subsection}{\numberline {6.1.1}Spectral Clustering and Graph Translation}{88}{subsection.6.1.1}%
-\contentsline {subsection}{\numberline {6.1.2}Dynamic Heuristic Routing}{91}{subsection.6.1.2}%
-\contentsline {section}{\numberline {6.2}Pipeline Overview: Retrieval and Merging Phase}{93}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Experimental Results}{96}{section.6.3}%
-\contentsline {subsection}{\numberline {6.3.1}Scaling to 50 Nodes: A $50\times 50$ Instance}{96}{subsection.6.3.1}%
-\contentsline {subsection}{\numberline {6.3.2}The Operational Frontier: A $100\times 100$ Instance}{99}{subsection.6.3.2}%
-\contentsline {subsection}{\numberline {6.3.3}Pushing the Density Limit: A Denser $100\times 100$ Instance}{102}{subsection.6.3.3}%
-\contentsline {chapter}{\numberline {7}Conclusions and Future Works}{107}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Discussion: Take-Home Messages}{107}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Limitations of the Current Study}{108}{section.7.2}%
-\contentsline {section}{\numberline {7.3}Future Outlook}{109}{section.7.3}%
-\contentsline {chapter}{\numberline {A}Classical Hardware}{112}{appendix.A}%
-\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{114}{appendix.B}%
-\contentsline {chapter}{Bibliography}{116}{appendix.B}%
+\contentsline {chapter}{\numberline {2}The Embedding Problem: Theoretical Framework}{14}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Combinatorial Optimization and Computational and Geometrical Complexity}{14}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Unit Disk Graphs (UDG) and the Maximum Independent Set (MIS)}{16}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Literature and State of the Art}{19}{section.2.3}%
+\contentsline {section}{\numberline {2.4}Quadratic Unconstrained Binary Optimization (QUBO)}{21}{section.2.4}%
+\contentsline {paragraph}{Investigated QUBO Instances}{23}{section*.6}%
+\contentsline {chapter}{\numberline {3}The Base Pipeline}{24}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Base pipeline: conceptual scheme}{24}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Hardware Constraints and the Jülich HPC Emulator}{25}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}QUBO Instance Generation}{27}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Instance Loading and Matrix Parsing}{29}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Embedding Optimization using Genetic Algorithms (GA)}{29}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Genetic Algorithm Framework}{30}{subsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.2.2}GA Parametrization: Explanation and Example}{31}{subsection.3.2.2}%
+\contentsline {subsection}{\numberline {3.2.3}Fitness Function Formulation}{34}{subsection.3.2.3}%
+\contentsline {section}{\numberline {3.3}Alternative Embedding: Simulated Annealing (SA)}{37}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Energy Formulation and Perturbation Strategy}{38}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Thermodynamic Evolution}{40}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}SA Parametrization: Explanation and Example}{40}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}SA Enhancements: GRASP and Quenching}{43}{subsection.3.3.4}%
+\contentsline {section}{\numberline {3.4}Laser Parametrization}{45}{section.3.4}%
+\contentsline {chapter}{\numberline {4}GAs: Experimental Results and Limitations}{48}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Validation on a 5x5 Instance}{48}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Scaling Validation on a 6x6 Instance}{52}{section.4.2}%
+\contentsline {section}{\numberline {4.3}Scaling Analysis: A 7x7 Instance}{55}{section.4.3}%
+\contentsline {section}{\numberline {4.4}Scaling Limits: A 10x10 Instance}{57}{section.4.4}%
+\contentsline {section}{\numberline {4.5}Algorithmic Breakdown: A 15x15 Instance}{62}{section.4.5}%
+\contentsline {chapter}{\numberline {5}SA: Experimental Results}{67}{chapter.5}%
+\contentsline {section}{\numberline {5.1}The Base $5\times 5$ Instance Validation}{68}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Scaling Up: The $10\times 10$ Instance}{71}{section.5.2}%
+\contentsline {section}{\numberline {5.3}Overcoming the Bottleneck: The $15\times 15$ Instance}{75}{section.5.3}%
+\contentsline {section}{\numberline {5.4}Scaling Up: The $20\times 20$ Instance}{78}{section.5.4}%
+\contentsline {section}{\numberline {5.5}A Denser $20\times 20$ Instance}{83}{section.5.5}%
+\contentsline {chapter}{\numberline {6}The \textit {Divide et Impera} Architecture}{87}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Pipeline Overview: Divide et Impera phase}{87}{section.6.1}%
+\contentsline {subsection}{\numberline {6.1.1}Spectral Clustering and Graph Translation}{89}{subsection.6.1.1}%
+\contentsline {subsection}{\numberline {6.1.2}Dynamic Heuristic Routing}{92}{subsection.6.1.2}%
+\contentsline {section}{\numberline {6.2}Pipeline Overview: Retrieval and Merging Phase}{94}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Experimental Results}{97}{section.6.3}%
+\contentsline {subsection}{\numberline {6.3.1}Scaling to 50 Nodes: A $50\times 50$ Instance}{97}{subsection.6.3.1}%
+\contentsline {subsection}{\numberline {6.3.2}The Operational Frontier: A $100\times 100$ Instance}{100}{subsection.6.3.2}%
+\contentsline {subsection}{\numberline {6.3.3}Pushing the Density Limit: A Denser $100\times 100$ Instance}{103}{subsection.6.3.3}%
+\contentsline {chapter}{\numberline {7}Conclusions and Future Works}{108}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Discussion: Take-Home Messages}{108}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Limitations of the Current Study}{109}{section.7.2}%
+\contentsline {section}{\numberline {7.3}Future Outlook}{110}{section.7.3}%
+\contentsline {chapter}{\numberline {A}Classical Hardware}{113}{appendix.A}%
+\contentsline {chapter}{\numberline {B}AI Usage Policy and Declaration}{115}{appendix.B}%
+\contentsline {chapter}{Bibliography}{117}{appendix.B}%

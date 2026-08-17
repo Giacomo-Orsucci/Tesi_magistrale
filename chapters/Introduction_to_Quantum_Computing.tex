@@ -13,7 +13,7 @@ The quantum computing paradigm currently promises to revolutionize information p
 
 As described in \cite{grotti2026practicalusecasesneutral}, which presents an overview of practical applications for neutral atom quantum architectures and discusses the primary characteristics and potential use cases of this technology, the most explored application fields for this type of platform are MIS, Max-Cut, Max-Clique, QUBO problems and similar. Additionally, a complete panorama of this paradigm, including its challenges, is detailed in \cite{quantumReport}. Thus, to provide a summarized but complete introduction in agreement with the recent literature, we can conclude that quantum computing is a disruptive paradigm offering new opportunities for solving complex problems in various fields. However, it is still in its early stages of development, and many challenges remain to be addressed before it can reach its full potential.
 
-In addition, it is very important to emphasize that these limitations and challenges must not be seen as a reason to avoid exploring this paradigm, but rather as a motivation to understand its boundaries and develop new algorithms capable of leveraging its unique capabilities. The importance of this aspect is highlighted by the sector's market capitalization, estimated at approximately USD 10.13 billion in 2022 and the high expectations placed upon it with a projected and estimated market capitalization of USD 125 billion by 2030 \cite{quantumReport}.
+In addition, it is very important to emphasize that these limitations and challenges must not be seen as a reason to avoid exploring this paradigm, but rather as a motivation to understand its boundaries and develop new algorithms able to leveraging its unique capabilities. The importance of this aspect is highlighted by the sector's market capitalization, estimated at approximately USD 10.13 billion in 2022 and the high expectations placed upon it with a projected and estimated market capitalization of USD 125 billion by 2030 \cite{quantumReport}.
 
 In the following sections, the main characteristics of neutral atom quantum computing are explored in more detail, together with their physical constraints, to provide a clear sense of what we are meant to experiment and explore, why with these modalities and why some specific limitations will be contemplated and expected in the next chapters of this thesis.
 
@@ -103,10 +103,10 @@ Neutral atom platforms can operate in both digital and analog modes. This work c
 
 This equation can be conceptually divided into two parts. The first summation dictates the evolution of single atoms driven by the external laser field, while the second summation governs the interactions between pairs of atoms. Specifically, the parameters and operators are defined as follows:
 \begin{itemize}
-    \item $N$ is the total number of atoms (qubits) in the register;
+    \item $\hbar$ is the reduced Planck constant, which scales the angular frequencies of the driving laser fields ($\Omega$ and $\delta$) into actual energy terms;    \item $N$ is the total number of atoms (qubits) in the register;
     \item $\Omega(t)$ is the time-dependent Rabi frequency, representing the amplitude of the laser exciting the atoms;
-    \item $\delta(t)$ is the detuning parameter of the laser frequency;
     \item $\hat{\sigma}_{i}^{x}$ is the Pauli-X operator acting on atom $i$, which drives the transition between the ground state $|0\rangle$ and the Rydberg state $|1\rangle$;
+    \item $\delta(t)$ is the detuning parameter of the laser frequency;
     \item $\hat{n}_{i}$ is the occupation number operator (defined as $|1\rangle_i\langle 1|_i$) which evaluates to 1 if atom $i$ is in the Rydberg state, and 0 otherwise;
     \item $r_i$ is the spatial position of atom $i$;
     \item $C_6$ is the Van der Waals interaction coefficient, which is a constant dependent on the specific atomic species and platform used \cite{nowak2026satellitemissionplanningrydberg}.
@@ -126,3 +126,5 @@ where:
     \item $C_6$ is the Van der Waals coefficient, which depends on the atom type and scales massively with the excitation level;
     \item $r_{ij}$ is the spatial distance between the two atoms \cite{Henriet2020quantumcomputing}.
 \end{itemize}
+
+From a combinatorial optimization perspective, this physical Hamiltonian establishes a native, perfect isomorphism with the Quadratic Unconstrained Binary Optimization (QUBO) formulation. The occupation operator $\hat{n}_i \in \{0, 1\}$ acts as the exact hardware equivalent of the mathematical binary decision variable $x_i$. Consequently, the first summation of the Hamiltonian (specifically driven by the negative detuning $-\delta$) represents the linear components on the main diagonal of the QUBO matrix, naturally incentivizing the physical variables to take the value of 1. Simultaneously, the second summation acts as the quadratic penalty (the off-diagonal terms), strictly enforcing the logical boundaries by applying massive energy costs when two interacting physical variables are both excited. This exact correspondence is the foundational mathematical bridge that enables the direct resolution of combinatorial graphs on Neutral Atom platforms.

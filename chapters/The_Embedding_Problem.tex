@@ -99,7 +99,7 @@ To specialize our focus from general graphs, we introduce the concept of Unit Di
     \filldraw (D2) circle (2pt);
     \end{scope}
 \end{tikzpicture}
-\caption{The equivalent geometric representations of a Unit Disk Graph (UDG) cited from \cite{CLARK1990165}. \textbf{(a)} The Distance Model connects nodes $u$ and $v$ if their Euclidean distance is $d \leq r$. \textbf{(b)} The Intersection Model places a disk of radius $r/2$ centered on each node; edges are formed exclusively where disks overlap.}
+\caption{The equivalent geometric representations of a Unit Disk Graph (UDG) adapted from \cite{CLARK1990165}. \textbf{(a)} The Distance Model connects nodes $u$ and $v$ if their Euclidean distance is $d \leq r$. \textbf{(b)} The Intersection Model places a disk of radius $r/2$ centered on each node; edges are formed exclusively where disks overlap.}
 \label{fig:udg_models}
 \end{figure}
 
@@ -111,7 +111,7 @@ As previously mentioned, the Maximum Independent Set (MIS) is a classic $NP$-Har
 
 Formally, given a graph $G = (V, E)$, an \textit{Independent Set} (IS) is defined as a subset of vertices $I \subseteq V$ such that no two vertices within $I$ are adjacent. Mathematically, this constraint translates to:
 \begin{equation}
-    \forall u, v \in I, \quad \{u, v\} \notin E
+    \forall u, v \in I, \; u \neq v \implies \{u, v\} \notin E
 \end{equation}
 The MIS problem entails finding an independent set that contains the largest possible number of vertices; in other words, the objective is to maximize the cardinality $|I|$.
 
@@ -176,7 +176,8 @@ to embed Quadratic Unconstrained Binary Optimization (QUBO) problems.
 
 Alongside embedding algorithms, significant research is devoted to translating highly complex real-world use cases into physical layouts. Examples include the formulation of emergency hub placement routing \cite{tarquini2026emergencyhubplacementneutralatom} and satellite mission planning \cite{nowak2026satellitemissionplanningrydberg}, demonstrating the vast applicability of QUBO formulations on neutral atoms.
 
-Most important for this thesis, several recent studies have started exploring problem partitioning as a workaround for hardware scale limitations. Works by Nembrini et al. \cite{nembrini2024application, Nembrini_2026} and Das et al. \cite{das2025grid} propose dividing the original combinatorial problem into sub-instances resolved using localized arrays. While their specific methodologies differ from our scope, these partitioning strategies served as the foundational inspiration for the hybrid \textit{divide et impera} (divide and conquer) architecture proposed in the subsequent chapters of this work.
+
+Most importantly for this thesis, several recent studies have started exploring advanced mapping and partitioning techniques as a workaround for hardware scale limitations. Works by Nembrini et al. \cite{nembrini2024application, Nembrini_2026} propose innovative Reinforcement Learning methodologies to tackle the severe embedding bottlenecks inherent to quantum annealing topologies. On the other hand, focusing strictly on neutral atom architectures, Das et al. \cite{das2025grid} explicitly propose problem partitioning, dividing the original combinatorial problem into sub-instances resolved using localized atomic arrays. While their specific methodologies differ from our scope, these partitioning strategies served as the foundational inspiration for the hybrid \textit{divide et impera} (divide and conquer) architecture proposed in the subsequent chapters of this work.
 
 This diversity of approaches underscores the immaturity and the highly exploratory nature of the field. While the lack of rigid standards offers significant opportunities for novel theoretical contributions, it also introduces substantial experimental risks and engineering bottlenecks. 
 
