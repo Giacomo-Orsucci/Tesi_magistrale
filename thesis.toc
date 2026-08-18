@@ -20,14 +20,14 @@
 \contentsline {subsection}{\numberline {3.1.1}Hardware Constraints and the Jülich HPC Emulator}{25}{subsection.3.1.1}%
 \contentsline {subsection}{\numberline {3.1.2}QUBO Instance Generation}{27}{subsection.3.1.2}%
 \contentsline {subsection}{\numberline {3.1.3}Instance Loading and Matrix Parsing}{29}{subsection.3.1.3}%
-\contentsline {section}{\numberline {3.2}Embedding Optimization using Genetic Algorithms (GA)}{29}{section.3.2}%
+\contentsline {section}{\numberline {3.2}Embedding Optimization using Genetic Algorithms (GA)}{30}{section.3.2}%
 \contentsline {subsection}{\numberline {3.2.1}Genetic Algorithm Framework}{30}{subsection.3.2.1}%
 \contentsline {subsection}{\numberline {3.2.2}GA Parametrization: Explanation and Example}{31}{subsection.3.2.2}%
 \contentsline {subsection}{\numberline {3.2.3}Fitness Function Formulation}{34}{subsection.3.2.3}%
 \contentsline {section}{\numberline {3.3}Alternative Embedding: Simulated Annealing (SA)}{37}{section.3.3}%
 \contentsline {subsection}{\numberline {3.3.1}Energy Formulation and Perturbation Strategy}{38}{subsection.3.3.1}%
 \contentsline {subsection}{\numberline {3.3.2}Thermodynamic Evolution}{40}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}SA Parametrization: Explanation and Example}{40}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.3}SA Parametrization: Explanation and Example}{41}{subsection.3.3.3}%
 \contentsline {subsection}{\numberline {3.3.4}SA Enhancements: GRASP and Quenching}{43}{subsection.3.3.4}%
 \contentsline {section}{\numberline {3.4}Laser Parametrization}{45}{section.3.4}%
 \contentsline {chapter}{\numberline {4}GAs: Experimental Results and Limitations}{48}{chapter.4}%
