@@ -1,14 +1,14 @@
 \chapter{SA: Experimental Results}
 \label{chap:SA_experiment}
 
-This chapter presents the experimental results achieved by employing Simulated Annealing (SA) (with the enhanced initialization presented before in Section \ref{sec:sa_theory}) as the core spatial embedding engine within our baseline pipeline. To rigorously evaluate its performance, the SA approach is directly compared against the Genetic Algorithm (GA) results on the most significant matrix dimensions previously analyzed. Furthermore, the testing is extended to larger and denser problem instances to probe the scalability limits of this classical embedding phase.
+This chapter presents the experimental results achieved by employing Simulated Annealing (SA) (with the enhanced initialization previously presented in Section \ref{sec:sa_theory}) as the core spatial embedding engine within our baseline pipeline. To rigorously evaluate its performance, the SA approach is directly compared against the Genetic Algorithm (GA) results on the most significant matrix dimensions previously analyzed. Furthermore, the testing is extended to larger and denser problem instances to probe the scalability limits of this classical embedding phase.
 
-To ensure a fair and scientifically sound evaluation, the simulated hardware platform (\texttt{FakeJade}) and the adiabatic quantum laser parametrization remain strictly identical to the configuration utilized in Chapter 4. With the sole exception of the SA-specific thermodynamic hyperparameters, the testing environment is completely frozen, guaranteeing a true fair comparative analysis between the two heuristic approaches.
+To ensure a fair and scientifically sound evaluation, the simulated hardware platform (\texttt{FakeJade}) and the adiabatic quantum laser parametrization remain strictly identical to the configuration utilized in Chapter 4. With the sole exception of the SA-specific thermodynamic hyperparameters, the testing environment is completely frozen, guaranteeing a truly fair comparative analysis between the two heuristic approaches.
 
 
 \section{The Base $5\times5$ Instance Validation}
 
-To rigorously validate the newly integrated heuristic method, we restarted the experimental evaluation from the exact same $5\times5$ target matrix presented in figure \ref{fig:5x5_qubo_instance}. The specific thermodynamic configuration utilized for this run is detailed in Table \ref{tab:sa_parameters_5x5}.
+To rigorously validate the newly integrated heuristic method, we restarted the experimental evaluation from the exact same $5\times5$ target matrix presented in Figure \ref{fig:5x5_qubo_instance}. The specific thermodynamic configuration utilized for this run is detailed in Table \ref{tab:sa_parameters_5x5}.
 
 \begin{table}[H]
     \centering
@@ -43,7 +43,7 @@ We immediately observe that Simulated Annealing does not necessarily guarantee a
 
 An interesting geometric observation emerges when comparing this layout to the one produced by the GA. While the absolute continuous spatial coordinates differ significantly from the ones generated in the previous chapter, the underlying structural topology and the isolation of the logical sub-graphs remain perfectly isomorphic.
 
-In figure \ref{fig:5x5_quantum_res_SA}, the quantum execution results are reported:
+In Figure \ref{fig:5x5_quantum_res_SA}, the quantum execution results are reported:
 
 \begin{figure}[H]
     \centering
@@ -149,16 +149,16 @@ The classical execution required $2429.1$ seconds, yielding a spatial fitness sc
     \label{fig:15x15_quantum_res_SA}
 \end{figure}
 
-Unlike the GA pipeline, which failed to identify any valid ground state on this problem, the analog simulation successfully isolated the multiple degenerate optimal solutions with a dominant probability mass (peaking at approximately $11.07\%$). 
+Unlike the GA pipeline, which failed to identify any valid ground state on this problem, in this case the analog simulation successfully isolated the multiple degenerate optimal solutions with a dominant probability mass (peaking at approximately $11.07\%$). 
 
 Drawing preliminary conclusions from this comparative analysis, we can affirm that the GRASP-enhanced Simulated Annealing exhibits vastly superior scaling capabilities. Crucially, its classical computational overhead is primarily dictated by the explicit thermodynamic parametrization rather than suffering the immediate, exponential explosion triggered by problem dimensionality observed in Genetic Algorithms. Ultimately, this validates the overall robustness and efficacy of our hybrid classical-quantum pipeline when driven by a specialized SA embedding engine.
 
-Having secured this algorithmic victory, the natural progression of our analysis leads to a fundamental question: to what extent can this SA pipeline scale before it, too, encounters the physical and computational limits of the neutral atom architecture?
+Having secured this algorithmic scaling success, the natural progression of our analysis leads to a fundamental question: to what extent can this SA pipeline scale before it, too, encounters the physical and computational limits of the neutral atom architecture?
 
 \section{Scaling Up: The $20\times20$ Instance}
 \label{sec:scaling_20x20}
 
-The $20\times20$ matrix represents the final dimensional scale tested in our direct embedding approach. Going beyond this threshold causes the classical simulation time required by the remote HPC infrastructure to skyrocket from minutes or hours to days. This simulator-imposed limit does not imply a physical impossibility of embedding larger instances on real hardware. Instead, it simply sets a realistic experimental boundary for our research. We selected this specific dimension as the best possible trade-off among geometric complexity, classical preprocessing time, and quantum emulation overhead. Setting this limit also serves a highly practical purpose for this thesis: it creates the perfect baseline to introduce our \textit{Divide et Impera} (divide and conquer) approach. After all, in real-world scenarios, both hardware availability and quantum emulation capacities are often constrained by a limited number of qubits. This makes the $20\times20$ scale a very credible and representative benchmark.
+The $20\times20$ matrix represents the final dimensional scale tested in our direct embedding approach. Going beyond this threshold causes the classical simulation time required by the remote HPC infrastructure to significantly increase from minutes or hours to days. This simulator-imposed limit does not imply a physical impossibility of embedding larger instances on real hardware. Instead, it simply sets a realistic experimental boundary for our research. We selected this specific dimension as the best possible trade-off among geometric complexity, classical preprocessing time, and quantum emulation overhead. Setting this limit also serves a highly practical purpose for this thesis: it creates the perfect baseline to introduce our \textit{Divide et Impera} (divide and conquer) approach. After all, in real-world scenarios, both hardware availability and quantum emulation capacities are often constrained by a limited number of qubits. This makes the $20\times20$ scale a very credible and representative benchmark.
 
 The mathematical formulation of this target instance is shown in Figure \ref{fig:20x20_qubo_instance}.
 

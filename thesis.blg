@@ -13,45 +13,45 @@ A level-1 auxiliary file: appendices/appendix_B_AI.aux
 The style file: ieeetr.bst
 Database file #1: files/biblio.bib
 Warning--empty publisher in bookGA
-You've used 36 entries,
+You've used 35 entries,
             1876 wiz_defined-function locations,
-            692 strings with 10568 characters,
-and the built_in function-call counts, 8097 in all, are:
-= -- 715
-> -- 476
+            689 strings with 10491 characters,
+and the built_in function-call counts, 7757 in all, are:
+= -- 678
+> -- 465
 < -- 1
-+ -- 174
-- -- 138
-* -- 579
-:= -- 1240
-add.period$ -- 49
-call.type$ -- 36
-change.case$ -- 35
++ -- 170
+- -- 135
+* -- 555
+:= -- 1195
+add.period$ -- 48
+call.type$ -- 35
+change.case$ -- 34
 chr.to.int$ -- 0
-cite$ -- 37
-duplicate$ -- 363
-empty$ -- 750
-format.name$ -- 138
-if$ -- 1935
+cite$ -- 36
+duplicate$ -- 346
+empty$ -- 720
+format.name$ -- 135
+if$ -- 1851
 int.to.chr$ -- 0
-int.to.str$ -- 36
-missing$ -- 26
-newline$ -- 124
-num.names$ -- 36
-pop$ -- 151
+int.to.str$ -- 35
+missing$ -- 25
+newline$ -- 121
+num.names$ -- 35
+pop$ -- 149
 preamble$ -- 1
 purify$ -- 0
 quote$ -- 0
-skip$ -- 234
+skip$ -- 220
 stack$ -- 0
-substring$ -- 254
-swap$ -- 125
+substring$ -- 222
+swap$ -- 116
 text.length$ -- 1
 text.prefix$ -- 0
 top$ -- 0
 type$ -- 0
 warning$ -- 1
-while$ -- 59
-width$ -- 38
-write$ -- 345
+while$ -- 55
+width$ -- 37
+write$ -- 335
 (There was 1 warning)

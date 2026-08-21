@@ -1,9 +1,9 @@
 \chapter{The \textit{Divide et Impera} Architecture}
 \label{chap:divide_et_impera}
 
-This chapter introduces the \textit{Divide et Impera} (Divide and Conquer) approach, our final and most advanced architectural proposal for solving large-scale QUBO problems. Designed to explicitly bypass the computational and hardware bottlenecks identified in the previous chapters, this distributed architecture successfully scales up to massive 100-variable instances. We first outline the general pipeline of this framework, followed by an in-depth algorithmic breakdown of its core components. Finally, we present the experimental results obtained from testing this architecture on a set of dense $100\times100$ matrices, drawing our ultimate conclusions on its performance and overall scalability.
+This chapter introduces the \textit{Divide et Impera} (Divide and Conquer) approach, our final and most advanced architectural proposal for solving large-scale QUBO problems. Designed to explicitly bypass the computational and hardware bottlenecks identified in the previous chapters, this architecture successfully scales up to massive 100-variable instances. We first outline the general pipeline of this framework, followed by an in-depth algorithmic breakdown of its core components. Finally, we present the experimental results obtained from testing this approach on a set of dense $100\times100$ matrices, drawing our ultimate conclusions on its performance and overall scalability.
 
-\section{Pipeline Overview: Divide et Impera phase}
+\section{Pipeline Overview: Divide et Impera Phase}
 \label{sec:divide_et_impera_pipeline_divide}
 
 The fundamental execution flow of our distributed architecture is visually summarized in Figure \ref{fig:divide_et_impera_pipeline}. This conceptual logic was explicitly implemented within our codebase through the \textit{bench-partitioned-GA.py} and \textit{bench-SA-partitioned-greedy-init.py} orchestration scripts \cite{orsucci_qubo_ga_quantum}.
@@ -276,5 +276,5 @@ Despite the staggering topological difficulty of the individual fragmented compo
 
 Given the dense boundary intersections between the highly entangled sub-graphs, residual topological conflicts and energy penalties were inevitable. However, the \textit{hot-start} low-temperature SA tuning effortlessly absorbed these boundary imperfections. The post-processing engine elegantly refined the global state intersections, successfully dropping the cumulative combinatorial cost to an optimal $-30.0$. This final energy score perfectly matches the true mathematical limit independently computed via the monolithic D-Wave Simulated Annealing benchmark.
 
-Ultimately, this extreme experimental configuration serves as the definitive culmination of our research. It provides a good evidence that the \textit{Divide et Impera} architecture, supported by intelligent data routing and dynamically scaling thermodynamic heuristics, is structurally robust. It effectively mitigates quantum readout noise and navigates heavily saturated topologies, guaranteeing the identification of global optimal solutions even under the most severe hardware constraints imposed by the Neutral Atom platform.
+Ultimately, this extreme experimental configuration serves as the definitive culmination of our research. It provides good evidence that the \textit{Divide et Impera} architecture, supported by intelligent data routing and dynamically scaling thermodynamic heuristics, is structurally robust. It effectively mitigates quantum readout noise and navigates heavily saturated topologies, guaranteeing the identification of global optimal solutions even under the most severe hardware constraints imposed by the Neutral Atom platform.
 
